@@ -1,0 +1,30 @@
+import styled from "styled-components";
+
+const TxtSinEtiquetasStyled = styled.div`
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+`
+
+export const TxtSinEtiquetas = ({txt}) =>{
+    return(
+        <TxtSinEtiquetasStyled>
+            {txt}
+        </TxtSinEtiquetasStyled>
+    )
+}
+
+export const H2Pos = styled.h2 `
+    color: var(--colorBlanco);
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+`
+export const TxtGenerico = styled.p`
+    color: ${props => props.color ? props.color : " var(--colorBlanco)"} ;;
+    margin: 0;
+    font-size: ${props => props.size ? props.size : "16px"} ;
+    font-weight: ${props => props.weight ? props.weight : "bold"} ;
+    line-height: ${props => props.line ? props.line : ""} ;
+`
