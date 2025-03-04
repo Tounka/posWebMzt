@@ -1,15 +1,17 @@
 import { createContext, useContext, useState } from "react";
-import { categoriasProductos } from "./dataDesarollo.jsx";
+import { categoriasProductos, localDataIn, ticketsDiasDb, userData } from "./dataDesarollo.jsx";
 
 const ContextoGeneral = createContext();
 
 export const ContextoGeneralProvider = ({ children }) => {
     const [ubicacionPagina, setUbicacionPagina] = useState("/");
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(userData);
+    const [localData, setLocalData] = useState(localDataIn)
     const [catalogo, setCatalogo] = useState(categoriasProductos); //Cambiar a database 
+    const [tickets, setTickets ]= useState(ticketsDiasDb);
 
     return (
-        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo }}>
+        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets }}>
             {children}
         </ContextoGeneral.Provider>
     );

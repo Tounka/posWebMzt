@@ -1,8 +1,8 @@
 import { Formik } from "formik"
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts"
 import { AgregarUsuarioUx } from "./AgregarUsuarioUx"
-import { validateContraseña, validateCorreo } from "../../../validaciones"
-
+import { validateApellido, validateContraseña, validateCorreo, validateNombre } from "../../../validaciones"
+import * as yup from "yup"
 
 
 export const AgregarUsuario = () => {
@@ -13,22 +13,25 @@ export const AgregarUsuario = () => {
         contraseña: "",
         rol: "",
     }
-    const  validationSchema = yup.object({
+    const  validationSchema  = yup.object({
+        nombre: validateNombre,
+        apellido: validateApellido,
         correo: validateCorreo,
         contraseña: validateContraseña,
     });
 
-    const handleSubmit = () =>{
-        console.log("Enviando formulario");
+    const handleSubmit = (values) =>{
+        console.log(values);
     }
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values) => handleSubmit(values)}
         >
             <Contenedor100>
                 <AgregarUsuarioUx />
+               
             </ Contenedor100>
         </Formik>
     )

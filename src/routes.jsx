@@ -1,5 +1,9 @@
 
+import { Inventarios } from './assets/Paginas/Inventarios';
+import { GenerarInventario } from './assets/Paginas/Inventarios/spGenerarInvetarios';
 import { Login } from './assets/Paginas/login';
+import { Reportes } from './assets/Paginas/Reportes';
+import { Tickets } from './assets/Paginas/Reportes/spTickets.jsx';
 import { Usuarios } from './assets/Paginas/usuarios';
 import { Ventas } from './assets/Paginas/ventas';
 import { AgregarUsuario } from './assets/Paginas/ventas/spAgregarUsuario';
@@ -17,6 +21,20 @@ export const routesConfig = [
     name: 'Auth',
     requiredPermission: [],
   },
+
+  {
+    path: '/inventario',
+    element: <Inventarios />,
+    name: 'Auth',
+    requiredPermission: [],
+  },
+  {
+    path: '/inventario/generar-inventario',
+    element: <GenerarInventario />,
+    name: 'Auth',
+    requiredPermission: [],
+  },
+
   {
     path: '/usuarios',
     element: <Usuarios />,
@@ -26,6 +44,19 @@ export const routesConfig = [
   {
     path: '/usuarios/agregar-usuario',
     element: <AgregarUsuario />,
+    name: 'Auth',
+    requiredPermission: [],
+  },
+
+  {
+    path: '/reportes',
+    element: <Reportes />,
+    name: 'Auth',
+    requiredPermission: [],
+  },
+  {
+    path: '/reportes/tickets',
+    element: <Tickets />,
     name: 'Auth',
     requiredPermission: [],
   },

@@ -27,7 +27,7 @@ const MenuLateralStyled = styled.div`
     }
 `
 
- const ContenedorItemMenuStyled = styled.button`
+const ContenedorItemMenuStyled = styled.button`
     height: 100px;
     width: 100%;
     background-color:${props => props.isSelected ? " var(--colorVerde)" : "transparent"};
@@ -48,49 +48,57 @@ const MenuLateralStyled = styled.div`
  `
 
 
-const ItemMenu = ({icon,txt,to}) =>{
+const ItemMenu = ({ icon, txt, to }) => {
     const Navigate = useNavigate();
     const location = useLocation();
-    
+
     const [isCurrentLocation, setIsCurrentLocation] = useState(false);
 
     useEffect(() => {
-        setIsCurrentLocation(location.pathname === to);
-    }, [location, to]); 
+        // Extraer el primer segmento de la ruta actual
+        const primerSegmentoActual = location.pathname.split("/")[1];
+        const primerSegmentoTo = to.split("/")[1];
 
+        if (to === "/") {
+            setIsCurrentLocation(location.pathname === "/");
+        } else {
 
-    const handleClick = () =>{
+            setIsCurrentLocation(primerSegmentoActual === primerSegmentoTo);
+        }
+    }, [location, to]);
+
+    const handleClick = () => {
         Navigate(to);
-    
+
     }
-    return(
-        <ContenedorItemMenuStyled isCurrentLocation={isCurrentLocation} onClick={ () => handleClick()}>
-            <ContenedorGenerico align= "end" >
-                <TxtGenerico line= ".8"  size="58px" > {icon} </TxtGenerico>
+    return (
+        <ContenedorItemMenuStyled isCurrentLocation={isCurrentLocation} onClick={() => handleClick()}>
+            <ContenedorGenerico align="end" >
+                <TxtGenerico line=".8" size="58px" > {icon} </TxtGenerico>
             </ContenedorGenerico>
 
             <ContenedorGenerico >
-                <TxtGenerico line= ".8"> {txt} </TxtGenerico>
+                <TxtGenerico line=".8"> {txt} </TxtGenerico>
             </ContenedorGenerico>
         </ContenedorItemMenuStyled>
     )
 }
 
-export const MenuLateral = ({user})=>{
-    const {ubicacionPagina} = useContextoGeneral();
+export const MenuLateral = ({ user }) => {
+    const { ubicacionPagina } = useContextoGeneral();
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(location);
-    },[location])
+    }, [location])
 
-    return(
+    return (
         <MenuLateralStyled user={user}>
             <H2Pos> POS </H2Pos>
 
-            <ItemMenu icon={<BsCashStack />}  txt="Venta" to="/" />
-            <ItemMenu icon={<HiOutlineClipboardList />}  txt="Inventario" to="/inventario" />
-            <ItemMenu icon={<FiFileText />}  txt="Reportes" to="/reportes" />
-            <ItemMenu icon={<FaUser />}  txt="Usuarios" to="/usuarios" />
+            <ItemMenu icon={<BsCashStack />} txt="Venta" to="/" />
+            <ItemMenu icon={<HiOutlineClipboardList />} txt="Inventario" to="/inventario" />
+            <ItemMenu icon={<FiFileText />} txt="Reportes" to="/reportes" />
+            <ItemMenu icon={<FaUser />} txt="Usuarios" to="/usuarios" />
         </MenuLateralStyled>
     )
 }

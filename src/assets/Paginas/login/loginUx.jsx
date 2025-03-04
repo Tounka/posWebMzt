@@ -26,27 +26,15 @@ const ContenedorField = styled.div`
 `;
 
 export const LoginUx = () => {
-  const validate = (values) => {
-    const errors = {};
-
-    const errorCorreo = validateCorreo(values.correo); // Cambiado a correo
-    if (errorCorreo) errors.correo = errorCorreo;
-
-    const errorContraseña = validateContraseña(values.contraseña);
-    if (errorContraseña) errors.contraseña = errorContraseña;
-
-    return errors;
-  };
-
   const validationSchema = yup.object({
-    correo: validateCorreo,
+    correo: validateCorreo, 
     contraseña: validateContraseña,
   });
 
   return (
     <Formik
       initialValues={{ correo: "", contraseña: "" }} // Cambiado a correo
-      validate={validationSchema}
+      validationSchema={validationSchema}
       onSubmit={(values) => {
         console.log("Datos enviados:", values);
       }}

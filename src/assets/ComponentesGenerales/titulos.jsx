@@ -16,7 +16,7 @@ export const TxtSinEtiquetas = ({txt}) =>{
 }
 
 export const H2Pos = styled.h2 `
-    color: var(--colorBlanco);
+    color: ${props => props.color ? props.color : "var(--colorBlanco)"};
     margin: 0;
     font-size: 24px;
     font-weight: bold;
@@ -27,4 +27,5 @@ export const TxtGenerico = styled.p`
     font-size: ${props => props.size ? props.size : "16px"} ;
     font-weight: ${props => props.weight ? props.weight : "bold"} ;
     line-height: ${props => props.line ? props.line : ""} ;
+    text-align: ${props => props.line ? props.align : ""} ;
 `
