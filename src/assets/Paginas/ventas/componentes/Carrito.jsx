@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { TxtGenerico } from "../../../ComponentesGenerales/titulos";
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
 import { useContextoPaginaVenta } from "../ContextoVenta";
+import { useNavigate } from "react-router";
 
 // Contenedores principales
 const ContenedorCarritoStyled = styled.div`
@@ -128,16 +129,50 @@ const ContenedorInputCantidad = styled.input`
     border: none;
 `;
 
-const InputCantidad = ({ icono }) => (
-    <ContendorLabelCantidad>
-        <InputLabel htmlFor={icono}>
-            <TxtGenerico color="var(--colorPrincipal)">{icono}</TxtGenerico>
-        </InputLabel>
-        <ContenedorInputCantidad id={icono} />
-    </ContendorLabelCantidad>
-);
+const InputCantidad = ({ icono, value, handleChange }) => {
+    const handleKeyDown = (e) => {
+        // Permitir solo números y teclas de control
+        if (!/[\d\b]/.test(e.key) && !["Backspace", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+            e.preventDefault();
+        }
+    };
 
-const ItemCarrito = ({ txt = "item", item }) => {
+    const handleInput = (e) => {
+        // Evitar valores negativos y limitar a 3 dígitos
+        e.target.value = Math.max(1, Math.min(999, Number(e.target.value)));
+    };
+
+    return (
+        <ContendorLabelCantidad>
+            <InputLabel htmlFor={icono}>
+                <TxtGenerico color="var(--colorPrincipal)">{icono}</TxtGenerico>
+            </InputLabel>
+            <ContenedorInputCantidad
+                type="number"
+                min={0}
+                max={999}
+                id={icono}
+                value={value}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onInput={handleInput}
+            />
+        </ContendorLabelCantidad>
+    );
+};
+
+const ItemCarrito = ({ idCarrito, item }) => {
+    const { setCarrito, carrito } = useContextoPaginaVenta();
+    const handleChange = (e) => {
+        const nuevaCantidad = Number(e.target.value);
+
+        setCarrito(prevCarrito =>
+            prevCarrito.map((producto, index) =>
+                index === idCarrito ? { ...producto, cantidad: nuevaCantidad } : producto
+            )
+        );
+    };
+
     let total = item.cantidad * item.precio || 0;
     const [isDesglozado, setIsDesglozado] = useState(false);
     return (
@@ -147,7 +182,7 @@ const ItemCarrito = ({ txt = "item", item }) => {
                     <BtnAccionDesglosar isDesglozado={isDesglozado} onClick={() => setIsDesglozado(prev => !prev)}>
                         <FaGreaterThan />
                     </BtnAccionDesglosar>
-                    <TxtGenerico size="14px">{txt}</TxtGenerico>
+                    <TxtGenerico size="14px">{item.nombre}</TxtGenerico>
                 </div>
                 <ContenedorNumeroTop>
                     <TxtGenerico size="14px">
@@ -160,10 +195,15 @@ const ItemCarrito = ({ txt = "item", item }) => {
             </ContenedorTop>
             {isDesglozado && (
                 <ContenedorBottom>
-                    <InputCantidad icono="#" />
-                    <InputCantidad icono="$" />
+                    <InputCantidad
+                        icono="#"
+                        value={carrito[idCarrito].cantidad}
+                        handleChange={handleChange} // Pasamos la referencia correcta
+                    />
+
                 </ContenedorBottom>
             )}
+
         </ContenedorItemCarritoStyled>
     );
 };
@@ -216,8 +256,8 @@ const TotalCarrito = ({ total = 0, totalVenta = "$200", handleClick }) => {
 }
 
 export const Carrito = () => {
-    const { carrito, setCarrito, setHandleResetProductosActualizados } = useContextoPaginaVenta();
-
+    const { carrito } = useContextoPaginaVenta();
+    const Navigate = useNavigate();
     const totalVenta = carrito.reduce((acumulador, item) => {
         return acumulador + (item.cantidad * item.precio);
     }, 0);
@@ -226,14 +266,20 @@ export const Carrito = () => {
     }, 0);
 
     const handleClick = () => {
-        setCarrito([]);
-        setHandleResetProductosActualizados(prevS => prevS + 1);
+        if (total <= 0) {
+            console.log("Ocupas agregar items al carrito");
+
+        } else {
+            console.log(carrito);
+            Navigate("/generar-ticket");
+        }
+
     }
 
     return (
         <ContenedorCarritoStyled>
             <ContenedorItemsCarrito>
-                {carrito.map((item, index) => <ItemCarrito key={index} item={item} />)}
+                {carrito.map((item, index) => <ItemCarrito key={index} idCarrito={index} item={item} />)}
             </ContenedorItemsCarrito>
             <TotalCarrito totalVenta={totalVenta} total={total} handleClick={handleClick} />
         </ContenedorCarritoStyled>

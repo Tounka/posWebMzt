@@ -88,3 +88,24 @@ export const BtnSecciones = ({ icono = <FaQuestion />, txtSeccion = "Lorem Ipsum
     </BtnSeccionesStyled>
   )
 }
+
+const BtnRectangularStyled = styled.button`
+  background-color: ${({color}) => color || "var(--colorPrincipal)"};
+  height: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+`
+
+export const BtnGenericoRectangular = ({txt, handleClick = ()=> console.log("Hola mundo") }) =>{
+
+  return(
+    <BtnRectangularStyled onClick ={() =>handleClick()}>
+      {txt}
+    </BtnRectangularStyled>
+  )
+}

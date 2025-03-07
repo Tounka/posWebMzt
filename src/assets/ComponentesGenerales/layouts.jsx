@@ -11,8 +11,8 @@ export const Contenedor100 = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: ${props => props.top ? "start" : "center"} ;
+    align-items:  center;
     overflow-x: hidden;
 `
 
@@ -21,3 +21,4 @@ export const LayoutApp = styled(Contenedor100vdh)`
     width: ${props => props.user ? "calc(100dvw - var(--anchoMenuLateral))" : "100%"};
     transition: margin-left .3s ease;
 `
+

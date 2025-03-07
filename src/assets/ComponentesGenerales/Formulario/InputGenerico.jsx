@@ -47,6 +47,8 @@ const ErrorMessageStyled = styled(ErrorMessage)`
     margin-top: 5px;
     animation: ${vibrar} 0.5s ease-in-out; 
     animation-iteration-count: 1; 
+   
+    text-align: ${({aling}) =>    aling || "start"};
 `;
 const ContenedorInputGenericoStyled = styled.div`
     display: flex;
@@ -70,3 +72,53 @@ export const InputGenerico = ({ id = "id", name = "name", placeholder = "Ingresa
         </ContenedorInputGenericoStyled>
     );
 };
+
+const ContenedorInputVerticalStyled = styled(ContenedorInputStyled)`
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: none;
+    gap: 10px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    label {
+        color: var(--colorPrincipal);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    input {
+        background-color: var(--colorPrincipal);
+        color: white;
+        height: 100%;
+        border-radius: 20px;
+        border: none;
+        overflow: hidden;
+        &:focus{
+            border: red;
+        }
+        &::placeholder{
+            color: white;
+        }
+    }
+`;
+
+export const InputGenericoVertical = ({ id = "id", name = "name", placeholder = "Ingresa información", txtLabel = "Label", type = "text" }) => {
+    return (
+        <ContenedorInputGenericoStyled>
+            <ContenedorInputVerticalStyled>
+                <label htmlFor={id}>{txtLabel}</label>
+                <Field
+                    id={id}
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                />
+                <ErrorMessageStyled aling = "center" name={name} component="div" />
+            </ContenedorInputVerticalStyled>
+        </ContenedorInputGenericoStyled>
+    );
+};
+

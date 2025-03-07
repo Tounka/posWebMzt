@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
-import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/titulos";
-import { ItemInventario } from "../Componentes/ItemGenerarInventario";
-import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
+
+import { H2Pos, TxtGenerico } from "../../../../ComponentesGenerales/titulos";
+import { ItemInventario } from "../../Componentes/ItemGenerarInventario";
+import { useContextoGeneral } from "../../../../Contextos/ContextoGeneral";
 import { Form } from "formik";
-import { obtenerFechaFormato } from "../../../Fn/ObtenerFechaHora";
-import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit";
+import { obtenerFechaFormato } from "../../../../Fn/ObtenerFechaHora";
+import { BtnSubmit } from "../../../../ComponentesGenerales/Formulario/BtnSubmit";
 import { useState } from "react";
-import { ModalHolaMundo } from "../Componentes/ModalVenta";
-import { ContenedorTop } from "../Componentes/ContenedorTop";
+import { ModalHolaMundo } from "../../Componentes/ModalVenta";
+import { ContenedorTop } from "../../Componentes/ContenedorTop";
+import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
 
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;
@@ -74,7 +75,7 @@ const ContenedorCategoria = styled.div`
     border-bottom: solid 4px var(--colorPrincipal);
 `;
 
-export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) => {
+export const EntradaProductoUx = ({ catalogo, user, values, handleChange }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isConfirmationModal, setIsConfirmationModal] = useState(false);
     const [isHelloWorldModalOpen, setIsHelloWorldModalOpen] = useState(false); // Nuevo estado
@@ -123,7 +124,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
                         <p>Los siguientes items tienen 0:</p>
                         <ul>
                             {itemsWithZero.map((item) => (
-                                <li key={item.id}>{item.nombre}</li>
+                                <li key={item.id}>{item.txt}</li>
                             ))}
                         </ul>
                         <p>¿Seguro que deseas continuar?</p>
@@ -145,7 +146,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
 
             {/* Formulario de inventario */}
             <ContenedorInventario>
-                <ContenedorTop user={user} fechaHora={fechaHora} />
+                <ContenedorTop txt="Entrada Producto" user={user} fechaHora={fechaHora} />
                 {catalogo.map((categoria, index) => (
                     <ContenedorCategoria key={index}>
                         <SeparacionCategorias>{categoria?.categoria}</SeparacionCategorias>
@@ -154,7 +155,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
                                 key={item.id}
                                 id={item.id}
                                 name={item.id}
-                                label={item.nombre}
+                                label={item.txt}
                                 value={values[item.id]} // Asigna el valor actual a cada input
                                 onChange={handleChange} // Asigna la función handleChange
                             />

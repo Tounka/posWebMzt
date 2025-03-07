@@ -4,7 +4,7 @@ import { BtnSecciones } from "../../ComponentesGenerales/BtnsGenericos";
 import { HiTicket } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { GiNotebook } from "react-icons/gi";
-import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+import { FaBoxOpen } from "react-icons/fa";
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;
     justify-content: center;  
@@ -21,8 +21,8 @@ export const InventariosUx = () => {
 
         <ContenedorReportes>
             <BtnSecciones txtSeccion="Generar Inventario" to="./inventario/generar-inventario" icono={<GiNotebook />}/>
-            <BtnSecciones txtSeccion="Ventas" to="./reportes/ventas" />
-            <BtnSecciones txtSeccion="Tickets" to="./reportes/tickets" />
+            <BtnSecciones txtSeccion="Productos" to="./inventario/productos" icono={<FaBook />} />
+            <BtnSecciones txtSeccion="Entrada de Producto" to="./inventario/entrada-producto"  icono={<FaBoxOpen />}/>
        
         </ContenedorReportes>
     )

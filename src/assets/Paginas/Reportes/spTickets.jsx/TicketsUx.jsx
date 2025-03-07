@@ -43,7 +43,7 @@ export const TicketsUx = () => {
 
                         <ContenedorTickets>
                         {dia.tickets.map((ticket, ticketIndex) => (
-                            <Ticket key={ticketIndex} datos= {ticket} />
+                            <Ticket key={ticketIndex} datosTicket = {ticket} />
                         ))}
                         </ContenedorTickets>
                     </ContenedorDias>

@@ -76,28 +76,7 @@ const TablaProductos = styled.table`
     th:nth-child(4) { width: 20%; }
 `;
 
-export const Ticket = ({ datos }) => {
-    const { localData } = useContextoGeneral();
-    
-    const datosTicket = {
-        fechaTransaccion: {
-            fecha: datos?.fechaTransaccion?.fecha || "12/02/2025",
-            hora: datos?.fechaTransaccion?.hora || "12:22"
-        },
-        usuario: {
-            nombre: datos?.usuario?.nombre || userData.nombre,
-            apellido: datos?.usuario?.apellido || userData.apellido
-        },
-        caja: datos?.caja || "1",
-        productos: datos?.productos || [
-            { nombre: "Ejemplo Producto", cantidad: 1, precio: 1000, total: 10 },
-            { nombre: "Ejemplo Producto", cantidad: 1, precio: 100, total: 1000 }
-        ],
-        total: datos?.total || 100,  // Asegúrate de que 'total' sea un número
-
-        totalEnTxt: NumerosALetras(100),
-    };
-
+export const Ticket = ({ datosTicket  }) => {
     // Asegúrate de que `total` es un número y usa `toFixed`
     const totalFormat = Number(datosTicket.total).toFixed(2);
 
@@ -112,7 +91,7 @@ export const Ticket = ({ datos }) => {
                     <b> Nombre del negocio:</b> Lorem, ipsum dolor sit amet consectetur.
                 </TxtGenerico>
                 <TxtGenerico color="black" align="center" size="10px">
-                    <b> {localData.ubicacion}</b> : {localData.sucursal}
+                    <b> {datosTicket.ubicacion}</b> : {datosTicket.sucursal}
                 </TxtGenerico>
             </ContenedorSeccionTicket>
 
@@ -153,8 +132,8 @@ export const Ticket = ({ datos }) => {
                         <tr key={index}>
                             <td>{producto.nombre}</td>
                             <td>{producto.cantidad}</td>
-                            <td>${producto.precio.toFixed(2)}</td>
-                            <td>${producto.total.toFixed(2)}</td>
+                            <td>${producto?.precio.toFixed(2)}</td>
+                            <td>${producto?.total.toFixed(2)}</td>
                         </tr>
                     ))}
                 </tbody>

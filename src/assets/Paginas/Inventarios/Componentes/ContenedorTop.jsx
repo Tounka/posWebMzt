@@ -22,14 +22,14 @@ const ContenedorTopStyled = styled.div`
 `;
 
 
-export const ContenedorTop = ({user, fechaHora}) => {
+export const ContenedorTop = ({user, fechaHora, txt="INVENTARIO"}) => {
     return (
         <ContenedorTopStyled>
             <H2Pos color="var(--colorPrincipal)">
                 {user.nombre.toUpperCase()} 
             </H2Pos>
             <H2Pos color="var(--colorPrincipal)">
-                 - INVENTARIO - 
+                 - {txt} - 
             </H2Pos>
             <H2Pos color="var(--colorPrincipal)">
                 {fechaHora}

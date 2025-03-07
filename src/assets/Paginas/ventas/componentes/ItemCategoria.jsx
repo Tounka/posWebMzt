@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { TxtGenerico } from "../../../ComponentesGenerales/titulos"
 import { ContenedorGenerico } from "../../../ComponentesGenerales/contendores"
 import { PiHandSoapBold } from "react-icons/pi";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
@@ -23,8 +23,8 @@ import { useContextoPaginaVenta } from "../ContextoVenta";
     transition: backgrodun-color .2s ease;
     cursor: pointer;
     border: solid 2px var(--colorPrincipal);
-    
- `
+    `
+ 
 
 const ContenedorItemProducto = styled.div`
         height: 160px;
@@ -40,8 +40,8 @@ const ContenedorItemProducto = styled.div`
         cursor: default ;
 
         border: dashed 2px var(--colorPrincipal);
-
 `
+
 export const ItemCategoria = ({icon=<PiHandSoapBold />,txt, catalogo, setCatalogoSeleccionado,index, categoria}) =>{
 
     const handleClick = () =>{
@@ -70,8 +70,8 @@ const ControlUnidadesStyled = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 30px;
     background-color: ${props => (Number(props.unidades) == 0 ? "var(--colorRojo)" : "var(--colorVerde)")};
-`
 
+`
 const BtnMasUnidadesStyled = styled.button`
 
     grid-column: 3/4;
@@ -85,8 +85,8 @@ const BtnMasUnidadesStyled = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
 `
+
 const BtnMenosUnidadesStyled = styled(BtnMasUnidadesStyled)`
 
     grid-column: 1/2;
@@ -106,7 +106,8 @@ const ContenedorTxtStyled = styled(Contenedor100)`
     color: var(--colorBlanco);
     font-weight: bold;
     font-size: 20px;
-`
+    
+    `
 const ControlUnidades = ({handleClickPlus, unidades,handleClickLess}) =>{
     return(
         <ControlUnidadesStyled unidades={unidades}>
@@ -134,12 +135,20 @@ const ControlUnidades = ({handleClickPlus, unidades,handleClickLess}) =>{
 }
 
 export const ItemProducto = ({ producto }) => {
-    const { setProductosEnVenta, productosEnVenta, setCarrito } = useContextoPaginaVenta();
+    const { setProductosEnVenta, productosEnVenta, setCarrito, carrito } = useContextoPaginaVenta();
+    const [cantidad, setCantidad] = useState(producto.cantidad || 0);
+    let productoEnCarrito = carrito.find(item => item.id === producto.id);
+    if(productoEnCarrito == undefined){
+        productoEnCarrito = {
+            cantidad: 0
+        }
+    }
+    useEffect(() => {
+        const productoEnVenta = productosEnVenta
+            .flatMap(categoria => categoria.items)
+            .find(item => item.id === producto.id);
 
-    // Memoriza el producto actualizado para evitar recalcularlo en cada renderizado
-    const productoActualizado = useMemo(() => {
-        return productosEnVenta.flatMap(categoria => categoria.items)
-            .find(item => item.id === producto.id) || producto;
+        setCantidad(productoEnVenta ? productoEnVenta.cantidad : 0);
     }, [productosEnVenta, producto.id]);
 
     const handleClickPlus = () => {
@@ -152,17 +161,13 @@ export const ItemProducto = ({ producto }) => {
             }))
         );
 
-        // Agregar al carrito o actualizar la cantidad si ya existe
         setCarrito(prevCarrito => {
             const existeProducto = prevCarrito.find(item => item.id === producto.id);
-
             if (existeProducto) {
-                // Si ya existe, actualiza la cantidad
                 return prevCarrito.map(item =>
                     item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
                 );
             } else {
-                // Si no existe, agrega el producto al carrito con cantidad 1
                 return [...prevCarrito, { ...producto, cantidad: 1 }];
             }
         });
@@ -178,18 +183,14 @@ export const ItemProducto = ({ producto }) => {
             }))
         );
 
-        // Eliminar del carrito o actualizar la cantidad si ya existe
         setCarrito(prevCarrito => {
             const existeProducto = prevCarrito.find(item => item.id === producto.id);
-
             if (existeProducto) {
                 if (existeProducto.cantidad > 1) {
-                    // Si la cantidad es mayor a 1, decrementa la cantidad
                     return prevCarrito.map(item =>
                         item.id === producto.id ? { ...item, cantidad: item.cantidad - 1 } : item
                     );
                 } else {
-                    // Si la cantidad es 1, elimina el producto del carrito
                     return prevCarrito.filter(item => item.id !== producto.id);
                 }
             }
@@ -198,25 +199,24 @@ export const ItemProducto = ({ producto }) => {
     };
 
     return (
-        <ContenedorItemProducto id={productoActualizado.id}>
+        <ContenedorItemProducto id={producto.id}>
             <ContenedorGenerico width="150px" align="center">
                 <TxtGenerico color="var(--colorPrincipal)" line=".8" size="58px">
-                    {productoActualizado.icon || <PiHandSoapBold />}
+                    {producto.icon || <PiHandSoapBold />}
                 </TxtGenerico>
             </ContenedorGenerico>
 
             <ContenedorGenerico width="150px">
                 <TxtGenerico color="var(--colorPrincipal)" line=".8" align="center">
-                    {productoActualizado.txt}
+                    {producto.nombre}
                 </TxtGenerico>
             </ContenedorGenerico>
             
             <ControlUnidades 
-                unidades={productoActualizado.cantidad} 
+                unidades={productoEnCarrito?.cantidad} 
                 handleClickPlus={handleClickPlus} 
                 handleClickLess={handleClickLess}  
             />
         </ContenedorItemProducto>
     );
 };
-
