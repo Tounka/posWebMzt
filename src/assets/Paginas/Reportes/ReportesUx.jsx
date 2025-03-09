@@ -20,8 +20,8 @@ export const ReportesUx = () => {
     return (
 
         <ContenedorReportes>
-            <BtnSecciones txtSeccion="Inventarios" to="./reportes/inventario"/>
-            <BtnSecciones txtSeccion="Ventas" to="./reportes/ventas"/>
+            <BtnSecciones txtSeccion="Inventarios" to="./reportes/inventarios" icono={<FaBook />} />
+            <BtnSecciones txtSeccion="Ventas" to="./reportes/ventas" icono={<TbDeviceDesktopAnalytics />}/>
             <BtnSecciones txtSeccion="Tickets" to="./reportes/tickets" icono={<HiTicket />}/>
        
         </ContenedorReportes>

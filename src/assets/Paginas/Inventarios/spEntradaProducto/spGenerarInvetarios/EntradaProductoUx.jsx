@@ -155,7 +155,7 @@ export const EntradaProductoUx = ({ catalogo, user, values, handleChange }) => {
                                 key={item.id}
                                 id={item.id}
                                 name={item.id}
-                                label={item.txt}
+                                label={item.nombre}
                                 value={values[item.id]} // Asigna el valor actual a cada input
                                 onChange={handleChange} // Asigna la función handleChange
                             />

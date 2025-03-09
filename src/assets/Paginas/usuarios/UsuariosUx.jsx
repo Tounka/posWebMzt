@@ -3,6 +3,7 @@ import { Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { BtnRedondo } from "../../ComponentesGenerales/btnRedondo";
 import { useNavigate } from "react-router";
+import { TxtGenerico } from "../../ComponentesGenerales/titulos";
 
 const ContenedorPaginaUsuarios = styled.div`
 
@@ -17,13 +18,25 @@ const ContenedorTop = styled.div`
     border: solid 2px var(--colorPrincipal);
     border-bottom: 0px;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
     margin-bottom: -4px;
+    position: relative;
 `
 const PaperStyled = styled(Paper)`
     border: solid 2px var(--colorPrincipal);
 `
+const ContenedorBtn = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
 
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+`
 const rows = [
     { id: 1, nombre: "Juan Pérez", email: "juan@example.com", contraseña: "123456", fechaIngreso: "2023-01-15", rol: "Admin", Fn: "Editar" },
     { id: 2, nombre: "María Gómez", email: "maria@example.com", contraseña: "abcdef", fechaIngreso: "2023-02-10", rol: "Usuario", Fn: "Eliminar" },
@@ -59,14 +72,20 @@ const paginationModel = { page: 0, pageSize: 15 };
 
 export const UsuariosUx = () => {
     const Navigate = useNavigate();
-    const handleClickBtnAgregar = () =>{
+    const handleClickBtnAgregar = () => {
         Navigate("/usuarios/agregar-usuario");
     }
     return (
 
         <ContenedorPaginaUsuarios>
             <ContenedorTop>
-                <BtnRedondo  diametro= "60px"  bgColor ="var(--colorPrincipal)" handleClick={() => handleClickBtnAgregar()}/>
+                <TxtGenerico size="22px" color="var(--colorPrincipal)" >
+                    Usuarios
+                </TxtGenerico>
+                <ContenedorBtn>
+
+                <BtnRedondo diametro="60px" bgColor="var(--colorPrincipal)" handleClick={() => handleClickBtnAgregar()} />
+                </ContenedorBtn>
             </ContenedorTop>
             <PaperStyled sx={{ height: 400, width: '100%' }}>
                 <DataGrid
@@ -74,7 +93,7 @@ export const UsuariosUx = () => {
                     columns={columns}
                     initialState={{ pagination: { paginationModel } }}
                     pageSizeOptions={[5, 10]}
-                    
+
                     sx={{ border: 0 }}
                 />
             </PaperStyled>

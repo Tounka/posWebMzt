@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { useContextoPaginaVenta } from "../ContextoVenta";
 import { NumerosALetras } from "numero-a-letras";
 import { obtenerFecha, obtenerHora } from "../../../Fn/ObtenerFechaHora";
+import { imprimirTicket } from "../../../Fn/Imprimir";
 const ContedorTicket = styled.div`
   display: grid;
   grid-template-rows: 400px 80px;
@@ -38,7 +39,7 @@ export const  GenerarTicketUx = ({ catalogo }) => {
   }
   const handleImprimir = () =>{
     //
-     
+    imprimirTicket(datosTicket)
     setCarrito([]);
     setHandleResetProductosActualizados(prevS => prevS + 1);
     Navigate(-1);

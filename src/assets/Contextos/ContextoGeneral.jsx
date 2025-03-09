@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { categoriasProductos, localDataIn, ticketsDiasDb, userData } from "./dataDesarollo.jsx";
+import { categoriasProductos, inventariosDb, localDataIn, ticketsDiasDb, userData } from "./dataDesarollo.jsx";
 
 const ContextoGeneral = createContext();
 
@@ -9,9 +9,10 @@ export const ContextoGeneralProvider = ({ children }) => {
     const [localData, setLocalData] = useState(localDataIn)
     const [catalogo, setCatalogo] = useState(categoriasProductos); //Cambiar a database 
     const [tickets, setTickets ]= useState(ticketsDiasDb);
+    const [inventarios, setInventarios ]= useState(inventariosDb);
 
     return (
-        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets }}>
+        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios }}>
             {children}
         </ContextoGeneral.Provider>
     );

@@ -8,9 +8,7 @@ export const Tickets = () => {
     return (
 
         <Contenedor100>
-            <TicketsUx
-  
-            />
+            <TicketsUx/>
         </Contenedor100>
 
     );

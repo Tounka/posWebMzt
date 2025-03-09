@@ -60,7 +60,7 @@ export const ProductosUx = () => {
                 rows.push({
                     id: item.id,
                     categoria: categoria.categoria, // Asignamos la categoría
-                    txt: item.txt, // Nombre del producto
+                    txt: item.nombre, // Nombre del producto
                     costo: item.costo, // Costo del producto
                     precio: item.precio, // Precio del producto
                     fn: "Editar", // Acción por defecto, puedes cambiarlo por "Eliminar" si es necesario

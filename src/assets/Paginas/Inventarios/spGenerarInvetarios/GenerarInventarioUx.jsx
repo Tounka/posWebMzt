@@ -43,6 +43,7 @@ const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
@@ -53,6 +54,7 @@ const ModalContainer = styled.div`
 const ModalContent = styled.div`
   background: var(--colorPrincipal);
   padding: 20px 50px;
+ 
   border-radius: 10px;
   max-width: 80%;
   max-height: 80%;

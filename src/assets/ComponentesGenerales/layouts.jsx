@@ -12,6 +12,8 @@ export const Contenedor100 = styled.div`
     height: 100%;
     display: flex;
     justify-content: ${props => props.top ? "start" : "center"} ;
+    flex-direction: ${({direction}) => direction || "row"} ;
+    gap: ${({gap}) => gap || "0"} ;
     align-items:  center;
     overflow-x: hidden;
 `

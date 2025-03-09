@@ -6,9 +6,9 @@ const PaperStyled = styled(Paper)`
     border: solid 2px var(--colorPrincipal);
 `;
 
-export const TablaGenerica = ({ rows, columns }) => {
+export const TablaGenerica = ({ rows, columns, height=600 }) => {
     return (
-        <PaperStyled sx={{ height: 600, width: "100%" }}>
+        <PaperStyled sx={{ height: height, width: "100%" }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -35,7 +35,7 @@ export const ProductosUx = () => {
 
     const columns = [
         { field: "id", headerName: "Id", width: 50 },
-        { field: "nombre", headerName: "Nombre", width: 200 },
+        { field: "producto", headerName: "Nombre", width: 200 },
         { field: "contraseña", headerName: "Password", width: 150 },
         { field: "fechaIngreso", headerName: "Fecha Ingreso", width: 150 },
         { field: "rol", headerName: "Rol", width: 80 },

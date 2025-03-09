@@ -36,7 +36,7 @@ const ContenedorItemProducto = styled.div`
         justify-content: center;
         align-items: start;
         background-color: var(--colorBlanco);
-
+        user-select: none;
         cursor: default ;
 
         border: dashed 2px var(--colorPrincipal);
@@ -199,14 +199,14 @@ export const ItemProducto = ({ producto }) => {
     };
 
     return (
-        <ContenedorItemProducto id={producto.id}>
-            <ContenedorGenerico width="150px" align="center">
-                <TxtGenerico color="var(--colorPrincipal)" line=".8" size="58px">
+        <ContenedorItemProducto id={producto.id} >
+            <ContenedorGenerico width="150px" align="center" onClick={() => handleClickPlus()}>
+                <TxtGenerico color="var(--colorPrincipal)" line=".8" size="58px" >
                     {producto.icon || <PiHandSoapBold />}
                 </TxtGenerico>
             </ContenedorGenerico>
 
-            <ContenedorGenerico width="150px">
+            <ContenedorGenerico width="150px" onClick={() => handleClickPlus()}>
                 <TxtGenerico color="var(--colorPrincipal)" line=".8" align="center">
                     {producto.nombre}
                 </TxtGenerico>

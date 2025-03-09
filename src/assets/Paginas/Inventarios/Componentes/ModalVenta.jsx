@@ -64,6 +64,7 @@ const ModalContainer = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  
   background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
   display: flex;
   justify-content: center;
@@ -76,9 +77,13 @@ const ModalContent = styled.div`
   border-radius: 10px;
   max-width: 210mm; /* Tamaño A4 */
   max-height: 297mm; /* Tamaño A4 */
+  
   overflow-y: auto;
   width: 100%;
-  height: 100%;
+  height: 90%;
+  h2{
+    text-align: center;
+  }
 `;
 
 const Table = styled.table`

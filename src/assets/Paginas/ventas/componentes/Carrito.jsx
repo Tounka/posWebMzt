@@ -257,6 +257,7 @@ const TotalCarrito = ({ total = 0, totalVenta = "$200", handleClick }) => {
 
 export const Carrito = () => {
     const { carrito } = useContextoPaginaVenta();
+
     const Navigate = useNavigate();
     const totalVenta = carrito.reduce((acumulador, item) => {
         return acumulador + (item.cantidad * item.precio);
@@ -279,7 +280,10 @@ export const Carrito = () => {
     return (
         <ContenedorCarritoStyled>
             <ContenedorItemsCarrito>
-                {carrito.map((item, index) => <ItemCarrito key={index} idCarrito={index} item={item} />)}
+                {carrito.length === 0 ?
+                    <TxtGenerico weight="normal" >(Agrega Items Al Carrito)</TxtGenerico> :
+                    carrito.map((item, index) => <ItemCarrito key={index} idCarrito={index} item={item} />)
+                }
             </ContenedorItemsCarrito>
             <TotalCarrito totalVenta={totalVenta} total={total} handleClick={handleClick} />
         </ContenedorCarritoStyled>
