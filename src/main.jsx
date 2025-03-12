@@ -10,14 +10,14 @@ import { ContextoPaginaVentaProvider } from './assets/Paginas/ventas/ContextoVen
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ContextoGeneralProvider>
-      <ContextoPaginaVentaProvider>
-        <AuthProvider>
-          <BrowserRouter>
+    <BrowserRouter>
+      <ContextoGeneralProvider>
+        <ContextoPaginaVentaProvider>
+          <AuthProvider>
             <App />
-          </BrowserRouter>
-        </AuthProvider>
-      </ContextoPaginaVentaProvider>
-    </ContextoGeneralProvider>
+          </AuthProvider>
+        </ContextoPaginaVentaProvider>
+      </ContextoGeneralProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

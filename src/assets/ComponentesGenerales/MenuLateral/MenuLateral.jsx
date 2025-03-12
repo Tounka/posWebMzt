@@ -1,14 +1,15 @@
 import styled from "styled-components"
 import { H2Pos, TxtGenerico } from "../titulos"
-import { BsCashStack } from "react-icons/bs";
-import { HiOutlineClipboardList } from "react-icons/hi";
-import { FiFileText } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
+
+
 import { ContenedorGenerico } from "../contendores";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
+
+import { routesConfig } from "../../../routes";
+//Editar archivo rutas para agregar una nueva seccion al menu
 
 const MenuLateralStyled = styled.div`
     width: var(--anchoMenuLateral);
@@ -58,11 +59,14 @@ const ItemMenu = ({ icon, txt, to }) => {
         // Extraer el primer segmento de la ruta actual
         const primerSegmentoActual = location.pathname.split("/")[1];
         const primerSegmentoTo = to.split("/")[1];
+      
+        console.log(primerSegmentoActual)
 
-        if (to === "/") {
-            setIsCurrentLocation(location.pathname === "/");
-        } else {
-
+        if (to === "/" || location.pathname==="/generar-ticket") {
+            setIsCurrentLocation(location.pathname === "/" );
+            console.log("hola")
+        }  else {
+            
             setIsCurrentLocation(primerSegmentoActual === primerSegmentoTo);
         }
     }, [location, to]);
@@ -84,8 +88,8 @@ const ItemMenu = ({ icon, txt, to }) => {
     )
 }
 
-export const MenuLateral = ({ user }) => {
-    const { ubicacionPagina } = useContextoGeneral();
+export const MenuLateral = () => {
+    const { user } = useContextoGeneral();
 
     useEffect(() => {
         console.log(location);
@@ -94,11 +98,19 @@ export const MenuLateral = ({ user }) => {
     return (
         <MenuLateralStyled user={user}>
             <H2Pos> POS </H2Pos>
-
-            <ItemMenu icon={<BsCashStack />} txt="Venta" to="/" />
-            <ItemMenu icon={<HiOutlineClipboardList />} txt="Inventario" to="/inventario" />
-            <ItemMenu icon={<FiFileText />} txt="Reportes" to="/reportes" />
-            <ItemMenu icon={<FaUser />} txt="Usuarios" to="/usuarios" />
+            {routesConfig.map((ruta, index) => {
+                if (ruta.isMenuPath !== undefined && ruta.requiredPermission.includes(user?.rol)) {
+                    return (
+                        <ItemMenu
+                            key={index} // Asegúrate de incluir una clave única
+                            icon={ruta.isMenuPath.icon}
+                            txt={ruta.isMenuPath.txt}
+                            to={ruta.isMenuPath.to}
+                        />
+                    );
+                }
+                return null; // Retorna null si no se cumple la condición
+            })}
         </MenuLateralStyled>
     )
 }

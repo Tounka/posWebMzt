@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { FaGreaterThan } from "react-icons/fa";
 import { GrCaretNext } from "react-icons/gr";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TxtGenerico } from "../../../ComponentesGenerales/titulos";
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
 import { useContextoPaginaVenta } from "../ContextoVenta";
 import { useNavigate } from "react-router";
+import { Label } from "recharts";
+import { DescuentoCarrito } from "./DescuentoCarrito";
 
 // Contenedores principales
 const ContenedorCarritoStyled = styled.div`
@@ -17,7 +19,15 @@ const ContenedorCarritoStyled = styled.div`
     padding: 10px 10px 20px 10px;
     overflow: hidden;
 `;
+const ContenedorBottomTotal = styled.div`
+    width: 100%;
+    height: 100%;
+    display: grid;
 
+    grid-template-rows: 35% 65%;
+    gap: 10px;
+
+`
 const ContenedorItemsCarrito = styled(Contenedor100)`
     flex-direction: column;
     justify-content: start;
@@ -127,7 +137,11 @@ const ContenedorInputCantidad = styled.input`
     height: 100%;
     padding: 10px;
     border: none;
+
+    
 `;
+
+
 
 const InputCantidad = ({ icono, value, handleChange }) => {
     const handleKeyDown = (e) => {
@@ -215,7 +229,7 @@ const ContenedorTxtCarrito = styled(Contenedor100)`
     div {
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 2fr;
+        grid-template-columns: 80px 50px 2fr;
         gap: 10px;
         :nth-child(1) {
             text-align: end;
@@ -244,11 +258,26 @@ const ConstBtnSubmit = styled.button`
 `;
 
 const TotalCarrito = ({ total = 0, totalVenta = "$200", handleClick }) => {
+    const {descuento} = useContextoPaginaVenta();
+
+
+    const calcularDescuento = (totalVenta) =>{
+        let valorDescuento = 0;
+        if(descuento.tipo === '%' ){
+            valorDescuento = totalVenta * (descuento.valor / 100);
+            valorDescuento = valorDescuento.toFixed(2)
+        }else{
+            valorDescuento = descuento.valor;
+        }
+
+        return(valorDescuento);
+    }
     return (
         <ContenedorTotal>
             <ContenedorTxtCarrito>
-                <div><TxtGenerico weight="normal">Productos:</TxtGenerico><TxtGenerico weight="bold">{total}</TxtGenerico></div>
-                <div><TxtGenerico weight="normal">Venta:</TxtGenerico><TxtGenerico weight="bold">{totalVenta}</TxtGenerico></div>
+                <div><TxtGenerico weight="normal">Productos:</TxtGenerico><TxtGenerico weight="bold">{total}</TxtGenerico> <TxtGenerico align= "center" weight="bold">desc:</TxtGenerico></div>
+                <div><TxtGenerico weight="normal">Venta:</TxtGenerico><TxtGenerico weight="bold">{totalVenta}</TxtGenerico>  <TxtGenerico align= "center" weight="bold">${calcularDescuento(totalVenta)}</TxtGenerico></div>
+                
             </ContenedorTxtCarrito>
             <ConstBtnSubmit onClick={() => handleClick()}><GrCaretNext /></ConstBtnSubmit>
         </ContenedorTotal>
@@ -272,7 +301,7 @@ export const Carrito = () => {
 
         } else {
             console.log(carrito);
-            Navigate("/generar-ticket");
+            Navigate("/venta/generar-ticket");
         }
 
     }
@@ -285,7 +314,12 @@ export const Carrito = () => {
                     carrito.map((item, index) => <ItemCarrito key={index} idCarrito={index} item={item} />)
                 }
             </ContenedorItemsCarrito>
-            <TotalCarrito totalVenta={totalVenta} total={total} handleClick={handleClick} />
+            <ContenedorBottomTotal>
+
+                <DescuentoCarrito />
+                <TotalCarrito totalVenta={totalVenta} total={total} handleClick={handleClick} />
+
+            </ContenedorBottomTotal>
         </ContenedorCarritoStyled>
     );
 }

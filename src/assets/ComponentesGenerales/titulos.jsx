@@ -27,5 +27,5 @@ export const TxtGenerico = styled.p`
     font-size: ${props => props.size ? props.size : "16px"} ;
     font-weight: ${props => props.weight ? props.weight : "bold"} ;
     line-height: ${props => props.line ? props.line : ""} ;
-    text-align: ${props => props.line ? props.align : ""} ;
+    text-align: ${props => props.align ? props.align : ""} ;
 `

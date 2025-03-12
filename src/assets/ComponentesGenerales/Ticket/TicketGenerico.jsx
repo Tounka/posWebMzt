@@ -76,9 +76,10 @@ const TablaProductos = styled.table`
     th:nth-child(4) { width: 20%; }
 `;
 
-export const Ticket = ({ datosTicket  }) => {
+export const Ticket = ({ datosTicket }) => {
     // Asegúrate de que `total` es un número y usa `toFixed`
     const totalFormat = Number(datosTicket.total).toFixed(2);
+    const totalDespuesDescuento = Number(datosTicket.total - datosTicket.descuento).toFixed(2);
 
     return (
         <ContenedorTicketStyled>
@@ -136,15 +137,30 @@ export const Ticket = ({ datosTicket  }) => {
                             <td>${producto?.total.toFixed(2)}</td>
                         </tr>
                     ))}
+                    <tr >
+                        <td><b>Total:</b></td>
+                        <td><b>{datosTicket.productos.reduce((acc,producto)  => acc + producto.cantidad,0 )}</b></td>
+                        <td></td>
+                        <td><b>${totalFormat}</b></td>
+                    </tr>
                 </tbody>
             </TablaProductos>
+            <hr />
+            <ContenedorMetaDatos>
+                <TxtPosicionado color="black" align="center" size="12px">
+                    Descuento:
+                </TxtPosicionado>
+                <TxtPosicionado color="black" weight="normal" align="center" size="10px">
+                    ${datosTicket.descuento} 
+                </TxtPosicionado>
+            </ContenedorMetaDatos>
             <hr />
             <ContenedorMetaDatos>
                 <TxtPosicionado color="black" align="center" size="12px">
                     Total:
                 </TxtPosicionado>
                 <TxtPosicionado color="black" weight="normal" align="center" size="10px">
-                    ${totalFormat} {/* Usar el total formateado */}
+                    ${totalDespuesDescuento} {/* Usar el total formateado */}
                 </TxtPosicionado>
             </ContenedorMetaDatos>
             <hr />

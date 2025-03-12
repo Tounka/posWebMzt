@@ -25,24 +25,35 @@ const ContenedorBtns = styled.div`
 `
 
 export const  GenerarTicketUx = ({ catalogo }) => {
-  const {carrito, setCarrito, setHandleResetProductosActualizados } = useContextoPaginaVenta();
+  const {carrito, setCarrito, setHandleResetProductosActualizados, descuento, setDescuento } = useContextoPaginaVenta();
   const fecha = new Date();
   const carritoConTotal = carrito.map(item => ({
     ...item,
     total: item.cantidad * item.precio
   }));
   const sumatoriaTotal = carritoConTotal.reduce((acumulador,item) => acumulador + item.total, 0);
+  const ObtenerDescuento  = () =>{
+    if(descuento.tipo === "$"){
+      return(descuento.valor);
+    }else if(descuento.tipo === "%"){
+      let descuentoRam = sumatoriaTotal * (descuento.valor / 100);
+      return(descuentoRam);
+    }
+  }
+  const totalTicket = sumatoriaTotal - ObtenerDescuento();
   const Navigate = useNavigate();
 
   const handleRegresar = () =>{
     Navigate(-1);
   }
+
   const handleImprimir = () =>{
     //
     imprimirTicket(datosTicket)
     setCarrito([]);
     setHandleResetProductosActualizados(prevS => prevS + 1);
     Navigate(-1);
+    setDescuento({tipo: "$", valor: 0})
   }
   
   const datosTicket = {
@@ -57,7 +68,8 @@ export const  GenerarTicketUx = ({ catalogo }) => {
     caja: "2",
     productos: carritoConTotal,
     total: sumatoriaTotal,
-    totalEnTxt: NumerosALetras(sumatoriaTotal),
+    descuento: ObtenerDescuento(), 
+    totalEnTxt: NumerosALetras(totalTicket),
   }
 
 

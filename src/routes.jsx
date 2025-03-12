@@ -14,14 +14,25 @@ import { GenerarTicket } from './assets/Paginas/ventas/spGenerarTicket/index.jsx
 import { ReporteInventarios } from './assets/Paginas/Reportes/spInventarios/index.jsx';
 import { ReporteVentas } from './assets/Paginas/Reportes/spVentas/index.jsx';
 
+
+import { BsCashStack } from "react-icons/bs";
+import { HiOutlineClipboardList } from "react-icons/hi";
+import { FiFileText } from "react-icons/fi";
+import { FaUser } from "react-icons/fa";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { Logout } from './assets/Paginas/login/logout.JSX';
+
+
+
 export const routesConfig = [
   {
-    path: '/',
+    path: '/venta',
     element: <Ventas />,
     name: 'Auth',
-    requiredPermission: ['empleado', 'admin'],
+    isMenuPath: { icon: <BsCashStack />, txt: "Venta", to: "/venta" },
+    requiredPermission: ['empleado', 'administrador'],
   }, {
-    path: '/generar-ticket',
+    path: '/venta/generar-ticket',
     element: <GenerarTicket />,
     name: 'Auth',
     requiredPermission: ['empleado', 'admin'],
@@ -36,8 +47,9 @@ export const routesConfig = [
   {
     path: '/inventario',
     element: <Inventarios />,
+    isMenuPath: { icon: <HiOutlineClipboardList />, txt: "Inventario", to: "/inventario" },
     name: 'Auth',
-    requiredPermission: [],
+    requiredPermission: ['empleado', 'administrador'],
   },
   {
     path: '/inventario/generar-inventario',
@@ -67,8 +79,9 @@ export const routesConfig = [
   {
     path: '/usuarios',
     element: <Usuarios />,
+    isMenuPath: { icon: <FaUser />, txt: "Usuarios", to: "/usuarios" },
     name: 'Auth',
-    requiredPermission: [],
+    requiredPermission: ['administrador'],
   },
   {
     path: '/usuarios/agregar-usuario',
@@ -80,8 +93,9 @@ export const routesConfig = [
   {
     path: '/reportes',
     element: <Reportes />,
+    isMenuPath: { icon: <FiFileText />, txt: "Reportes", to: "/reportes" },
     name: 'Auth',
-    requiredPermission: [],
+    requiredPermission: ['administrador'],
   },
   {
     path: '/reportes/inventarios',
@@ -106,5 +120,14 @@ export const routesConfig = [
     element: <Login />,
     name: 'Auth',
     requiredPermission: [],
-  }
+  },
+
+
+  {
+    path: '/logout',
+    element: <Logout />,
+    isMenuPath: { icon: <RiLogoutCircleLine />, txt: "Salir", to: "/logout" },
+    name: 'Auth',
+    requiredPermission: ['administrador', 'empleado'],
+  },
 ];

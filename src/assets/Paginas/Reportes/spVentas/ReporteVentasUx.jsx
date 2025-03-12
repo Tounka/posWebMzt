@@ -5,6 +5,9 @@ import { ContenedorGenerico } from "../../../ComponentesGenerales/contendores";
 import { SeccionReporteProducto } from "./componentes/SeccionReporteProducto";
 import { ResumenVentasPorDia } from "./componentes/SeccionResumenVentasPorDia";
 import { ResumenVentas } from "./componentes/SeccionResumenVentas";
+import { SeccionTicketPromedio } from "./componentes/SeccionTicketPromedio";
+import { SeccionSetFecha } from "./componentes/SeccionSetFecha";
+import { useState } from "react";
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;
     justify-content: start;  
@@ -19,15 +22,27 @@ const ContenedorReportes = styled(Contenedor100)`
 
 
 export const ReporteVentasUx = () => {
-    const {inventarios} = useContextoGeneral();
+    const { inventarios, tickets,setRangoFechas,rangoFechas } = useContextoGeneral();
+
     
+
+
     return (
 
         <ContenedorReportes>
-            <SeccionReporteProducto inventario= {inventarios[0]} />
-            <ResumenVentas inventario= {inventarios[0]} />
-            <ResumenVentasPorDia inventario= {inventarios[0]} />
-       
+
+            {rangoFechas != null ? (
+                <>
+                    <SeccionTicketPromedio tickets={tickets} />
+                    <SeccionReporteProducto inventario={inventarios[0]} />
+                    <ResumenVentas inventario={inventarios[0]} />
+                    <ResumenVentasPorDia inventario={inventarios[0]} />
+                </>
+            ) : (
+                <SeccionSetFecha setRangoFechas={setRangoFechas} />
+            )}
+
+
         </ContenedorReportes>
     )
 }

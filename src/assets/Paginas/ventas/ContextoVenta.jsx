@@ -5,6 +5,8 @@ const ContextoPaginaVenta = createContext();
 
 export const ContextoPaginaVentaProvider = ({ children }) => {
     const [carrito, setCarrito] = useState([]);
+    const [descuento, setDescuento] = useState({tipo: "$", valor: 0});
+
     const [productosEnVenta, setProductosEnVenta] = useState(categoriasProductos);
     const [handleResetProductosActualizados, setHandleResetProductosActualizados] = useState(0);
     useEffect(() => {
@@ -24,7 +26,7 @@ export const ContextoPaginaVentaProvider = ({ children }) => {
     }, [handleResetProductosActualizados]);
 
     return (
-        <ContextoPaginaVenta.Provider value={{ setCarrito, carrito, productosEnVenta, setProductosEnVenta, setHandleResetProductosActualizados}}>
+        <ContextoPaginaVenta.Provider value={{ setCarrito, carrito, productosEnVenta, setProductosEnVenta, setHandleResetProductosActualizados,descuento, setDescuento}}>
             {children}
         </ContextoPaginaVenta.Provider>
     );

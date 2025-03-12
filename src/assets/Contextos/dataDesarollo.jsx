@@ -176,12 +176,22 @@ export const categoriasProductos = [
     }
 ];
 
-export const userData = {
-    nombre: "ramon",
-    apellido: "marquez",
-    rol: "administrador"
-};
+export const userData = [
+    {
+        nombre: "ramon",
+        apellido: "marquez",
+        rol: "administrador",
+        correo: "luis@gmail.com",
+        contraseña: "luis1234",
+    }, {
+        nombre: "pablo",
+        apellido: "gonzales",
+        rol: "empleado",
+        correo: "pablo@gmail.com",
+        contraseña: "pablo1234",
+    }
 
+]
 export const localDataIn = {
     ubicacion: "Ubicacion del local",
     sucursal: "Sucursal X",
@@ -208,7 +218,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 130,
                 totalEnTxt: NumerosALetras(130),
-                costoTotal: 55
+                costoTotal: 55,
+                descuento: 10 // Nuevo campo descuento
             },
             {
                 fechaTransaccion: {
@@ -226,7 +237,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 150,
                 totalEnTxt: NumerosALetras(150),
-                costoTotal: 59
+                costoTotal: 59,
+                descuento: 15 // Nuevo campo descuento
             }
         ]
     },
@@ -249,7 +261,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 125,
                 totalEnTxt: NumerosALetras(125),
-                costoTotal: 50
+                costoTotal: 50,
+                descuento: 5 // Nuevo campo descuento
             },
             {
                 fechaTransaccion: {
@@ -267,7 +280,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 65,
                 totalEnTxt: NumerosALetras(65),
-                costoTotal: 25
+                costoTotal: 25,
+                descuento: 0 // Nuevo campo descuento
             }
         ]
     },
@@ -290,7 +304,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 58,
                 totalEnTxt: NumerosALetras(58),
-                costoTotal: 22
+                costoTotal: 22,
+                descuento: 8 // Nuevo campo descuento
             },
             {
                 fechaTransaccion: {
@@ -308,7 +323,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 76,
                 totalEnTxt: NumerosALetras(76),
-                costoTotal: 27
+                costoTotal: 27,
+                descuento: 10 // Nuevo campo descuento
             }
         ]
     },
@@ -331,7 +347,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 80,
                 totalEnTxt: NumerosALetras(80),
-                costoTotal: 32
+                costoTotal: 32,
+                descuento: 12 // Nuevo campo descuento
             }
         ]
     },
@@ -354,7 +371,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 165,
                 totalEnTxt: NumerosALetras(165),
-                costoTotal: 68
+                costoTotal: 68,
+                descuento: 20 // Nuevo campo descuento
             }
         ]
     },
@@ -377,7 +395,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 80,
                 totalEnTxt: NumerosALetras(80),
-                costoTotal: 32
+                costoTotal: 32,
+                descuento: 5 // Nuevo campo descuento
             }
         ]
     },
@@ -400,7 +419,8 @@ export const ticketsDiasDb = [
                 ],
                 total: 80,
                 totalEnTxt: NumerosALetras(80),
-                costoTotal: 30
+                costoTotal: 30,
+                descuento: 10 // Nuevo campo descuento
             }
         ]
     }

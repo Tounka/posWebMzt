@@ -5,6 +5,9 @@ import { FieldStyledLabelInside } from "../../ComponentesGenerales/inputs";
 import { TxtSinEtiquetas } from "../../ComponentesGenerales/titulos";
 import { BtnGenerico } from "../../ComponentesGenerales/inputs";
 import * as yup from "yup";
+import { useAuth } from "../../Contextos/ContextoAuth";
+import { useContext } from "react";
+import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 const ContenedoForm = styled(Form)`
     width: 500px;
     height: 350px;
@@ -26,17 +29,24 @@ const ContenedorField = styled.div`
 `;
 
 export const LoginUx = () => {
+  const {login} = useAuth();
+
+
   const validationSchema = yup.object({
     correo: validateCorreo, 
     contraseña: validateContraseña,
   });
-
+  const handleSubmit = (values)=>{
+    login(values);
+  }
+  
   return (
     <Formik
       initialValues={{ correo: "", contraseña: "" }} // Cambiado a correo
       validationSchema={validationSchema}
       onSubmit={(values) => {
         console.log("Datos enviados:", values);
+        handleSubmit(values);
       }}
     >
       {({ handleSubmit }) => (
