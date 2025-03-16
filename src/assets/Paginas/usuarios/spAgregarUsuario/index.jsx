@@ -1,7 +1,7 @@
 import { Formik } from "formik"
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts"
 import { AgregarUsuarioUx } from "./AgregarUsuarioUx"
-import { validateApellido, validateContraseña, validateCorreo, validateNombre } from "../../../validaciones"
+import { validateApellido, validateContraseña, validateCorreo, validateNombre, validateRol } from "../../../validaciones"
 import * as yup from "yup"
 
 
@@ -18,6 +18,7 @@ export const AgregarUsuario = () => {
         apellido: validateApellido,
         correo: validateCorreo,
         contraseña: validateContraseña,
+        rol: validateRol,
     });
 
     const handleSubmit = (values) =>{

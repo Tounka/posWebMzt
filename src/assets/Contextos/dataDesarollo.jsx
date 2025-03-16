@@ -139,39 +139,39 @@ export const categoriasProductos = [
     {
         categoria: "Bebidas",
         items: [
-            { id: 1, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
-            { id: 2, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
-            { id: 3, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
-            { id: 4, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
-            { id: 5, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
-            { id: 6, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
-            { id: 7, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
-            { id: 8, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 }
+            { id: 1000, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
+            { id: 2000, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
+            { id: 3000, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
+            { id: 4000, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
+            { id: 5000, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
+            { id: 6000, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
+            { id: 7000, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
+            { id: 8000, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 }
         ]
     },
     {
         categoria: "Comida Rápida",
         items: [
-            { id: 9, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
-            { id: 10, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
-            { id: 11, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
-            { id: 12, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
-            { id: 13, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
-            { id: 14, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
-            { id: 15, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 }
+            { id: 9000, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
+            { id: 1000, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
+            { id: 1100, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
+            { id: 1200, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
+            { id: 1300, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
+            { id: 1400, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
+            { id: 1500, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 }
         ]
     },
     {
         categoria: "Postres",
         items: [
-            { id: 16, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
-            { id: 17, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
-            { id: 18, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
-            { id: 19, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
-            { id: 20, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
-            { id: 21, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
-            { id: 22, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
-            { id: 23, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
+            { id: 16000, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
+            { id: 17000, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
+            { id: 18000, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
+            { id: 19000, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
+            { id: 20000, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
+            { id: 21000, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
+            { id: 22000, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
+            { id: 23000, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
         ]
     }
 ];
@@ -424,4 +424,28 @@ export const ticketsDiasDb = [
             }
         ]
     }
+];
+
+
+export const usuariosData  = [
+    { id: 1, nombre: "Juan", apellido: "Pérez", correo: "juan@example.com", contraseña: "123456", fechaIngreso: "2023-01-15", rol: "Admin", Fn: "Editar" },
+    { id: 2, nombre: "María", apellido: "Gómez", correo: "maria@example.com", contraseña: "abcdef", fechaIngreso: "2023-02-10", rol: "Usuario", Fn: "Eliminar" },
+    { id: 3, nombre: "Carlos", apellido: "López", correo: "carlos@example.com", contraseña: "qwerty", fechaIngreso: "2023-03-05", rol: "Usuario", Fn: "Editar" },
+    { id: 4, nombre: "Ana", apellido: "Martínez", correo: "ana@example.com", contraseña: "password", fechaIngreso: "2023-04-20", rol: "Admin", Fn: "Eliminar" },
+    { id: 5, nombre: "Luis", apellido: "Rodríguez", correo: "luis@example.com", contraseña: "123abc", fechaIngreso: "2023-05-12", rol: "Usuario", Fn: "Editar" },
+    { id: 6, nombre: "Laura", apellido: "Sánchez", correo: "laura@example.com", contraseña: "abc123", fechaIngreso: "2023-06-18", rol: "Usuario", Fn: "Eliminar" },
+    { id: 7, nombre: "Pedro", apellido: "García", correo: "pedro@example.com", contraseña: "pass123", fechaIngreso: "2023-07-22", rol: "Admin", Fn: "Editar" },
+    { id: 8, nombre: "Sofía", apellido: "Fernández", correo: "sofia@example.com", contraseña: "123pass", fechaIngreso: "2023-08-30", rol: "Usuario", Fn: "Eliminar" },
+    { id: 9, nombre: "Miguel", apellido: "Torres", correo: "miguel@example.com", contraseña: "qwe123", fechaIngreso: "2023-09-14", rol: "Usuario", Fn: "Editar" },
+    { id: 10, nombre: "Elena", apellido: "Ruiz", correo: "elena@example.com", contraseña: "123qwe", fechaIngreso: "2023-10-05", rol: "Admin", Fn: "Eliminar" },
+    { id: 11, nombre: "Jorge", apellido: "Díaz", correo: "jorge@example.com", contraseña: "pass456", fechaIngreso: "2023-11-11", rol: "Usuario", Fn: "Editar" },
+    { id: 12, nombre: "Carmen", apellido: "Vargas", correo: "carmen@example.com", contraseña: "456pass", fechaIngreso: "2023-12-25", rol: "Usuario", Fn: "Eliminar" },
+    { id: 13, nombre: "Daniel", apellido: "Castro", correo: "daniel@example.com", contraseña: "abc456", fechaIngreso: "2024-01-01", rol: "Admin", Fn: "Editar" },
+    { id: 14, nombre: "Isabel", apellido: "Morales", correo: "isabel@example.com", contraseña: "456abc", fechaIngreso: "2024-02-14", rol: "Usuario", Fn: "Eliminar" },
+    { id: 15, nombre: "Francisco", apellido: "Ortega", correo: "francisco@example.com", contraseña: "pass789", fechaIngreso: "2024-03-08", rol: "Usuario", Fn: "Editar" },
+    { id: 16, nombre: "Patricia", apellido: "Reyes", correo: "patricia@example.com", contraseña: "789pass", fechaIngreso: "2024-04-22", rol: "Admin", Fn: "Eliminar" },
+    { id: 17, nombre: "Antonio", apellido: "Méndez", correo: "antonio@example.com", contraseña: "qwe789", fechaIngreso: "2024-05-30", rol: "Usuario", Fn: "Editar" },
+    { id: 18, nombre: "Lucía", apellido: "Herrera", correo: "lucia@example.com", contraseña: "789qwe", fechaIngreso: "2024-06-15", rol: "Usuario", Fn: "Eliminar" },
+    { id: 19, nombre: "Manuel", apellido: "Jiménez", correo: "manuel@example.com", contraseña: "pass000", fechaIngreso: "2024-07-04", rol: "Admin", Fn: "Editar" },
+    { id: 20, nombre: "Raquel", apellido: "Navarro", correo: "raquel@example.com", contraseña: "000pass", fechaIngreso: "2024-08-19", rol: "Usuario", Fn: "Eliminar" }
 ];

@@ -78,6 +78,17 @@ const ContenedorTxtPadre = styled(Contenedor100)`
 
     
 `
+const TxtSeccion = styled(TxtGenerico)`
+
+    color: var(--colorPrincipal);
+    width: 100%;
+  
+    font-size: 28px;
+    
+ 
+        
+    
+`
 export const SeccionTicketPromedio = ({tickets}) => {
     console.log(tickets)
     const ObtenerTicketsTotales = tickets.reduce((acc, dia) => {
@@ -170,12 +181,12 @@ export const SeccionTicketPromedio = ({tickets}) => {
 
                     <ContenedorTxtPadre>
                         <ContenedorTxt>
-                            <TxtGenerico color="black" size="20px">Tickets en revision</TxtGenerico>
-                            <TxtGenerico color="black" size="20px">{totales.ticketsTotales }</TxtGenerico>
+                            <TxtSeccion color="black" size="20px">Tickets en revision</TxtSeccion>
+                            <TxtSeccion color="black" size="20px">{totales.ticketsTotales }</TxtSeccion>
                         </ContenedorTxt>
                         <ContenedorTxt>
-                            <TxtGenerico color="black" size="20px">Ticket Promedio</TxtGenerico>
-                            <TxtGenerico color="black" size="20px">${(totales.ticketTotalPrecio /totales.ticketsTotales).toFixed(2) }</TxtGenerico>
+                            <TxtSeccion color="black" size="20px">Ticket Promedio</TxtSeccion>
+                            <TxtSeccion color="black" size="20px">${(totales.ticketTotalPrecio /totales.ticketsTotales).toFixed(2) }</TxtSeccion>
                         </ContenedorTxt>
                     </ContenedorTxtPadre>
 

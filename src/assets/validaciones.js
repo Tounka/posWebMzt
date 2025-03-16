@@ -29,3 +29,8 @@ export const validateApellido = yup
   .matches(/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/, "El apellido solo puede contener letras y espacios")
   .min(2, "El apellido debe tener al menos 2 caracteres")
   .max(50, "El apellido no puede tener más de 50 caracteres");
+
+  export const validateRol = yup
+  .string()
+  .required("El Rol es requerido")
+

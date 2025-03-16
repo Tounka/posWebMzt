@@ -48,7 +48,7 @@ const ErrorMessageStyled = styled(ErrorMessage)`
     animation: ${vibrar} 0.5s ease-in-out; 
     animation-iteration-count: 1; 
    
-    text-align: ${({aling}) =>    aling || "start"};
+    text-align: ${({ aling }) => aling || "start"};
 `;
 const ContenedorInputGenericoStyled = styled.div`
     display: flex;
@@ -67,6 +67,27 @@ export const InputGenerico = ({ id = "id", name = "name", placeholder = "Ingresa
                     placeholder={placeholder}
                     type={type}
                 />
+            </ContenedorInputStyled>
+            <ErrorMessageStyled name={name} component="div" />
+        </ContenedorInputGenericoStyled>
+    );
+};
+
+export const InputSelect = ({ id = "id", name = "name", placeholder = "Ingresa información", txtLabel = "Label", options = [] }) => {
+    return (
+        <ContenedorInputGenericoStyled>
+            <ContenedorInputStyled>
+                <label htmlFor={id}>{txtLabel}</label>
+                <Field as="select" id={id} name={name} placeholder={placeholder}>
+                    <option value="" disabled>
+                        Selecciona una opción
+                    </option>
+                    {options.map((opcion, index) => (
+                        <option key={index} value={opcion.value}>
+                            {opcion.txt}
+                        </option>
+                    ))}
+                </Field>
             </ContenedorInputStyled>
             <ErrorMessageStyled name={name} component="div" />
         </ContenedorInputGenericoStyled>
@@ -116,7 +137,7 @@ export const InputGenericoVertical = ({ id = "id", name = "name", placeholder = 
                     placeholder={placeholder}
                     type={type}
                 />
-                <ErrorMessageStyled aling = "center" name={name} component="div" />
+                <ErrorMessageStyled aling="center" name={name} component="div" />
             </ContenedorInputVerticalStyled>
         </ContenedorInputGenericoStyled>
     );

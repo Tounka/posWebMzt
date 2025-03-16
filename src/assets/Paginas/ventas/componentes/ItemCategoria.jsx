@@ -69,7 +69,7 @@ const ControlUnidadesStyled = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 30px;
-    background-color: ${props => (Number(props.unidades) == 0 ? "var(--colorRojo)" : "var(--colorVerde)")};
+    background-color: ${props => (Number(props.unidades) == 0 ? "var(--colorNaranja)" : "var(--colorVerde)")};
 
 `
 const BtnMasUnidadesStyled = styled.button`

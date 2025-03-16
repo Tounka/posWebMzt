@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { BtnRegresar } from "../../../ComponentesGenerales/btnRedondo"
 import { Form } from "formik"
-import { InputGenerico } from "../../../ComponentesGenerales/Formulario/InputGenerico"
+import { InputGenerico, InputSelect } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"
 
 
@@ -61,6 +61,7 @@ export const AgregarUsuarioUx = () => {
                     <InputGenerico id="apellido" name="apellido" txtLabel="Apellido" placeholder="Ingresa el apellido del usuario" />
                     <InputGenerico id="correo" name="correo" txtLabel="Correo" placeholder="Ingresa el correo del usuario" />
                     <InputGenerico id="contraseña" name="contraseña" txtLabel="Contraseña" placeholder="Ingresa el contraseña del usuario" />
+                    <InputSelect id="rol" name="rol" txtLabel="Rol" options={[{value: "empleado", txt: "Empleado"},{value: "Administrador", txt: "Administrador"}]} />
                 </ContenedorInputs>
                 <BtnSubmit type="submit" > Subir </BtnSubmit>
             </Separador>
