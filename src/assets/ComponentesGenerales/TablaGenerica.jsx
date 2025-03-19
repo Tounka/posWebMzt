@@ -19,6 +19,7 @@ export const TablaGenerica = ({ rows, columns, height=600 }) => {
                         style: { color: "var(--colorPrincipal)", fontWeight: "bold" },
                     },
                 }}
+                
                 sx={{ border: 0 }}
             />
 

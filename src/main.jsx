@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router'
 import { ContextoGeneralProvider } from './assets/Contextos/ContextoGeneral.jsx'
 import { AuthProvider } from './assets/Contextos/ContextoAuth.jsx'
 import { ContextoPaginaVentaProvider } from './assets/Paginas/ventas/ContextoVenta.jsx'
+import { ContextoInventariosProvider } from './assets/Contextos/ContextoInventarios.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
       <ContextoGeneralProvider>
         <ContextoPaginaVentaProvider>
           <AuthProvider>
-            <App />
+            <ContextoInventariosProvider>
+              <App />
+            </ContextoInventariosProvider>
           </AuthProvider>
         </ContextoPaginaVentaProvider>
       </ContextoGeneralProvider>

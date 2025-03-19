@@ -6,6 +6,11 @@ import { useNavigate } from "react-router";
 import { TablaGenerica } from "../../../ComponentesGenerales/TablaGenerica";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 import { TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { ModalModificarProductos } from "../Componentes/ModalModificarProducto";
+import { useState } from "react";
+
+
+
 
 const ContenedorPaginaUsuarios = styled.div`
 
@@ -48,6 +53,14 @@ const ContenedorTabla = styled.div`
 `
 
 export const ProductosUx = () => {
+    const [productoSeleccionado, setProductoSeleccionado] = useState();
+    const [boolModalProductoSeleccionado, setBoolModalProductoSeleccionado] = useState(false);
+
+    const handleClick = (producto) =>{
+        setProductoSeleccionado(producto);
+        setBoolModalProductoSeleccionado(true);
+    }
+    
     const Navigate = useNavigate();
     const handleClickBtnAgregar = () => {
         Navigate("/inventario/productos/agregar-producto");
@@ -63,7 +76,7 @@ export const ProductosUx = () => {
                     txt: item.nombre, // Nombre del producto
                     costo: item.costo, // Costo del producto
                     precio: item.precio, // Precio del producto
-                    fn: "Editar", // Acción por defecto, puedes cambiarlo por "Eliminar" si es necesario
+
                 });
             });
         });
@@ -74,13 +87,14 @@ export const ProductosUx = () => {
     const { catalogo } = useContextoGeneral();
     const columns = [
         { field: "categoria", headerName: "Categoria", width: 150 },
-        { field: "id", headerName: "Id", width: 50 },
+        { field: "subCategoria", headerName: "subCategoria", width: 150 },
+        { field: "id", headerName: "Id", width: 80 },
         { field: "txt", headerName: "Nombre", width: 200 },
-        { field: "costo", headerName: "Costo", width: 150 },
+        { field: "costo", headerName: "Costo", width: 80 },
         { field: "precio", headerName: "Precio", width: 80 },
-        { field: "fn", headerName: "Fn", width: 50 },
-    ];
 
+    ];
+    const paginationModel = { page: 0, pageSize: 15 };
     const rows = transformarCatalogo(catalogo);
 
     return (
@@ -97,9 +111,23 @@ export const ProductosUx = () => {
                     </ContenedorBtn>
                 </ContenedorTop>
 
+                <PaperStyled sx={{ height: 400, width: '100%' }}>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        initialState={{ pagination: { paginationModel } }}
+                        pageSizeOptions={[5, 10]}
+                        sx={{ border: 0 }}
+                        onCellClick={(params) => {
+                            handleClick(params.row);
+                 
+                        }}
+                    />
+                </PaperStyled>
 
-                <TablaGenerica rows={rows} columns={columns} onAddClick={handleClickBtnAgregar} />
             </ContenedorTabla>
+
+            <ModalModificarProductos usuarioSeleccionado={productoSeleccionado} isOpen={boolModalProductoSeleccionado} onClose={() => setBoolModalProductoSeleccionado(false)} />
         </ContenedorPaginaUsuarios>
     )
 }

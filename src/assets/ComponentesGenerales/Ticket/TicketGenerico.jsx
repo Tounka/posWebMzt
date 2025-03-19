@@ -5,6 +5,7 @@ import { TxtGenerico } from "../titulos";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { userData } from "../../Contextos/dataDesarollo";
 import { NumerosALetras, numerosALetras } from "numero-a-letras";
+import img from "../../img/imgLogoPosWebp.webp"
 
 export const ContenedorTicketStyled = styled.div`
     width: 80mm;
@@ -42,7 +43,7 @@ const ContenedorMetaDatos = styled(ContenedorSeccionTicket)`
 const ContenedorLogo = styled(ContenedorSeccionTicket)`
     color: black;
 
-    svg {
+    img {
         height: 20mm; /* Tamaño deseado del icono */
         width: 20mm;  /* Mantener la proporción */
     }
@@ -51,8 +52,15 @@ const ContenedorLogo = styled(ContenedorSeccionTicket)`
 const TxtPosicionado = styled(TxtGenerico)`
     color: black;
     grid-column: ${props => props.columnP ? props.columnP : ""};
+    margin: ${({ margin }) => margin || "0"};
+    
 `;
+const TxtFinal = styled(TxtGenerico)`
+    color: black;
+    font-weight: bold;
+    margin: 2mm 0 10mm 0;
 
+`;
 const TablaProductos = styled.table`
     width: 100%;
     border-collapse: collapse;
@@ -60,7 +68,7 @@ const TablaProductos = styled.table`
     
     th, td {
         border: 1px solid black;
-        padding: 5px;
+       
         text-align: center;
         border: none;
     }
@@ -70,11 +78,23 @@ const TablaProductos = styled.table`
         border: none;
     }
 
-    th:nth-child(1) { width: 60%;   text-align: left;}
-    td:nth-child(1) { width: 60%;   text-align: left;}
-    th:nth-child(2), th:nth-child(3) { width: 10%; }
+    th:nth-child(1) { width: 5%;   text-align: left;}
+    th:nth-child(2) { text-align: left;}
+    td:nth-child(1) { width: 5%;   text-align: left;}
+    td:nth-child(2) { width: 40%;   text-align: left;}
+    th:nth-child(3) { width: 10%; }
     th:nth-child(4) { width: 20%; }
 `;
+
+const Td = styled.td`
+    padding: ${({ padding }) => padding || "0px"};
+    text-align: center;
+    padding-bottom: 10px !important;
+    
+`;
+
+
+
 
 export const Ticket = ({ datosTicket }) => {
     // Asegúrate de que `total` es un número y usa `toFixed`
@@ -82,9 +102,10 @@ export const Ticket = ({ datosTicket }) => {
     const totalDespuesDescuento = Number(datosTicket.total - datosTicket.descuento).toFixed(2);
 
     return (
+        
         <ContenedorTicketStyled>
             <ContenedorLogo>
-                <IoLogoNpm size="50mm" />
+                <img src={img} />
             </ContenedorLogo>
 
             <ContenedorSeccionTicket flexDirection="column">
@@ -122,20 +143,27 @@ export const Ticket = ({ datosTicket }) => {
             <TablaProductos>
                 <thead>
                     <tr>
-                        <th>Producto</th>
                         <th>#</th>
+                        <th>Producto</th>
                         <th>$</th>
                         <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     {datosTicket.productos.map((producto, index) => (
+                     <>
                         <tr key={index}>
-                            <td>{producto.nombre}</td>
-                            <td>{producto.cantidad}</td>
-                            <td>${producto?.precio.toFixed(2)}</td>
-                            <td>${producto?.total.toFixed(2)}</td>
+                            <td> <b> {producto.cantidad} </b></td>
+                            <td colSpan={3}>{producto.nombre}</td>
+        
                         </tr>
+                        <tr key={index}>
+                            <td></td>
+                            <td></td>
+                            <Td padding= "10">${producto?.precio.toFixed(2)}</Td>
+                            <Td padding= "0">${producto?.total.toFixed(2)}</Td>
+                        </tr>
+                     </>
                     ))}
                     <tr >
                         <td><b>Total:</b></td>
@@ -167,6 +195,11 @@ export const Ticket = ({ datosTicket }) => {
             <TxtPosicionado color="black" weight="normal" align="center" size="10px">
                 {datosTicket.totalEnTxt}
             </TxtPosicionado>
+
+
+            <TxtFinal align="center" size="10px">
+                GRACIAS POR SU COMPRA
+            </TxtFinal>
         </ContenedorTicketStyled>
     );
 };

@@ -134,47 +134,74 @@ export const inventariosDb = [
         ]
     }
 ];
+export const productos = [
+    { categoria: "Bebidas", subcategoria: "", id: 1, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
+    { categoria: "Bebidas", subcategoria: "", id: 2, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
+    { categoria: "Bebidas", subcategoria: "", id: 3, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
+    { categoria: "Bebidas", subcategoria: "", id: 4, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
+    { categoria: "Bebidas", subcategoria: "", id: 5, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
+    { categoria: "Bebidas", subcategoria: "", id: 6, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
+    { categoria: "Bebidas", subcategoria: "", id: 7, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
+    { categoria: "Bebidas", subcategoria: "", id: 8, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 },
+
+    { categoria: "Comida Rápida", subcategoria: "", id: 9, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 10, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 11, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 12, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 13, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 14, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
+    { categoria: "Comida Rápida", subcategoria: "", id: 15, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 },
+
+    { categoria: "Postres", subcategoria: "", id: 16, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
+    { categoria: "Postres", subcategoria: "", id: 17, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
+    { categoria: "Postres", subcategoria: "", id: 18, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
+    { categoria: "Postres", subcategoria: "", id: 19, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
+    { categoria: "Postres", subcategoria: "", id: 20, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
+    { categoria: "Postres", subcategoria: "", id: 21, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
+    { categoria: "Postres", subcategoria: "", id: 22, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
+    { categoria: "Postres", subcategoria: "", id: 23, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
+];
 
 export const categoriasProductos = [
     {
         categoria: "Bebidas",
         items: [
-            { id: 1000, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
-            { id: 2000, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
-            { id: 3000, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
-            { id: 4000, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
-            { id: 5000, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
-            { id: 6000, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
-            { id: 7000, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
-            { id: 8000, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 }
+            { id: 1, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
+            { id: 2, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
+            { id: 3, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
+            { id: 4, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
+            { id: 5, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
+            { id: 6, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
+            { id: 7, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
+            { id: 8, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 }
         ]
     },
     {
         categoria: "Comida Rápida",
         items: [
-            { id: 9000, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
-            { id: 1000, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
-            { id: 1100, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
-            { id: 1200, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
-            { id: 1300, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
-            { id: 1400, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
-            { id: 1500, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 }
+            { id: 9, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
+            { id: 10, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
+            { id: 11, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
+            { id: 12, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
+            { id: 13, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
+            { id: 14, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
+            { id: 15, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 }
         ]
     },
     {
         categoria: "Postres",
         items: [
-            { id: 16000, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
-            { id: 17000, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
-            { id: 18000, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
-            { id: 19000, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
-            { id: 20000, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
-            { id: 21000, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
-            { id: 22000, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
-            { id: 23000, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
+            { id: 16, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
+            { id: 17, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
+            { id: 18, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
+            { id: 19, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
+            { id: 20, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
+            { id: 21, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
+            { id: 22, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
+            { id: 23, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
         ]
     }
-];
+]; //  Productos 
 
 export const userData = [
     {

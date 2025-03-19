@@ -86,7 +86,7 @@ export const UsuariosUx = ({rows}) => {
                 sx={{ border: 0 }}
                 onCellClick={(params) => {
                     handleClick(params.row);
-                    console.log(params.row)
+                 
                  
                 }}
             />

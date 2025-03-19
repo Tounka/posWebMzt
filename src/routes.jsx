@@ -1,7 +1,7 @@
 
 import { Inventarios } from './assets/Paginas/Inventarios';
 import { AgregarProducto } from './assets/Paginas/Inventarios/spAgregarProducto/index.jsx';
-import { EntradaProducto } from './assets/Paginas/Inventarios/spEntradaProducto/spGenerarInvetarios/index.jsx';
+import { EntradaProducto } from './assets/Paginas/Inventarios/spEntradaProducto/index.jsx';
 import { GenerarInventario } from './assets/Paginas/Inventarios/spGenerarInvetarios';
 import { Productos } from './assets/Paginas/Inventarios/spProductos/index.jsx';
 import { Login } from './assets/Paginas/login';
@@ -21,6 +21,7 @@ import { FiFileText } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Logout } from './assets/Paginas/login/logout.JSX';
+import { GenerarEtiqueta } from './assets/Paginas/Inventarios/spEntradaProducto/spGenerarEtiqueta/index.jsx';
 
 
 
@@ -72,6 +73,12 @@ export const routesConfig = [
   {
     path: '/inventario/entrada-producto',
     element: <EntradaProducto />,
+    name: 'Auth',
+    requiredPermission: [],
+  },
+  {
+    path: '/inventario/entrada-producto/generar-etiqueta',
+    element: <GenerarEtiqueta />,
     name: 'Auth',
     requiredPermission: [],
   },

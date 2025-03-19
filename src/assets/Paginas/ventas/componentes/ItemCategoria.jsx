@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { TxtGenerico } from "../../../ComponentesGenerales/titulos"
-import { ContenedorGenerico } from "../../../ComponentesGenerales/contendores"
+import { ContenedorGenerico, ContenedorItemProducto } from "../../../ComponentesGenerales/contendores"
 import { PiHandSoapBold } from "react-icons/pi";
 import { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -26,21 +26,6 @@ import { useContextoPaginaVenta } from "../ContextoVenta";
     `
  
 
-const ContenedorItemProducto = styled.div`
-        height: 160px;
-        width: 160px;
-        display: grid;
-        grid-template-rows: 5fr 2fr 3fr;
-        border-radius: 20px;
-        padding: 5px 0;
-        justify-content: center;
-        align-items: start;
-        background-color: var(--colorBlanco);
-        user-select: none;
-        cursor: default ;
-
-        border: dashed 2px var(--colorPrincipal);
-`
 
 export const ItemCategoria = ({icon=<PiHandSoapBold />,txt, catalogo, setCatalogoSeleccionado,index, categoria}) =>{
 

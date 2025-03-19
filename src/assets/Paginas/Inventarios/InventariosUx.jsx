@@ -23,7 +23,6 @@ export const InventariosUx = () => {
             <BtnSecciones txtSeccion="Generar Inventario" to="./inventario/generar-inventario" icono={<GiNotebook />}/>
             <BtnSecciones txtSeccion="Productos" to="./inventario/productos" icono={<FaBook />} />
             <BtnSecciones txtSeccion="Entrada de Producto" to="./inventario/entrada-producto"  icono={<FaBoxOpen />}/>
-       
         </ContenedorReportes>
     )
 }

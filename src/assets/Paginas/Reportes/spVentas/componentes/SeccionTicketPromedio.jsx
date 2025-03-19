@@ -1,6 +1,7 @@
 import { ContenedorSeccionReporte } from "./ContenedorSeccionReporteGenerico"
 import React, { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 import styled from "styled-components";
 import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
 import { TxtGenerico } from "../../../../ComponentesGenerales/titulos";
