@@ -27,7 +27,7 @@ import { useContextoPaginaVenta } from "../ContextoVenta";
  
 
 
-export const ItemCategoria = ({icon=<PiHandSoapBold />,txt, catalogo, setCatalogoSeleccionado,index, categoria}) =>{
+export const ItemCategoria = ({icono=<PiHandSoapBold />,txt, catalogo, setCatalogoSeleccionado,index, categoria}) =>{
 
     const handleClick = () =>{
         setCatalogoSeleccionado(catalogo[index]);
@@ -36,7 +36,7 @@ export const ItemCategoria = ({icon=<PiHandSoapBold />,txt, catalogo, setCatalog
     return(
         <ContenedorItemCategoria onClick={() => handleClick()}>
             <ContenedorGenerico width= "120px" align= "end" >
-                <TxtGenerico color="var(--colorPrincipal)" line= ".8"  size="58px" > {icon} </TxtGenerico>
+                <TxtGenerico color="var(--colorPrincipal)" line= ".8"  size="58px" > {icono} </TxtGenerico>
             </ContenedorGenerico>
 
             <ContenedorGenerico width= "120px" >
@@ -187,7 +187,7 @@ export const ItemProducto = ({ producto }) => {
         <ContenedorItemProducto id={producto.id} >
             <ContenedorGenerico width="150px" align="center" onClick={() => handleClickPlus()}>
                 <TxtGenerico color="var(--colorPrincipal)" line=".8" size="58px" >
-                    {producto.icon || <PiHandSoapBold />}
+                    {producto.icono || <PiHandSoapBold />}
                 </TxtGenerico>
             </ContenedorGenerico>
 

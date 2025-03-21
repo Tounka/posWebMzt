@@ -1,61 +1,78 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
+import { ContenedorTop } from "./ContenedorTop";
+import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 
-export const ModalHolaMundo = ({ isOpen, onClose, catalogo, values }) => {
-    if (!isOpen) return null; // Si el modal no está abierto, no renderiza nada
+const ContenedorTopStyled = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  h2{
+    color: white;
+  }
 
-    // Recolectamos todos los items y sus cantidades en un formato plano
-    const items = catalogo.flatMap(categoria =>
-        categoria.items.map(item => ({
-            nombre: item.txt,
-            cantidad: values[item.id] || 0,
-        }))
-    );
+`
 
-    // Ref para la tabla
-    const tableRef = useRef();
+export const ModalHolaMundo = ({ isOpen, onClose, catalogo, values, fecha }) => {
 
-    // Función para imprimir la tabla directamente desde el modal
-    const handlePrint = () => {
-        const printWindow = window.document; // Usamos el documento actual
-        const originalContent = printWindow.body.innerHTML; // Guardamos el contenido original de la página
-        const printContent = tableRef.current.outerHTML; // Obtenemos solo la tabla para imprimir
+  const { user } = useContextoGeneral();
+  if (!isOpen) return null; // Si el modal no está abierto, no renderiza nada
 
-        // Insertamos la tabla en el documento de impresión
-        printWindow.body.innerHTML = `<div style="text-align: center;"><h2>Inventario Completo</h2></div>${printContent}`;
+  // Recolectamos todos los items y sus cantidades en un formato plano
+  const items = catalogo.flatMap(categoria =>
+    categoria.items.map(item => ({
+      nombre: item.nombre,
+      cantidad: values[item.id] || 0,
+    }))
+  );
 
-        // Llamamos a print() para imprimir sin abrir una nueva ventana
-        window.print();
+  // Ref para la tabla
+  const tableRef = useRef();
 
-        // Restauramos el contenido original de la página después de la impresión
-        printWindow.body.innerHTML = originalContent;
-    };
+  // Función para imprimir la tabla directamente desde el modal
+  const handlePrint = () => {
+    const printWindow = window.document; // Usamos el documento actual
+    const originalContent = printWindow.body.innerHTML; // Guardamos el contenido original de la página
+    const printContent = tableRef.current.outerHTML; // Obtenemos solo la tabla para imprimir
 
-    return (
-        <ModalContainer>
-            <ModalContent>
-                <h2>Inventario Completo</h2>
-                <Table ref={tableRef}>
-                    <thead>
-                        <tr>
-                            <th>Nombre del Item</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.nombre}</td>
-                                <td>{item.cantidad}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <BtnModal onClick={onClose}>Cerrar</BtnModal>
-                <PrintBtn onClick={handlePrint}>Imprimir</PrintBtn> {/* Botón para imprimir */}
-            </ModalContent>
-        </ModalContainer>
-    );
+    // Insertamos la tabla en el documento de impresión
+    printWindow.body.innerHTML = `<div style="text-align: center;"><h2>Inventario Completo</h2></div>${printContent}`;
+
+    // Llamamos a print() para imprimir sin abrir una nueva ventana
+    window.print();
+
+    // Restauramos el contenido original de la página después de la impresión
+    printWindow.body.innerHTML = originalContent;
+  };
+
+  return (
+    <ModalContainer>
+      <ModalContent>
+        <ContenedorTopStyled>
+          <ContenedorTop user={user} txt="Inventario Completo" fechaHora={fecha} />
+        </ContenedorTopStyled>
+
+        <Table ref={tableRef}>
+          <thead>
+            <tr>
+              <th>Nombre del Item</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr key={index}>
+                <td>{item.nombre}</td>
+                <td>{item.cantidad}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <BtnModal onClick={onClose}>Cerrar</BtnModal>
+        <PrintBtn onClick={handlePrint}>Imprimir</PrintBtn> {/* Botón para imprimir */}
+      </ModalContent>
+    </ModalContainer>
+  );
 };
 
 const ModalContainer = styled.div`
@@ -75,24 +92,25 @@ const ModalContent = styled.div`
   background: var(--colorPrincipal);
   padding: 20px;
   border-radius: 10px;
-  max-width: 210mm; /* Tamaño A4 */
-  max-height: 297mm; /* Tamaño A4 */
+  max-width: 100%; /* Tamaño A4 */
+  max-height: 100%; /* Tamaño A4 */
   
   overflow-y: auto;
   width: 100%;
-  height: 90%;
+  height: 100%;
   h2{
     text-align: center;
+    margin-bottom: 10px;
   }
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 10px;
 
   th, td {
-    padding: 10px;
+    padding: 5px;
     text-align: left;
     border-bottom: 1px solid #ddd;
   }

@@ -30,7 +30,16 @@ export const validateApellido = yup
   .min(2, "El apellido debe tener al menos 2 caracteres")
   .max(50, "El apellido no puede tener más de 50 caracteres");
 
-  export const validateRol = yup
+export const validateRol = yup
   .string()
   .required("El Rol es requerido")
 
+export const validateGenerica = yup
+  .string()
+  .required("Este campo es requerido")
+
+  export const validateNumeroGenerico = yup
+  .number()
+  .typeError("Debe ser un número") // Mensaje de error si no es un número
+  .required("Este campo es requerido") // El campo es obligatorio
+  .positive("Debe ser un número positivo");

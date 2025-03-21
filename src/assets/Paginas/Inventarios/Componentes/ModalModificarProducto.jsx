@@ -1,21 +1,23 @@
 import styled from "styled-components"
 
-import { Form, Formik } from "formik"
+import { Form, Formik, useFormikContext } from "formik"
 
-import { BtnRegresar } from "../../../ComponentesGenerales/btnRedondo"
-import { InputGenerico, InputSelect } from "../../../ComponentesGenerales/Formulario/InputGenerico"
+
+import { InputGenerico, InputGenericoVertical, InputSelect, InputSelectIcono } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal"
-import { validateApellido, validateContraseña, validateCorreo, validateNombre, validateRol } from "../../../validaciones"
+import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico, validateRol } from "../../../validaciones"
 import * as yup from "yup"
 import { ModificarUsuario } from "../../../Fn/AgregarModificarUsuarios"
+import { GridGenerico } from "../../../ComponentesGenerales/GridGenerico"
+import { iconos, iconosUtils } from "../../../img/uitls/iconos"
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    width: 600px;
+    width: 850px;
    
     max-width: 80%;
     max-height: 90%;
@@ -54,33 +56,48 @@ const Separador = styled.div`
     justify-content: space-between;
     gap: 10px;
 `
-const ContenedorInputs = styled.div`
+const ContenedorInputSelect = styled.div`
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    justify-content: center;
+    align-items: start;
+
+    grid-column: 1/3;
     gap: 10px;
 `
-export const ModalModificarProductos = ({ usuarioSeleccionado, isOpen, onClose }) => {
-    const initialValues = {
-        nombre: usuarioSeleccionado?.nombre || "",
-        apellido: usuarioSeleccionado?.apellido || "",
-        correo: usuarioSeleccionado?.correo || "",
-        contraseña: usuarioSeleccionado?.contraseña || "",
-        rol: usuarioSeleccionado?.rol || "",
-    }
+export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose }) => {
+    const initialValues = productoSeleccionado || {
+        nombre: "",
+        descripcion: "",
+        marca: "",
+        costo: 0,
+        precio: 0,
+        categoria: "",
+        subCategoria: "",
+        icono: "", // Asegúrate de incluir el campo "icono"
+    };
+    console.log(productoSeleccionado)
+
     const validationSchema = yup.object({
         nombre: validateNombre,
-        apellido: validateApellido,
-        correo: validateCorreo,
-        contraseña: validateContraseña,
-        rol: validateRol,
+        descripcion: validateGenerica,
+        marca: validateGenerica,
+        categoria: validateGenerica,
+        subCategoria: validateGenerica,
+        costo: validateNumeroGenerico,
+        precio: validateNumeroGenerico,
     });
+    const IconoSeleccionado = styled.div`
+    font-size: 40px;
+    color: var(--colorPrincipal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
     const handleSubmit = (values) => {
         ModificarUsuario(values);
-        
-    }
+    };
+
     return (
         <Formik
             initialValues={initialValues}
@@ -88,23 +105,44 @@ export const ModalModificarProductos = ({ usuarioSeleccionado, isOpen, onClose }
             onSubmit={(values) => handleSubmit(values)}
             enableReinitialize
         >
-            <ModalGenerico isOpen={isOpen} onClose={onClose}>
-                <ContenedorContenidoModal>
-                    <ContenedorAgregarUsuarioStyled>
-                        <HeaderTxt> Modificar Usuario </HeaderTxt>
-                        <Separador>
-                            <ContenedorInputs>
-                                <InputGenerico id="nombre" name="nombre" txtLabel="Nombre" placeholder="Ingresa el nombre del usuario" />
-                                <InputGenerico id="apellido" name="apellido" txtLabel="Apellido" placeholder="Ingresa el apellido del usuario" />
-                                <InputGenerico id="correo" name="correo" txtLabel="Correo" placeholder="Ingresa el correo del usuario" />
-                                <InputGenerico id="contraseña" name="contraseña" txtLabel="Contraseña" placeholder="Ingresa el contraseña del usuario" />
-                                <InputSelect id="rol" name="rol" txtLabel="Rol" options={[{ value: "empleado", txt: "Empleado" }, { value: "Administrador", txt: "Administrador" }]} />
-                            </ContenedorInputs>
-                            <BtnSubmit type="submit" > Subir </BtnSubmit>
-                        </Separador>
-                    </ContenedorAgregarUsuarioStyled>
-                </ContenedorContenidoModal>
-            </ModalGenerico>
-        </ Formik>
-    )
-}
+            {({ values, setFieldValue }) => ( // Accede a values y setFieldValue aquí
+                <ModalGenerico isOpen={isOpen} onClose={onClose}>
+                    <ContenedorContenidoModal>
+                        <ContenedorAgregarUsuarioStyled>
+                            <HeaderTxt>Modificar Producto</HeaderTxt>
+                            <Separador>
+                                <GridGenerico columns="2fr 3fr" rows="100px 100px 100px 60px">
+                                    <InputGenericoVertical id="nombre" name="nombre" placeholder="Nombre del producto" txtLabel="Nombre" type="text" />
+                                    <InputGenericoVertical id="descripcion" name="descripcion" placeholder="Descripcion del producto" txtLabel="Descripcion" type="text" />
+                                    <InputGenericoVertical id="marca" name="marca" placeholder="Marca del producto" txtLabel="Marca" type="text" />
+
+                                    <GridGenerico columns="1fr 1fr">
+                                        <InputGenericoVertical id="costo" name="costo" placeholder="Costo del producto" txtLabel="Costo" type="number" />
+                                        <InputGenericoVertical id="precio" name="precio" placeholder="Precio del producto" txtLabel="Precio" type="number" />
+                                    </GridGenerico>
+
+                                    <InputGenericoVertical id="categoria" name="categoria" placeholder="Categoria del producto" txtLabel="Categoria" type="text" />
+                                    <InputGenericoVertical id="subCategoria" name="subCategoria" placeholder="SubCategoria del producto" txtLabel="SubCategoria" type="text" />
+
+                                    <ContenedorInputSelect>
+                                        <InputSelectIcono
+                                            id="icono"
+                                            name="icono"
+                                            placeholder="Selecciona un ícono"
+                                            options={iconosUtils}
+                                            onChange={(e) => setFieldValue("icono", e.target.value)} // Actualiza el valor en Formik
+                                            value={values.icono} // Usa el valor de Formik
+                                        />
+                                        <IconoSeleccionado>{iconos[values.icono]}</IconoSeleccionado> {/* Muestra el ícono seleccionado */}
+                                    </ContenedorInputSelect>
+                                </GridGenerico>
+
+                                <BtnSubmit type="submit">Subir</BtnSubmit>
+                            </Separador>
+                        </ContenedorAgregarUsuarioStyled>
+                    </ContenedorContenidoModal>
+                </ModalGenerico>
+            )}
+        </Formik>
+    );
+};

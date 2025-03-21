@@ -55,6 +55,13 @@ const ContenedorInputGenericoStyled = styled.div`
     width: 100%;
     flex-direction: column;
 `
+const IconoSeleccionado = styled.div`
+    font-size: 40px;
+    color: var(--colorPrincipal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const InputGenerico = ({ id = "id", name = "name", placeholder = "Ingresa información", txtLabel = "Label", type = "text" }) => {
     return (
@@ -94,12 +101,41 @@ export const InputSelect = ({ id = "id", name = "name", placeholder = "Ingresa i
     );
 };
 
+export const InputSelectIcono = ({
+    id = "id",
+    name = "name",
+    placeholder = "Ingresa información",
+    txtLabel = "Label",
+    options = [],
+    onChange,
+    value, // Recibe el valor actual del campo
+}) => {
+    return (
+        <ContenedorInputGenericoStyled>
+            <ContenedorInputStyled>
+                <label htmlFor={id}>{txtLabel}</label>
+                <Field as="select" id={id} name={name} placeholder={placeholder} onChange={onChange} value={value}>
+                    <option value="" disabled>
+                        Selecciona una opción
+                    </option>
+                    {options.map((opcion, index) => (
+                        <option key={index} value={opcion.value}>
+                            {opcion.txt}
+                        </option>
+                    ))}
+                </Field>
+            </ContenedorInputStyled>
+            <ErrorMessageStyled name={name} component="div" />
+        </ContenedorInputGenericoStyled>
+    );
+};
+
 const ContenedorInputVerticalStyled = styled(ContenedorInputStyled)`
     height: 100%;
     display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-rows: 25px 40px 30px;
     grid-template-columns: none;
-    gap: 10px;
+    gap: 5px;
     background-color: transparent;
     border: none;
     border-radius: 0;

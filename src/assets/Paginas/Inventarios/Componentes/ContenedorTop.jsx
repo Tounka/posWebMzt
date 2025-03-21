@@ -16,7 +16,7 @@ const ContenedorTopStyled = styled.div`
         }
         &:nth-child(3){
             font-size: 20px;
-            text-align: start;
+            text-align: center;
         }
     }
 `;

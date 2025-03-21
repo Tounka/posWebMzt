@@ -16,7 +16,7 @@ const Label = styled.label`
     font-weight: bold;
     user-select: none;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 18px;
 
 `;
 

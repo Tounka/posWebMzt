@@ -13,10 +13,10 @@ import { useState } from "react";
 
 
 const ContenedorPaginaUsuarios = styled.div`
-
+    width: 100%;
     padding: 20px;
     display: flex;
-  
+    height: 100%;
     
     
     flex-direction: column;
@@ -48,8 +48,9 @@ const ContenedorBtn = styled.div`
 
 `
 const ContenedorTabla = styled.div`
-    width: 800px;
-   
+    width: 100% ;
+   min-width: 800px;
+   height: 100%;
 `
 
 export const ProductosUx = () => {
@@ -57,6 +58,7 @@ export const ProductosUx = () => {
     const [boolModalProductoSeleccionado, setBoolModalProductoSeleccionado] = useState(false);
 
     const handleClick = (producto) =>{
+        console.log(producto)
         setProductoSeleccionado(producto);
         setBoolModalProductoSeleccionado(true);
     }
@@ -76,7 +78,8 @@ export const ProductosUx = () => {
                     txt: item.nombre, // Nombre del producto
                     costo: item.costo, // Costo del producto
                     precio: item.precio, // Precio del producto
-
+        
+                    productoCompelto: item,
                 });
             });
         });
@@ -92,6 +95,7 @@ export const ProductosUx = () => {
         { field: "txt", headerName: "Nombre", width: 200 },
         { field: "costo", headerName: "Costo", width: 80 },
         { field: "precio", headerName: "Precio", width: 80 },
+  
 
     ];
     const paginationModel = { page: 0, pageSize: 15 };
@@ -111,7 +115,7 @@ export const ProductosUx = () => {
                     </ContenedorBtn>
                 </ContenedorTop>
 
-                <PaperStyled sx={{ height: 400, width: '100%' }}>
+                <PaperStyled sx={{ height: "90%", width: '100%' }}>
                     <DataGrid
                         rows={rows}
                         columns={columns}
@@ -119,7 +123,7 @@ export const ProductosUx = () => {
                         pageSizeOptions={[5, 10]}
                         sx={{ border: 0 }}
                         onCellClick={(params) => {
-                            handleClick(params.row);
+                            handleClick(params.row.productoCompelto);
                  
                         }}
                     />
@@ -127,7 +131,7 @@ export const ProductosUx = () => {
 
             </ContenedorTabla>
 
-            <ModalModificarProductos usuarioSeleccionado={productoSeleccionado} isOpen={boolModalProductoSeleccionado} onClose={() => setBoolModalProductoSeleccionado(false)} />
+            <ModalModificarProductos productoSeleccionado={productoSeleccionado} isOpen={boolModalProductoSeleccionado} onClose={() => setBoolModalProductoSeleccionado(false)} />
         </ContenedorPaginaUsuarios>
     )
 }

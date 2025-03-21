@@ -46,6 +46,7 @@ const ContenedorTotal = styled.div`
 
 const ContenedorItemCarritoStyled = styled.div`
     width: 100%;
+    min-height: 50px;
     display: grid;
     border: solid 2px var(--colorBlanco);
     border-radius: 20px;
@@ -190,7 +191,7 @@ export const Etiquetas = () => {
             console.log("Ocupas agregar items al carrito");
 
         } else {
-            console.log(carrito);
+            
             Navigate("/inventario/entrada-producto/generar-etiqueta");
         }
 

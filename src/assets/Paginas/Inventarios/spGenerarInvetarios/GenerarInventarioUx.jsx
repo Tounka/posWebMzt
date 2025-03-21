@@ -142,6 +142,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
                  onClose={closeHelloWorldModal}  // Función para cerrar el modal
                  catalogo={catalogo}
                  values={values}
+                 fecha = {fechaHora}
              />
             )}
 
@@ -163,7 +164,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
                         ))}
                     </ContenedorCategoria>
                 ))}
-                <BtnSubmit type="submit" onClick={checkZeroItems}>Siguiente</BtnSubmit>
+                <BtnSubmit type="submit" onClick={checkZeroItems}  >Siguiente</BtnSubmit>
             </ContenedorInventario>
         </ContenedorReportes>
     );

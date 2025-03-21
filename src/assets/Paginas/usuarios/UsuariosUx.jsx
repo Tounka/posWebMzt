@@ -8,7 +8,9 @@ import { FaEdit } from "react-icons/fa";
 import { ModalModificarUsuario } from "./ModalModificarUsuario";
 import { useState } from "react";
 const ContenedorPaginaUsuarios = styled.div`
-
+   width: 100% ;
+   min-width: 800px;
+   height: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -77,7 +79,7 @@ export const UsuariosUx = ({rows}) => {
                 <BtnRedondo diametro="60px" bgColor="var(--colorPrincipal)" handleClick={() => handleClickBtnAgregar()} />
                 </ContenedorBtn>
             </ContenedorTop>
-            <PaperStyled sx={{ height: 400, width: '100%' }}>
+            <PaperStyled sx={{ height: "90%", width: '100%' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}

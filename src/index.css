@@ -22,3 +22,9 @@
 
   --anchoMenuLateral: 150px;
 }
+
+
+@font-face {
+  font-family: 'FuenteDeBarras';
+  src: url('./assets/img/code128.ttf') format('truetype');
+}

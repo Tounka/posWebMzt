@@ -1,7 +1,7 @@
 import { Formik } from "formik"
 import { Contenedor100 } from "../../../ComponentesGenerales/layouts"
 import { AgregarProductoUx } from "./AgregarProductoUx"
-import { validateApellido, validateContraseña, validateCorreo, validateNombre } from "../../../validaciones"
+import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico } from "../../../validaciones"
 import * as yup from "yup"
 
 
@@ -17,6 +17,13 @@ export const AgregarProducto = () => {
     }
     const  validationSchema  = yup.object({
         nombre: validateNombre,
+        descripcion: validateGenerica,
+        marca: validateGenerica,
+        categoria: validateGenerica,
+        subCategoria: validateGenerica,
+        costo: validateNumeroGenerico,
+        precio: validateNumeroGenerico,
+    
     
     });
 

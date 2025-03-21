@@ -11,10 +11,13 @@ import { obtenerFecha, obtenerHora } from "../../../Fn/ObtenerFechaHora";
 import { imprimirTicket } from "../../../Fn/Imprimir";
 const ContedorTicket = styled.div`
   display: grid;
-  grid-template-rows: 400px 80px;
+  grid-template-rows: auto 80px;
+  height: 100%;
+  padding: 20px;
 `
 const ContenedorScroll = styled.div`
   overflow-y: auto;
+  
 `
 const ContenedorBtns = styled.div`
   height: 100%;

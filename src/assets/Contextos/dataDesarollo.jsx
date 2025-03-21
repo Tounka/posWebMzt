@@ -2,6 +2,7 @@ import { GiBeerStein, GiCoffeeCup, GiSodaCan, GiCupcake, GiIceCreamCone, GiDonut
 import { FaMugHot, FaGlassWhiskey, FaCookie, FaAppleAlt, FaCheese, FaBreadSlice } from "react-icons/fa";
 import { MdLocalDrink, MdIcecream } from "react-icons/md";
 import { NumerosALetras } from "numero-a-letras";
+import { iconos, iconosUtils } from "../img/uitls/iconos";
 
 export const inventariosDb = [
     {
@@ -134,74 +135,243 @@ export const inventariosDb = [
         ]
     }
 ];
-export const productos = [
-    { categoria: "Bebidas", subcategoria: "", id: 1, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
-    { categoria: "Bebidas", subcategoria: "", id: 2, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
-    { categoria: "Bebidas", subcategoria: "", id: 3, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
-    { categoria: "Bebidas", subcategoria: "", id: 4, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
-    { categoria: "Bebidas", subcategoria: "", id: 5, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
-    { categoria: "Bebidas", subcategoria: "", id: 6, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
-    { categoria: "Bebidas", subcategoria: "", id: 7, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
-    { categoria: "Bebidas", subcategoria: "", id: 8, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 },
-
-    { categoria: "Comida Rápida", subcategoria: "", id: 9, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 10, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 11, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 12, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 13, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 14, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
-    { categoria: "Comida Rápida", subcategoria: "", id: 15, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 },
-
-    { categoria: "Postres", subcategoria: "", id: 16, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
-    { categoria: "Postres", subcategoria: "", id: 17, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
-    { categoria: "Postres", subcategoria: "", id: 18, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
-    { categoria: "Postres", subcategoria: "", id: 19, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
-    { categoria: "Postres", subcategoria: "", id: 20, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
-    { categoria: "Postres", subcategoria: "", id: 21, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
-    { categoria: "Postres", subcategoria: "", id: 22, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
-    { categoria: "Postres", subcategoria: "", id: 23, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
+export const productosBrutosDb = [
+    {
+        nombre: "Pestañas Postizas Clásicas",
+        descripcion: "Pestañas postizas de estilo clásico para un look natural.",
+        marca: "LashLux",
+        costo: 50,
+        precio: 120,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiEyelashes",
+    },
+    {
+        nombre: "Pestañas de Seda",
+        descripcion: "Pestañas de seda suave y ligera para un acabado natural.",
+        marca: "SilkLash",
+        costo: 60,
+        precio: 140,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiEyelashes",
+    },
+    {
+        nombre: "Pestañas de Colores",
+        descripcion: "Pestañas postizas en colores vibrantes para un look divertido.",
+        marca: "ColorLash",
+        costo: 45,
+        precio: 100,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "MdOutlineColorLens",
+    },
+    {
+        nombre: "Pestañas Magnéticas",
+        descripcion: "Pestañas magnéticas fáciles de aplicar sin pegamento.",
+        marca: "MagneticLash",
+        costo: 70,
+        precio: 150,
+        categoria: "Pestañas",
+        subCategoria: "Magnéticas",
+        icono: "FaMagnet",
+    },
+    {
+        nombre: "Pegamento para Pestañas",
+        descripcion: "Pegamento de larga duración para pestañas postizas.",
+        marca: "LashGrip",
+        costo: 10,
+        precio: 25,
+        categoria: "Accesorios",
+        subCategoria: "Pegamentos",
+        icono: "FaSprayCan",
+    },
+    {
+        nombre: "Rimel Volumizador",
+        descripcion: "Rimel para dar volumen y longitud a tus pestañas.",
+        marca: "VolumLash",
+        costo: 15,
+        precio: 35,
+        categoria: "Maquillaje",
+        subCategoria: "Rimel",
+        icono: "FaBrush",
+    },
+    {
+        nombre: "Rimel Impermeable",
+        descripcion: "Rimel resistente al agua para un look duradero.",
+        marca: "AquaLash",
+        costo: 18,
+        precio: 40,
+        categoria: "Maquillaje",
+        subCategoria: "Rimel",
+        icono: "FaBrush",
+    },
+    {
+        nombre: "Cepillo para Pestañas",
+        descripcion: "Cepillo para separar y definir pestañas.",
+        marca: "LashTool",
+        costo: 5,
+        precio: 15,
+        categoria: "Accesorios",
+        subCategoria: "Herramientas",
+        icono: "MdOutlineBrush",
+    },
+    {
+        nombre: "Curvador de Pestañas",
+        descripcion: "Curvador profesional para un look impactante.",
+        marca: "CurlPro",
+        costo: 8,
+        precio: 20,
+        categoria: "Accesorios",
+        subCategoria: "Herramientas",
+        icono: "FaAngleDoubleUp",
+    },
+    {
+        nombre: "Kit de Extensión de Pestañas",
+        descripcion: "Kit completo para extensiones de pestañas en casa.",
+        marca: "LashKit",
+        costo: 80,
+        precio: 180,
+        categoria: "Pestañas",
+        subCategoria: "Extensiones",
+        icono: "GiEyelashes",
+    },
+    {
+        nombre: "Serum para Crecimiento de Pestañas",
+        descripcion: "Serum fortalecedor para pestañas más largas y gruesas.",
+        marca: "LashGrow",
+        costo: 30,
+        precio: 70,
+        categoria: "Cuidado",
+        subCategoria: "Sérums",
+        icono: "FaEyeDropper",
+    },
+    {
+        nombre: "Toallitas Desmaquillantes",
+        descripcion: "Toallitas suaves para desmaquillar pestañas y ojos.",
+        marca: "LashWipe",
+        costo: 12,
+        precio: 30,
+        categoria: "Cuidado",
+        subCategoria: "Limpieza",
+        icono: "MdOutlineSpa",
+    },
+    {
+        nombre: "Tinte para Pestañas",
+        descripcion: "Tinte duradero para pestañas y cejas.",
+        marca: "LashTint",
+        costo: 20,
+        precio: 50,
+        categoria: "Maquillaje",
+        subCategoria: "Tintes",
+        icono: "IoColorPaletteOutline",
+    },
+    {
+        nombre: "Pestañas de Cola de Sirena",
+        descripcion: "Pestañas postizas con diseño de cola de sirena.",
+        marca: "MermaidLash",
+        costo: 55,
+        precio: 130,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiSparkles",
+    },
+    {
+        nombre: "Pestañas de Diamantes",
+        descripcion: "Pestañas postizas con detalles de diamantes.",
+        marca: "DiamondLash",
+        costo: 65,
+        precio: 150,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiSparkles",
+    },
+    {
+        nombre: "Pestañas de Fantasía",
+        descripcion: "Pestañas postizas para looks extravagantes.",
+        marca: "FantasyLash",
+        costo: 40,
+        precio: 90,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiSparkles",
+    },
+    {
+        nombre: "Pestañas Naturales",
+        descripcion: "Pestañas postizas con un acabado natural.",
+        marca: "NaturalLash",
+        costo: 35,
+        precio: 80,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiEyelashes",
+    },
+    {
+        nombre: "Pestañas de Seda con Brillo",
+        descripcion: "Pestañas de seda con un toque de brillo.",
+        marca: "ShinyLash",
+        costo: 50,
+        precio: 110,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiSparkles",
+    },
+    {
+        nombre: "Pestañas de Gato",
+        descripcion: "Pestañas postizas con diseño de gato.",
+        marca: "CatLash",
+        costo: 45,
+        precio: 100,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiEyelashes",
+    },
+    {
+        nombre: "Pestañas de Mariposa",
+        descripcion: "Pestañas postizas con diseño de mariposa.",
+        marca: "ButterflyLash",
+        costo: 50,
+        precio: 120,
+        categoria: "Pestañas",
+        subCategoria: "Postizas",
+        icono: "GiEyelashes",
+    },
 ];
 
-export const categoriasProductos = [
-    {
-        categoria: "Bebidas",
-        items: [
-            { id: 1, nombre: "Cerveza", icon: <GiBeerStein />, costo: 15, precio: 35 },
-            { id: 2, nombre: "Café", icon: <GiCoffeeCup />, costo: 8, precio: 20 },
-            { id: 3, nombre: "Refresco", icon: <GiSodaCan />, costo: 10, precio: 25 },
-            { id: 4, nombre: "Whiskey", icon: <FaGlassWhiskey />, costo: 50, precio: 120 },
-            { id: 5, nombre: "Agua", icon: <GiWaterBottle />, costo: 5, precio: 15 },
-            { id: 6, nombre: "Leche", icon: <GiMilkCarton />, costo: 7, precio: 18 },
-            { id: 7, nombre: "Té", icon: <FaMugHot />, costo: 6, precio: 18 },
-            { id: 8, nombre: "Jugo", icon: <MdLocalDrink />, costo: 12, precio: 30 }
-        ]
-    },
-    {
-        categoria: "Comida Rápida",
-        items: [
-            { id: 9, nombre: "Hamburguesa", icon: <GiHamburger />, costo: 25, precio: 60 },
-            { id: 10, nombre: "Pizza", icon: <GiPizzaSlice />, costo: 30, precio: 75 },
-            { id: 11, nombre: "Hot Dog", icon: <GiHotDog />, costo: 12, precio: 30 },
-            { id: 12, nombre: "Papas Fritas", icon: <GiFrenchFries />, costo: 10, precio: 25 },
-            { id: 13, nombre: "Sándwich", icon: <FaBreadSlice />, costo: 15, precio: 40 },
-            { id: 14, nombre: "Queso", icon: <FaCheese />, costo: 20, precio: 50 },
-            { id: 15, nombre: "Frutas", icon: <GiFruitBowl />, costo: 18, precio: 45 }
-        ]
-    },
-    {
-        categoria: "Postres",
-        items: [
-            { id: 16, nombre: "Pastel", icon: <GiCakeSlice />, costo: 35, precio: 90 },
-            { id: 17, nombre: "Galletas", icon: <FaCookie />, costo: 10, precio: 25 },
-            { id: 18, nombre: "Helado", icon: <MdIcecream />, costo: 15, precio: 40 },
-            { id: 19, nombre: "Cupcake", icon: <GiCupcake />, costo: 12, precio: 30 },
-            { id: 20, nombre: "Dona", icon: <GiDonut />, costo: 10, precio: 25 },
-            { id: 21, nombre: "Chocolate", icon: <GiChocolateBar />, costo: 20, precio: 55 },
-            { id: 22, nombre: "Manzana Caramelizada", icon: <FaAppleAlt />, costo: 18, precio: 45 },
-            { id: 23, nombre: "Cono de Helado", icon: <GiIceCreamCone />, costo: 12, precio: 35 }
-        ]
-    }
-]; //  Productos 
+export const tratarProductos = (productosBrutos) =>{
+
+    const ProductosTratados = productosBrutos.map((producto) => {
+        return {
+            ...producto, 
+            icono: iconos[producto.icono], // Cambia la propiedad `icono` al valor deseado
+        };
+    });
+
+    return(ProductosTratados);
+}
+export const productos = tratarProductos(productosBrutosDb);
+
+export const convertirProductos = (productos) => {
+    const categoriasMap = new Map();
+    
+    productos.forEach((producto, index) => {
+        if (!categoriasMap.has(producto.categoria)) {
+            categoriasMap.set(producto.categoria, []);
+        }
+        
+        categoriasMap.get(producto.categoria).push({
+            id: index + 1, // Genera un ID basado en la posición en la lista
+            nombre: producto.nombre,
+            icono: producto.icono, // Mantiene la referencia del icono
+            costo: producto.costo,
+            precio: producto.precio
+        });
+    });
+    
+    return Array.from(categoriasMap, ([categoria, items]) => ({ categoria, items }));
+};
+
+export const categoriasProductos = convertirProductos(productos) //  Se construye a apartir de productos 
 
 export const userData = [
     {
@@ -222,6 +392,7 @@ export const userData = [
 export const localDataIn = {
     ubicacion: "Ubicacion del local",
     sucursal: "Sucursal X",
+    id: 1,
 
 }
 

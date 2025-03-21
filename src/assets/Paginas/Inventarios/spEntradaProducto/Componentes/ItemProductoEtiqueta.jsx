@@ -5,6 +5,7 @@ import { TxtGenerico } from "../../../../ComponentesGenerales/titulos";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import styled from "styled-components";
 import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
+import { PiHandSoapBold } from "react-icons/pi";
 
 const ControlUnidadesStyled = styled.div`
     width: 100%;
@@ -99,7 +100,7 @@ export const ItemProductoEtiqueta = ({ producto }) => {
         <ContenedorItemProducto id={producto.id}>
             <ContenedorGenerico width="150px" align="center" onClick={() => handleClickPlus()}>
                 <TxtGenerico color="var(--colorPrincipal)" line=".8" size="58px">
-                    {producto.icon || <PiHandSoapBold />}
+                    {producto.icono || <PiHandSoapBold />}
                 </TxtGenerico>
             </ContenedorGenerico>
 
