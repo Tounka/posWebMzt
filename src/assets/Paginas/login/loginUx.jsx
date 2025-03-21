@@ -6,8 +6,9 @@ import { TxtSinEtiquetas } from "../../ComponentesGenerales/titulos";
 import { BtnGenerico } from "../../ComponentesGenerales/inputs";
 import * as yup from "yup";
 import { useAuth } from "../../Contextos/ContextoAuth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
+import { useNavigate } from "react-router";
 const ContenedoForm = styled(Form)`
     width: 500px;
     height: 350px;
@@ -30,7 +31,14 @@ const ContenedorField = styled.div`
 
 export const LoginUx = () => {
   const {login} = useAuth();
-
+   
+  const {user} = useContextoGeneral();
+  const navigate = useNavigate();
+  useEffect(() =>{
+    if(user){
+      navigate("/venta")
+    }
+  },[user])
 
   const validationSchema = yup.object({
     correo: validateCorreo, 

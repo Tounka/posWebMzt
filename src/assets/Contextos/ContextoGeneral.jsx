@@ -6,13 +6,7 @@ const ContextoGeneral = createContext();
 
 export const ContextoGeneralProvider = ({ children }) => {
     const [ubicacionPagina, setUbicacionPagina] = useState("/");
-    const [user, setUser] = useState({
-        nombre: "ramon",
-        apellido: "marquez",
-        rol: "administrador",
-        correo: "luis@gmail.com",
-        contraseña: "luis1234",
-    });
+    const [user, setUser] = useState();
     const [localData, setLocalData] = useState(localDataIn)
     const [catalogo, setCatalogo] = useState(categoriasProductos); //Cambiar a database 
     const [catalogoV2, setCatalogov2] = useState(productos)
