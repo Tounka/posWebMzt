@@ -18,7 +18,7 @@ export const ContenedorItemProducto = styled.div`
         height: 160px;
         width: 160px;
         display: grid;
-        grid-template-rows: 5fr 2fr 3fr;
+        grid-template-rows: 5fr 2fr 2fr;
         border-radius: 20px;
         padding: 5px 0;
         justify-content: center;

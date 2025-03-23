@@ -120,7 +120,7 @@ export const Ticket = ({ datosTicket }) => {
             <ContenedorMetaDatos>
                 <div>
                     <TxtPosicionado color="black" weight="normal" align="start" size="12px">
-                        <b>  Fecha:</b> {datosTicket.fechaTransaccion.fecha} : {datosTicket.fechaTransaccion.hora}
+                        <b>  Fecha:</b> {datosTicket.fechaTransaccion}
                     </TxtPosicionado>
                 </div>
                 <div>

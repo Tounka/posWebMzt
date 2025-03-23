@@ -65,7 +65,7 @@ const ContenedorTop = styled.div`
     width: 100%;
     height: 50px;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 36px 4fr 1fr;
     align-items: center;
     padding: 10px;
   

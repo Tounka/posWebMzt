@@ -416,233 +416,180 @@ export const localDataIn = {
 
 }
 
-export const ticketsDiasDb = [
+export const ticketsDb = [
     {
-        fecha: "12/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "12/02/2025",
-                    hora: "12:22"
-                },
-                usuario: {
-                    nombre: "Juan",
-                    apellido: "Pérez"
-                },
-                caja: "1",
-                productos: [
-                    { nombre: "Cerveza", cantidad: 2, precio: 35, costo: 15, total: 70, costoTotal: 30 },
-                    { nombre: "Hamburguesa", cantidad: 1, precio: 60, costo: 25, total: 60, costoTotal: 25 }
-                ],
-                total: 130,
-                totalEnTxt: NumerosALetras(130),
-                costoTotal: 55,
-                descuento: 10 // Nuevo campo descuento
-            },
-            {
-                fechaTransaccion: {
-                    fecha: "12/02/2025",
-                    hora: "13:45"
-                },
-                usuario: {
-                    nombre: "María",
-                    apellido: "Gómez"
-                },
-                caja: "2",
-                productos: [
-                    { nombre: "Café", cantidad: 3, precio: 20, costo: 8, total: 60, costoTotal: 24 },
-                    { nombre: "Pastel", cantidad: 1, precio: 90, costo: 35, total: 90, costoTotal: 35 }
-                ],
-                total: 150,
-                totalEnTxt: NumerosALetras(150),
-                costoTotal: 59,
-                descuento: 15 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547578-924",
+        fechaTransaccion: new Date("2025-02-12T12:22:00"),
+        usuario: {
+            nombre: "Juan",
+            apellido: "Pérez"
+        },
+        caja: "1",
+        productos: [
+            { nombre: "Cerveza", cantidad: 2, precio: 35, costo: 15, total: 70, costoTotal: 30 },
+            { nombre: "Hamburguesa", cantidad: 1, precio: 60, costo: 25, total: 60, costoTotal: 25 }
+        ],
+        total: 130,
+        totalEnTxt: NumerosALetras(130),
+        costoTotal: 55,
+        descuento: 10
     },
     {
-        fecha: "13/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "13/02/2025",
-                    hora: "10:15"
-                },
-                usuario: {
-                    nombre: "Carlos",
-                    apellido: "López"
-                },
-                caja: "3",
-                productos: [
-                    { nombre: "Refresco", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 },
-                    { nombre: "Pizza", cantidad: 1, precio: 75, costo: 30, total: 75, costoTotal: 30 }
-                ],
-                total: 125,
-                totalEnTxt: NumerosALetras(125),
-                costoTotal: 50,
-                descuento: 5 // Nuevo campo descuento
-            },
-            {
-                fechaTransaccion: {
-                    fecha: "13/02/2025",
-                    hora: "11:50"
-                },
-                usuario: {
-                    nombre: "Ana",
-                    apellido: "Martínez"
-                },
-                caja: "4",
-                productos: [
-                    { nombre: "Agua", cantidad: 1, precio: 15, costo: 5, total: 15, costoTotal: 5 },
-                    { nombre: "Papas Fritas", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 }
-                ],
-                total: 65,
-                totalEnTxt: NumerosALetras(65),
-                costoTotal: 25,
-                descuento: 0 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547580-925",
+        fechaTransaccion: new Date("2025-02-12T13:45:00"),
+        usuario: {
+            nombre: "María",
+            apellido: "Gómez"
+        },
+        caja: "2",
+        productos: [
+            { nombre: "Café", cantidad: 3, precio: 20, costo: 8, total: 60, costoTotal: 24 },
+            { nombre: "Pastel", cantidad: 1, precio: 90, costo: 35, total: 90, costoTotal: 35 }
+        ],
+        total: 150,
+        totalEnTxt: NumerosALetras(150),
+        costoTotal: 59,
+        descuento: 15
     },
     {
-        fecha: "14/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "14/02/2025",
-                    hora: "09:30"
-                },
-                usuario: {
-                    nombre: "Pedro",
-                    apellido: "García"
-                },
-                caja: "5",
-                productos: [
-                    { nombre: "Leche", cantidad: 1, precio: 18, costo: 7, total: 18, costoTotal: 7 },
-                    { nombre: "Sándwich", cantidad: 1, precio: 40, costo: 15, total: 40, costoTotal: 15 }
-                ],
-                total: 58,
-                totalEnTxt: NumerosALetras(58),
-                costoTotal: 22,
-                descuento: 8 // Nuevo campo descuento
-            },
-            {
-                fechaTransaccion: {
-                    fecha: "14/02/2025",
-                    hora: "12:00"
-                },
-                usuario: {
-                    nombre: "Luis",
-                    apellido: "Rodríguez"
-                },
-                caja: "6",
-                productos: [
-                    { nombre: "Té", cantidad: 2, precio: 18, costo: 6, total: 36, costoTotal: 12 },
-                    { nombre: "Helado", cantidad: 1, precio: 40, costo: 15, total: 40, costoTotal: 15 }
-                ],
-                total: 76,
-                totalEnTxt: NumerosALetras(76),
-                costoTotal: 27,
-                descuento: 10 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547582-926",
+        fechaTransaccion: new Date("2025-02-13T10:15:00"),
+        usuario: {
+            nombre: "Carlos",
+            apellido: "López"
+        },
+        caja: "3",
+        productos: [
+            { nombre: "Refresco", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 },
+            { nombre: "Pizza", cantidad: 1, precio: 75, costo: 30, total: 75, costoTotal: 30 }
+        ],
+        total: 125,
+        totalEnTxt: NumerosALetras(125),
+        costoTotal: 50,
+        descuento: 5
     },
     {
-        fecha: "15/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "15/02/2025",
-                    hora: "14:20"
-                },
-                usuario: {
-                    nombre: "Sofía",
-                    apellido: "Hernández"
-                },
-                caja: "7",
-                productos: [
-                    { nombre: "Jugo", cantidad: 1, precio: 30, costo: 12, total: 30, costoTotal: 12 },
-                    { nombre: "Queso", cantidad: 1, precio: 50, costo: 20, total: 50, costoTotal: 20 }
-                ],
-                total: 80,
-                totalEnTxt: NumerosALetras(80),
-                costoTotal: 32,
-                descuento: 12 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547584-927",
+        fechaTransaccion: new Date("2025-02-13T11:50:00"),
+        usuario: {
+            nombre: "Ana",
+            apellido: "Martínez"
+        },
+        caja: "4",
+        productos: [
+            { nombre: "Agua", cantidad: 1, precio: 15, costo: 5, total: 15, costoTotal: 5 },
+            { nombre: "Papas Fritas", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 }
+        ],
+        total: 65,
+        totalEnTxt: NumerosALetras(65),
+        costoTotal: 25,
+        descuento: 0
     },
     {
-        fecha: "16/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "16/02/2025",
-                    hora: "16:45"
-                },
-                usuario: {
-                    nombre: "Ricardo",
-                    apellido: "Ortega"
-                },
-                caja: "8",
-                productos: [
-                    { nombre: "Whiskey", cantidad: 1, precio: 120, costo: 50, total: 120, costoTotal: 50 },
-                    { nombre: "Frutas", cantidad: 1, precio: 45, costo: 18, total: 45, costoTotal: 18 }
-                ],
-                total: 165,
-                totalEnTxt: NumerosALetras(165),
-                costoTotal: 68,
-                descuento: 20 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547586-928",
+        fechaTransaccion: new Date("2025-02-14T09:30:00"),
+        usuario: {
+            nombre: "Pedro",
+            apellido: "García"
+        },
+        caja: "5",
+        productos: [
+            { nombre: "Leche", cantidad: 1, precio: 18, costo: 7, total: 18, costoTotal: 7 },
+            { nombre: "Sándwich", cantidad: 1, precio: 40, costo: 15, total: 40, costoTotal: 15 }
+        ],
+        total: 58,
+        totalEnTxt: NumerosALetras(58),
+        costoTotal: 22,
+        descuento: 8
     },
     {
-        fecha: "17/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "17/02/2025",
-                    hora: "18:00"
-                },
-                usuario: {
-                    nombre: "Laura",
-                    apellido: "Díaz"
-                },
-                caja: "9",
-                productos: [
-                    { nombre: "Galletas", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 },
-                    { nombre: "Cupcake", cantidad: 1, precio: 30, costo: 12, total: 30, costoTotal: 12 }
-                ],
-                total: 80,
-                totalEnTxt: NumerosALetras(80),
-                costoTotal: 32,
-                descuento: 5 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547588-929",
+        fechaTransaccion: new Date("2025-02-14T12:00:00"),
+        usuario: {
+            nombre: "Luis",
+            apellido: "Rodríguez"
+        },
+        caja: "6",
+        productos: [
+            { nombre: "Té", cantidad: 2, precio: 18, costo: 6, total: 36, costoTotal: 12 },
+            { nombre: "Helado", cantidad: 1, precio: 40, costo: 15, total: 40, costoTotal: 15 }
+        ],
+        total: 76,
+        totalEnTxt: NumerosALetras(76),
+        costoTotal: 27,
+        descuento: 10
     },
     {
-        fecha: "18/02/2025",
-        tickets: [
-            {
-                fechaTransaccion: {
-                    fecha: "18/02/2025",
-                    hora: "19:30"
-                },
-                usuario: {
-                    nombre: "Miguel",
-                    apellido: "Fernández"
-                },
-                caja: "10",
-                productos: [
-                    { nombre: "Dona", cantidad: 1, precio: 25, costo: 10, total: 25, costoTotal: 10 },
-                    { nombre: "Chocolate", cantidad: 1, precio: 55, costo: 20, total: 55, costoTotal: 20 }
-                ],
-                total: 80,
-                totalEnTxt: NumerosALetras(80),
-                costoTotal: 30,
-                descuento: 10 // Nuevo campo descuento
-            }
-        ]
+        id: "1742762547590-930",
+        fechaTransaccion: new Date("2025-02-15T14:20:00"),
+        usuario: {
+            nombre: "Sofía",
+            apellido: "Hernández"
+        },
+        caja: "7",
+        productos: [
+            { nombre: "Jugo", cantidad: 1, precio: 30, costo: 12, total: 30, costoTotal: 12 },
+            { nombre: "Queso", cantidad: 1, precio: 50, costo: 20, total: 50, costoTotal: 20 }
+        ],
+        total: 80,
+        totalEnTxt: NumerosALetras(80),
+        costoTotal: 32,
+        descuento: 12
+    },
+    {
+        id: "1742762547592-931",
+        fechaTransaccion: new Date("2025-02-16T16:45:00"),
+        usuario: {
+            nombre: "Ricardo",
+            apellido: "Ortega"
+        },
+        caja: "8",
+        productos: [
+            { nombre: "Whiskey", cantidad: 1, precio: 120, costo: 50, total: 120, costoTotal: 50 },
+            { nombre: "Frutas", cantidad: 1, precio: 45, costo: 18, total: 45, costoTotal: 18 }
+        ],
+        total: 165,
+        totalEnTxt: NumerosALetras(165),
+        costoTotal: 68,
+        descuento: 20
+    },
+    {
+        id: "1742762547594-932",
+        fechaTransaccion: new Date("2025-02-17T18:00:00"),
+        usuario: {
+            nombre: "Laura",
+            apellido: "Díaz"
+        },
+        caja: "9",
+        productos: [
+            { nombre: "Galletas", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 },
+            { nombre: "Cupcake", cantidad: 1, precio: 30, costo: 12, total: 30, costoTotal: 12 }
+        ],
+        total: 80,
+        totalEnTxt: NumerosALetras(80),
+        costoTotal: 32,
+        descuento: 5
+    },
+    {
+        id: "1742762547596-933",
+        fechaTransaccion: new Date("2025-02-18T19:30:00"),
+        usuario: {
+            nombre: "Miguel",
+            apellido: "Fernández"
+        },
+        caja: "10",
+        productos: [
+            { nombre: "Dona", cantidad: 1, precio: 25, costo: 10, total: 25, costoTotal: 10 },
+            { nombre: "Chocolate", cantidad: 1, precio: 55, costo: 20, total: 55, costoTotal: 20 }
+        ],
+        total: 80,
+        totalEnTxt: NumerosALetras(80),
+        costoTotal: 30,
+        descuento: 10
     }
 ];
+
+
 
 
 export const usuariosData  = [

@@ -62,6 +62,7 @@ const SeccionInventario = ({dia, index, height}) => {
         { field: "costo", headerName: "Costo", width: 80 },
         { field: "precio", headerName: "Precio", width: 80 },
         { field: "stock", headerName: "Cantidad", width: 120 },
+        { field: "stockCalculado", headerName: "Cantidad Calculado", width: 150 },
     ];
 
     console.log(dia)

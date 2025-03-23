@@ -63,10 +63,7 @@ export const  GenerarTicketUx = ({ catalogo }) => {
   }
   
   const datosTicket = {
-    fechaTransaccion: {
-      fecha: obtenerFecha(fecha),
-      hora: obtenerHora(fecha),
-    },
+    fechaTransaccion: `${obtenerFecha(fecha)} - ${obtenerHora(fecha)} `, 
     usuario: {
       nombre: user.nombre,
       apellido: user.apellido

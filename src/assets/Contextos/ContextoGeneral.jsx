@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { categoriasProductos, inventariosDb, localDataIn, productos, ticketsDiasDb, userData } from "./dataDesarollo.jsx";
+import { categoriasProductos, inventariosDb, localDataIn, productos, ticketsDb, userData } from "./dataDesarollo.jsx";
 import { useLocation, useNavigate } from "react-router";
 
 const ContextoGeneral = createContext();
@@ -14,9 +14,9 @@ export const ContextoGeneralProvider = ({ children }) => {
         contraseña: "luis1234",
     });
     const [localData, setLocalData] = useState(localDataIn)
-    const [catalogo, setCatalogo] = useState(categoriasProductos); //Cambiar a database 
+    const [catalogo, setCatalogo] = useState(categoriasProductos); 
     const [catalogoV2, setCatalogov2] = useState(productos)
-    const [tickets, setTickets ]= useState(ticketsDiasDb);
+    const [tickets, setTickets ]= useState(ticketsDb);
     const [inventarios, setInventarios ]= useState(inventariosDb);
     const [rangoFechas, setRangoFechas]  = useState(null);
 
