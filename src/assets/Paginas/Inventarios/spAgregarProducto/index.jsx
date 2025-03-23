@@ -1,5 +1,5 @@
 import { Formik } from "formik"
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts"
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts"
 import { AgregarProductoUx } from "./AgregarProductoUx"
 import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico } from "../../../validaciones"
 import * as yup from "yup"

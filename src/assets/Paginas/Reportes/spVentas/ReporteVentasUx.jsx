@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
-import { ContenedorGenerico } from "../../../ComponentesGenerales/contendores";
+import { ContenedorGenerico } from "../../../ComponentesGenerales/Genericos/contendores";
 import { SeccionReporteProducto } from "./componentes/SeccionReporteProducto";
 import { ResumenVentasPorDia } from "./componentes/SeccionResumenVentasPorDia";
 import { ResumenVentas } from "./componentes/SeccionResumenVentas";

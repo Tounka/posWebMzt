@@ -23,6 +23,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { Logout } from './assets/Paginas/login/logout.JSX';
 import { GenerarEtiqueta } from './assets/Paginas/Inventarios/spEntradaProducto/spGenerarEtiqueta/index.jsx';
 
+import { GrConfigure } from "react-icons/gr";
 
 
 export const routesConfig = [
@@ -137,4 +138,6 @@ export const routesConfig = [
     name: 'Auth',
     requiredPermission: ['administrador', 'empleado'],
   },
+
+
 ];

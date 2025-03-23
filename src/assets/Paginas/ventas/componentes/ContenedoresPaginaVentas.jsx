@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 
 export const ContenedorVentasStyled = styled.div`
     display: grid;
     grid-template-columns: 1fr 350px;
-    grid-template-rows: 200px 1fr;
+    grid-template-rows: 200px 1fr 30px;
     width: 100%;
     max-width: 100%;
     height: 100%;
@@ -59,7 +59,7 @@ export const ContenedorItems = styled(Contenedor100)`
         `
 export const SeccionCarrito = styled(Contenedor100)`
         grid-column: 2 / 3;
-        grid-row: 1/3;
+        grid-row: 1/4;
         background-color: var(--colorPrincipal);
         border-radius: 40px 0 0 40px ; 
 

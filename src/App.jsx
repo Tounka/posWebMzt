@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router'; 
 import './App.css';
 
-import { LayoutApp } from './assets/ComponentesGenerales/layouts';
+import { LayoutApp } from './assets/ComponentesGenerales/Genericos/layouts.jsx';
 import { MenuLateral } from './assets/ComponentesGenerales/MenuLateral/MenuLateral';
 
 import { routesConfig } from './routes.jsx';

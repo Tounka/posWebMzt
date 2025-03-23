@@ -1,5 +1,6 @@
-import { H2Pos } from "../../../ComponentesGenerales/titulos";
+
 import styled from "styled-components";
+import { H2Pos } from "../../../ComponentesGenerales/Genericos/titulos";
 const ContenedorTopStyled = styled.div`
     width: 100%;
     display: grid;

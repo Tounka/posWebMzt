@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import styled from "styled-components";
-import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
-import { TxtGenerico } from "../../../../ComponentesGenerales/titulos";
+import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
+import { TxtGenerico } from "../../../../ComponentesGenerales/Genericos/titulos";
 const data = [
     {
         name: 'Page A',

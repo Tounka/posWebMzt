@@ -1,7 +1,36 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      devOptions: {
+        enabled: true, // Activa PWA en desarrollo
+      },
+      manifest: {
+        name: "POS-Beauty-With-Meli",
+        short_name: "POS-BWM",
+        description: "Sistema POS web pwa",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        display: "minimal-ui",
+        icons: [
+          {
+            src: "./public/imgLogo192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "./public/imgLogo512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
+
+    }),
+  ],
+});

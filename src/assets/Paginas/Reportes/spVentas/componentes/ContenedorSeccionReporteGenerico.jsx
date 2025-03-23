@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ContenedorGenerico } from "../../../../ComponentesGenerales/contendores";
+import { ContenedorGenerico } from "../../../../ComponentesGenerales/Genericos/contendores";
 
  const ContenedorSeccionReporteStyled = styled.div`
     display: flex;

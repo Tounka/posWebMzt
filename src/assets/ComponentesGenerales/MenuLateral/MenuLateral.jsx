@@ -1,14 +1,13 @@
 import styled from "styled-components"
-import { H2Pos, TxtGenerico } from "../titulos"
+import { H2Pos, TxtGenerico } from "../Genericos/titulos"
 
-
-import { ContenedorGenerico } from "../contendores";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
 
 import { routesConfig } from "../../../routes";
+import { ContenedorGenerico } from "../Genericos/contendores";
 //Editar archivo rutas para agregar una nueva seccion al menu
 
 const MenuLateralStyled = styled.div`

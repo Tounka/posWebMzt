@@ -1,4 +1,4 @@
-import { ContenedorGenerico } from "../../../../ComponentesGenerales/contendores"
+import { ContenedorGenerico } from "../../../../ComponentesGenerales/Genericos/contendores"
 import { PieChart, Pie, Legend , Sector, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import { ContenedorSeccionReporte } from "./ContenedorSeccionReporteGenerico";
 import styled from "styled-components";

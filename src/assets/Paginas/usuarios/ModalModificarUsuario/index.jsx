@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 import { Form, Formik } from "formik"
 
-import { BtnRegresar } from "../../../ComponentesGenerales/btnRedondo"
+import { BtnRegresar } from "../../../ComponentesGenerales/Genericos/btnRedondo"
 import { InputGenerico, InputSelect } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal"

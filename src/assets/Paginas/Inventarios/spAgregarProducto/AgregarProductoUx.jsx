@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { FaBox, FaTag, FaApple } from "react-icons/fa"; // Importa los íconos específicos
+
 import styled from "styled-components";
-import { BtnRegresar } from "../../../ComponentesGenerales/btnRedondo";
+import { BtnRegresar } from "../../../ComponentesGenerales/Genericos/btnRedondo";
 import { Form, useFormikContext } from "formik";
 import { InputGenericoVertical, InputSelect, InputSelectIcono } from "../../../ComponentesGenerales/Formulario/InputGenerico";
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit";
-import { GridGenerico } from "../../../ComponentesGenerales/GridGenerico";
+import { GridGenerico } from "../../../ComponentesGenerales/Genericos/GridGenerico";
 import { iconos, iconosUtils } from "../../../img/uitls/iconos";
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
@@ -47,13 +46,6 @@ const Separador = styled.div`
     gap: 10px;
 `;
 
-const ContenedorInputs = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    gap: 10px;
-`;
 const ContenedorInputSelect = styled.div`
     display: flex;
     justify-content: center;

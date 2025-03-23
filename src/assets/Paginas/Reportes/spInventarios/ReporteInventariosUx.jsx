@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
-import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
+import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal";
 import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
-import { BtnGenericoRectangular } from "../../../ComponentesGenerales/BtnsGenericos";
+import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 import { useState } from "react";
-import { TablaGenerica } from "../../../ComponentesGenerales/TablaGenerica";
+import { TablaGenerica } from "../../../ComponentesGenerales/Genericos/TablaGenerica";
+
 
 
 
@@ -77,6 +78,7 @@ const SeccionInventario = ({dia, index, height}) => {
                 <TxtGenerico color="white" size="20px">
                     {dia.fecha.toLocaleString()}
                 </TxtGenerico>
+                
             </ContenedorGenerico>
 
             <ContenedorTabla isOpen={isOpenTabla}>

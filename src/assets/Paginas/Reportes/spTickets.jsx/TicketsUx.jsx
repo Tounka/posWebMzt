@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
-import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 import { useState } from "react";
 import { Modal } from "@mui/material";
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal";
-import { BtnGenericoRectangular } from "../../../ComponentesGenerales/BtnsGenericos";
+import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { imprimirTicket } from "../../../Fn/Imprimir";
-
+import { ModalFiltrar } from "./ContenidoModalFiltrar";
 
 const ContenedorPagina = styled(Contenedor100)`
     display: flex;
@@ -38,23 +38,34 @@ const ContenedorTicketStyled = styled.div`
     width: 320px;
 
 `
+const ContenedorTop = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+`
 
 
 export const TicketsUx = () => {
     const { tickets } = useContextoGeneral();
     const [boolModalTicket, setBoolModalTicket] = useState(false);
     const [ticketSeleccionado, setTicketSeleccionado] = useState();
+    const [boolModalFiltrarTickets, setBoolModalFiltrarTickets] = useState(true);
 
     const handleClickTicket = (ticket) => {
         setTicketSeleccionado(ticket);
         setBoolModalTicket(true);
     }
+    const handleClickBtnModal = ()=>{
+        setBoolModalFiltrarTickets(true)
+    }
 
-        
- 
+
     return (
         <ContenedorPagina>
-            <H2Pos color="var(--colorPrincipal)">Tickets</H2Pos>
+            <ContenedorTop>
+                <H2Pos color="var(--colorPrincipal)">Tickets</H2Pos>
+                <BtnGenericoRectangular txt="Buscar" handleClick={() => handleClickBtnModal()} />
+            </ContenedorTop>
             <>
                 {tickets.map((dia, index) => (
                     <ContenedorDias key={index}>
@@ -83,6 +94,10 @@ export const TicketsUx = () => {
                     : <>
                     </>
                 }
+            </ModalGenerico>
+
+            <ModalGenerico isOpen={boolModalFiltrarTickets} onClose={() => setBoolModalFiltrarTickets(false)} >
+                <ModalFiltrar />
             </ModalGenerico>
         </ContenedorPagina>
 

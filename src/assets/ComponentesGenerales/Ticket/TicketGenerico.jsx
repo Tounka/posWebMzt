@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../layouts";
+import { Contenedor100 } from "../Genericos/layouts";
 import { IoLogoNpm } from "react-icons/io";
-import { TxtGenerico } from "../titulos";
+import { TxtGenerico } from "../Genericos/titulos";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { userData } from "../../Contextos/dataDesarollo";
 import { NumerosALetras, numerosALetras } from "numero-a-letras";
@@ -37,7 +37,7 @@ const ContenedorSeccionTicket = styled.div`
 
 const ContenedorMetaDatos = styled(ContenedorSeccionTicket)`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
 `;
 
 const ContenedorLogo = styled(ContenedorSeccionTicket)`
@@ -102,7 +102,7 @@ export const Ticket = ({ datosTicket }) => {
     const totalDespuesDescuento = Number(datosTicket.total - datosTicket.descuento).toFixed(2);
 
     return (
-        
+
         <ContenedorTicketStyled>
             <ContenedorLogo>
                 <img src={img} />
@@ -118,9 +118,18 @@ export const Ticket = ({ datosTicket }) => {
             </ContenedorSeccionTicket>
 
             <ContenedorMetaDatos>
-                <TxtPosicionado color="black" weight="normal" align="start" size="12px" columnP="1/3">
-                    <b>  Fecha:</b> {datosTicket.fechaTransaccion.fecha} : {datosTicket.fechaTransaccion.hora}
-                </TxtPosicionado>
+                <div>
+                    <TxtPosicionado color="black" weight="normal" align="start" size="12px">
+                        <b>  Fecha:</b> {datosTicket.fechaTransaccion.fecha} : {datosTicket.fechaTransaccion.hora}
+                    </TxtPosicionado>
+                </div>
+                <div>
+                 
+                    <TxtPosicionado color="black" weight="normal" align="start" size="10px">
+                        {datosTicket?.id ? datosTicket?.id :  "0000" }
+                    </TxtPosicionado>
+                </div>
+
                 <div>
                     <TxtPosicionado color="black" align="start" size="12px">
                         Usuario:
@@ -151,23 +160,23 @@ export const Ticket = ({ datosTicket }) => {
                 </thead>
                 <tbody>
                     {datosTicket.productos.map((producto, index) => (
-                     <>
-                        <tr key={index}>
-                            <td> <b> {producto.cantidad} </b></td>
-                            <td colSpan={3}>{producto.nombre}</td>
-        
-                        </tr>
-                        <tr key={index}>
-                            <td></td>
-                            <td></td>
-                            <Td padding= "10">${producto?.precio.toFixed(2)}</Td>
-                            <Td padding= "0">${producto?.total.toFixed(2)}</Td>
-                        </tr>
-                     </>
+                        <>
+                            <tr key={index}>
+                                <td> <b> {producto.cantidad} </b></td>
+                                <td colSpan={3}>{producto.nombre}</td>
+
+                            </tr>
+                            <tr key={index}>
+                                <td></td>
+                                <td></td>
+                                <Td padding="10">${producto?.precio.toFixed(2)}</Td>
+                                <Td padding="0">${producto?.total.toFixed(2)}</Td>
+                            </tr>
+                        </>
                     ))}
                     <tr >
                         <td><b>Total:</b></td>
-                        <td><b>{datosTicket.productos.reduce((acc,producto)  => acc + producto.cantidad,0 )}</b></td>
+                        <td><b>{datosTicket.productos.reduce((acc, producto) => acc + producto.cantidad, 0)}</b></td>
                         <td></td>
                         <td><b>${totalFormat}</b></td>
                     </tr>
@@ -179,7 +188,7 @@ export const Ticket = ({ datosTicket }) => {
                     Descuento:
                 </TxtPosicionado>
                 <TxtPosicionado color="black" weight="normal" align="center" size="10px">
-                    ${datosTicket.descuento} 
+                    ${datosTicket.descuento}
                 </TxtPosicionado>
             </ContenedorMetaDatos>
             <hr />

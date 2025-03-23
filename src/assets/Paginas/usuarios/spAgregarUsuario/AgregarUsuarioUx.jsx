@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { BtnRegresar } from "../../../ComponentesGenerales/btnRedondo"
+import { BtnRegresar } from "../../../ComponentesGenerales/Genericos/btnRedondo"
 import { Form } from "formik"
 import { InputGenerico, InputSelect } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"

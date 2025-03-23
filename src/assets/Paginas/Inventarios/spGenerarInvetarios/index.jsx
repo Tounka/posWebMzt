@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { GenerarInventarioUx } from "./GenerarInventarioUx";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 

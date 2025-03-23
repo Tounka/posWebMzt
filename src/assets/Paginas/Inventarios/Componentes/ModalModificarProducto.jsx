@@ -9,7 +9,7 @@ import { ModalGenerico } from "../../../ComponentesGenerales/Modal"
 import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico, validateRol } from "../../../validaciones"
 import * as yup from "yup"
 import { ModificarUsuario } from "../../../Fn/AgregarModificarUsuarios"
-import { GridGenerico } from "../../../ComponentesGenerales/GridGenerico"
+import { GridGenerico } from "../../../ComponentesGenerales/Genericos/GridGenerico"
 import { iconos, iconosUtils } from "../../../img/uitls/iconos"
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
@@ -65,17 +65,19 @@ const ContenedorInputSelect = styled.div`
     gap: 10px;
 `
 export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose }) => {
-    const initialValues = productoSeleccionado || {
-        nombre: "",
-        descripcion: "",
-        marca: "",
-        costo: 0,
-        precio: 0,
-        categoria: "",
-        subCategoria: "",
-        icono: "", // Asegúrate de incluir el campo "icono"
+ 
+    const initialValues = {
+        nombre: productoSeleccionado?.nombre || "",
+        descripcion: productoSeleccionado?.descripcion || "",
+        marca: productoSeleccionado?.marca || "",
+        costo: productoSeleccionado?.costo || 0,
+        precio: productoSeleccionado?.precio || 0,
+        categoria: productoSeleccionado?.categoria || "",
+        subCategoria: productoSeleccionado?.subCategoria || "",
+        icono: productoSeleccionado?.icono?.type?.name || "", 
     };
-    console.log(productoSeleccionado)
+    
+ 
 
     const validationSchema = yup.object({
         nombre: validateNombre,

@@ -1,4 +1,4 @@
-import { Contenedor100 } from "../../ComponentesGenerales/layouts"
+import { Contenedor100 } from "../../ComponentesGenerales/Genericos/layouts"
 import { ReportesUx } from "./ReportesUx"
 
 export const Reportes = () =>{

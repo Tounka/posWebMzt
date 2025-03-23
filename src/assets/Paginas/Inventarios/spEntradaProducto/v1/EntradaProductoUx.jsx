@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { H2Pos, TxtGenerico } from "../../../../ComponentesGenerales/titulos";
+import { H2Pos, TxtGenerico } from "../../../../ComponentesGenerales/Genericos/titulos";
 import { ItemInventario } from "../../Componentes/ItemGenerarInventario";
 import { useContextoGeneral } from "../../../../Contextos/ContextoGeneral";
 import { Form } from "formik";
@@ -9,7 +9,7 @@ import { BtnSubmit } from "../../../../ComponentesGenerales/Formulario/BtnSubmit
 import { useState } from "react";
 import { ModalHolaMundo } from "../../Componentes/ModalVenta";
 import { ContenedorTop } from "../../Componentes/ContenedorTop";
-import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
 
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;

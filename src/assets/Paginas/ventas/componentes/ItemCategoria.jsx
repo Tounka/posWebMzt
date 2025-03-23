@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { TxtGenerico } from "../../../ComponentesGenerales/titulos"
-import { ContenedorGenerico, ContenedorItemProducto } from "../../../ComponentesGenerales/contendores"
+import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos"
+import { ContenedorGenerico, ContenedorItemProducto } from "../../../ComponentesGenerales/Genericos/contendores"
 import { PiHandSoapBold } from "react-icons/pi";
 import { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { useContextoPaginaVenta } from "../ContextoVenta";
 
  const ContenedorItemCategoria = styled.button`

@@ -1,4 +1,4 @@
-import { Contenedor100 } from "../../ComponentesGenerales/layouts"
+import { Contenedor100 } from "../../ComponentesGenerales/Genericos/layouts"
 import { usuariosData } from "../../Contextos/dataDesarollo"
 import { UsuariosUx } from "./UsuariosUx"
 export const Usuarios = () =>{

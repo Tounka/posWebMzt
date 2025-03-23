@@ -1,4 +1,4 @@
-import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { ContenedorCategoria, SeccionItems, SeccionCarrito, ContenedorVentasStyled, SeccionCategoria, ContenedorItems } from "../../ventas/componentes/ContenedoresPaginaVentas";
 import { ItemCategoria, ItemProducto } from "../../ventas/componentes/ItemCategoria";
 import { Carrito } from "../../ventas/componentes/Carrito";

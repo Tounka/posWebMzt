@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Barcode from "react-barcode"; // Importamos la librería
 
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
-import { TxtGenerico } from "../titulos";
+import { TxtGenerico } from "../Genericos/titulos";
 
 const EtiquetaAImprimirStyled = styled.div`
     height: 13mm;

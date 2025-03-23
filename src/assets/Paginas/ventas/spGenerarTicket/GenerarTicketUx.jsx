@@ -1,14 +1,16 @@
 
 import { useState } from "react";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
 import styled from "styled-components";
-import { BtnGenericoRectangular } from "../../../ComponentesGenerales/BtnsGenericos";
+import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { useNavigate } from "react-router";
 import { useContextoPaginaVenta } from "../ContextoVenta";
 import { NumerosALetras } from "numero-a-letras";
 import { obtenerFecha, obtenerHora } from "../../../Fn/ObtenerFechaHora";
 import { imprimirTicket } from "../../../Fn/Imprimir";
+import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
+import { generarIdTicket } from "../../../Fn/utilidades/GenerarIdTicket";
 const ContedorTicket = styled.div`
   display: grid;
   grid-template-rows: auto 80px;
@@ -29,6 +31,7 @@ const ContenedorBtns = styled.div`
 
 export const  GenerarTicketUx = ({ catalogo }) => {
   const {carrito, setCarrito, setHandleResetProductosActualizados, descuento, setDescuento } = useContextoPaginaVenta();
+  const {user} = useContextoGeneral()
   const fecha = new Date();
   const carritoConTotal = carrito.map(item => ({
     ...item,
@@ -50,8 +53,8 @@ export const  GenerarTicketUx = ({ catalogo }) => {
     Navigate(-1);
   }
 
-  const handleImprimir = () =>{
-    //
+  const handleImprimir = (user) =>{
+    
     imprimirTicket(datosTicket)
     setCarrito([]);
     setHandleResetProductosActualizados(prevS => prevS + 1);
@@ -65,14 +68,15 @@ export const  GenerarTicketUx = ({ catalogo }) => {
       hora: obtenerHora(fecha),
     },
     usuario: {
-      nombre: "María",
-      apellido: "Gómez"
+      nombre: user.nombre,
+      apellido: user.apellido
     },
     caja: "2",
     productos: carritoConTotal,
     total: sumatoriaTotal,
     descuento: ObtenerDescuento(), 
     totalEnTxt: NumerosALetras(totalTicket),
+    id: generarIdTicket(),
   }
 
 
@@ -85,7 +89,7 @@ export const  GenerarTicketUx = ({ catalogo }) => {
 
         <ContenedorBtns>
           <BtnGenericoRectangular txt = "Regresar" handleClick={() => handleRegresar()} />
-          <BtnGenericoRectangular txt = "Imprimir" handleClick={() => handleImprimir()} />
+          <BtnGenericoRectangular txt = "Imprimir" handleClick={() => handleImprimir(user)} />
         </ContenedorBtns>
       </ContedorTicket>
     </Contenedor100>

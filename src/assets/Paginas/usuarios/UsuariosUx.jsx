@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { BtnRedondo } from "../../ComponentesGenerales/btnRedondo";
+import { BtnRedondo } from "../../ComponentesGenerales/Genericos/btnRedondo";
 import { useNavigate } from "react-router";
-import { TxtGenerico } from "../../ComponentesGenerales/titulos";
+import { TxtGenerico } from "../../ComponentesGenerales/Genericos/titulos";
 import { FaEdit } from "react-icons/fa";
 import { ModalModificarUsuario } from "./ModalModificarUsuario";
 import { useState } from "react";

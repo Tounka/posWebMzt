@@ -137,6 +137,7 @@ export const inventariosDb = [
 ];
 export const productosBrutosDb = [
     {
+        id: 1,
         nombre: "Pestañas Postizas Clásicas",
         descripcion: "Pestañas postizas de estilo clásico para un look natural.",
         marca: "LashLux",
@@ -147,6 +148,7 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
     {
+        id: 2,
         nombre: "Pestañas de Seda",
         descripcion: "Pestañas de seda suave y ligera para un acabado natural.",
         marca: "SilkLash",
@@ -157,6 +159,7 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
     {
+        id: 3,
         nombre: "Pestañas de Colores",
         descripcion: "Pestañas postizas en colores vibrantes para un look divertido.",
         marca: "ColorLash",
@@ -167,6 +170,7 @@ export const productosBrutosDb = [
         icono: "MdOutlineColorLens",
     },
     {
+        id: 4,
         nombre: "Pestañas Magnéticas",
         descripcion: "Pestañas magnéticas fáciles de aplicar sin pegamento.",
         marca: "MagneticLash",
@@ -177,6 +181,7 @@ export const productosBrutosDb = [
         icono: "FaMagnet",
     },
     {
+        id: 5,
         nombre: "Pegamento para Pestañas",
         descripcion: "Pegamento de larga duración para pestañas postizas.",
         marca: "LashGrip",
@@ -187,6 +192,7 @@ export const productosBrutosDb = [
         icono: "FaSprayCan",
     },
     {
+        id: 6,
         nombre: "Rimel Volumizador",
         descripcion: "Rimel para dar volumen y longitud a tus pestañas.",
         marca: "VolumLash",
@@ -197,6 +203,7 @@ export const productosBrutosDb = [
         icono: "FaBrush",
     },
     {
+        id: 7,
         nombre: "Rimel Impermeable",
         descripcion: "Rimel resistente al agua para un look duradero.",
         marca: "AquaLash",
@@ -207,6 +214,7 @@ export const productosBrutosDb = [
         icono: "FaBrush",
     },
     {
+        id: 8,
         nombre: "Cepillo para Pestañas",
         descripcion: "Cepillo para separar y definir pestañas.",
         marca: "LashTool",
@@ -217,6 +225,7 @@ export const productosBrutosDb = [
         icono: "MdOutlineBrush",
     },
     {
+        id: 9,
         nombre: "Curvador de Pestañas",
         descripcion: "Curvador profesional para un look impactante.",
         marca: "CurlPro",
@@ -227,6 +236,7 @@ export const productosBrutosDb = [
         icono: "FaAngleDoubleUp",
     },
     {
+        id: 10,
         nombre: "Kit de Extensión de Pestañas",
         descripcion: "Kit completo para extensiones de pestañas en casa.",
         marca: "LashKit",
@@ -237,6 +247,7 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
     {
+        id: 11,
         nombre: "Serum para Crecimiento de Pestañas",
         descripcion: "Serum fortalecedor para pestañas más largas y gruesas.",
         marca: "LashGrow",
@@ -247,6 +258,7 @@ export const productosBrutosDb = [
         icono: "FaEyeDropper",
     },
     {
+        id: 12,
         nombre: "Toallitas Desmaquillantes",
         descripcion: "Toallitas suaves para desmaquillar pestañas y ojos.",
         marca: "LashWipe",
@@ -257,6 +269,7 @@ export const productosBrutosDb = [
         icono: "MdOutlineSpa",
     },
     {
+        id: 13,
         nombre: "Tinte para Pestañas",
         descripcion: "Tinte duradero para pestañas y cejas.",
         marca: "LashTint",
@@ -267,6 +280,7 @@ export const productosBrutosDb = [
         icono: "IoColorPaletteOutline",
     },
     {
+        id: 14,
         nombre: "Pestañas de Cola de Sirena",
         descripcion: "Pestañas postizas con diseño de cola de sirena.",
         marca: "MermaidLash",
@@ -277,6 +291,7 @@ export const productosBrutosDb = [
         icono: "GiSparkles",
     },
     {
+        id: 15,
         nombre: "Pestañas de Diamantes",
         descripcion: "Pestañas postizas con detalles de diamantes.",
         marca: "DiamondLash",
@@ -287,6 +302,7 @@ export const productosBrutosDb = [
         icono: "GiSparkles",
     },
     {
+        id: 16,
         nombre: "Pestañas de Fantasía",
         descripcion: "Pestañas postizas para looks extravagantes.",
         marca: "FantasyLash",
@@ -297,6 +313,7 @@ export const productosBrutosDb = [
         icono: "GiSparkles",
     },
     {
+        id: 17,
         nombre: "Pestañas Naturales",
         descripcion: "Pestañas postizas con un acabado natural.",
         marca: "NaturalLash",
@@ -307,6 +324,7 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
     {
+        id: 18,
         nombre: "Pestañas de Seda con Brillo",
         descripcion: "Pestañas de seda con un toque de brillo.",
         marca: "ShinyLash",
@@ -317,6 +335,7 @@ export const productosBrutosDb = [
         icono: "GiSparkles",
     },
     {
+        id: 19,
         nombre: "Pestañas de Gato",
         descripcion: "Pestañas postizas con diseño de gato.",
         marca: "CatLash",
@@ -327,6 +346,7 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
     {
+        id: 20,
         nombre: "Pestañas de Mariposa",
         descripcion: "Pestañas postizas con diseño de mariposa.",
         marca: "ButterflyLash",
@@ -351,7 +371,7 @@ export const tratarProductos = (productosBrutos) =>{
 }
 export const productos = tratarProductos(productosBrutosDb);
 
-export const convertirProductos = (productos) => {
+ const convertirProductos = (productos) => {
     const categoriasMap = new Map();
     
     productos.forEach((producto, index) => {
@@ -360,9 +380,9 @@ export const convertirProductos = (productos) => {
         }
         
         categoriasMap.get(producto.categoria).push({
-            id: index + 1, // Genera un ID basado en la posición en la lista
+            id: producto.id, // Genera un ID basado en la posición en la lista
             nombre: producto.nombre,
-            icono: producto.icono, // Mantiene la referencia del icono
+            icono: producto.icono, 
             costo: producto.costo,
             precio: producto.precio
         });

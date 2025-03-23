@@ -1,5 +1,5 @@
 
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { ReporteInventariosUx } from "./ReporteInventariosUx";
 
 export const ReporteInventarios = () => {

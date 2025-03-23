@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useContextoInventarios } from "../../../../Contextos/ContextoInventarios";
-import { ContenedorGenerico, ContenedorItemProducto } from "../../../../ComponentesGenerales/contendores";
-import { TxtGenerico } from "../../../../ComponentesGenerales/titulos";
+import { ContenedorGenerico, ContenedorItemProducto } from "../../../../ComponentesGenerales/Genericos/contendores";
+import { TxtGenerico } from "../../../../ComponentesGenerales/Genericos/titulos";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import styled from "styled-components";
-import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
 import { PiHandSoapBold } from "react-icons/pi";
 
 const ControlUnidadesStyled = styled.div`

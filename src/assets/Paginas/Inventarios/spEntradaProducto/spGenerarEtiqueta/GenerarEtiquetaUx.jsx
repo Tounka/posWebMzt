@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
 import { useContextoInventarios } from "../../../../Contextos/ContextoInventarios";
-import { TxtGenerico } from "../../../../ComponentesGenerales/titulos";
+import { TxtGenerico } from "../../../../ComponentesGenerales/Genericos/titulos";
 import { formatearNumeroCeros } from "../../../../Fn/utilidades/Agregar0";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { BtnGenericoRectangular } from "../../../../ComponentesGenerales/BtnsGenericos";
+import { BtnGenericoRectangular } from "../../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { EtiquetaAImprimir } from "../../../../ComponentesGenerales/Ticket/EtiquetaProducto";
 import { ModalImprimirEtiquetas } from "../Componentes/ModalImprimirEtiquetas";
 

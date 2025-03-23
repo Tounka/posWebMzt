@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useContextoPaginaVenta } from "../ContextoVenta";
-import { TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 
 
 const ContenedorDescuentoStyled = styled.div`

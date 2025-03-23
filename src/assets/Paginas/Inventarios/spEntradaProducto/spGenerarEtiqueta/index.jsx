@@ -1,5 +1,5 @@
 
-import { Contenedor100 } from "../../../../ComponentesGenerales/layouts";
+import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
 
 import { useContextoInventarios } from "../../../../Contextos/ContextoInventarios";
 import { GenerarEtiquetaUx } from "./GenerarEtiquetaUx";

@@ -1,9 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validateContraseña, validateCorreo } from "../../validaciones"; // Asegúrate de tener validateCorreo en tus validaciones
 import styled from "styled-components";
-import { FieldStyledLabelInside } from "../../ComponentesGenerales/inputs";
-import { TxtSinEtiquetas } from "../../ComponentesGenerales/titulos";
-import { BtnGenerico } from "../../ComponentesGenerales/inputs";
+import { FieldStyledLabelInside } from "../../ComponentesGenerales/Genericos/inputs";
+import { TxtSinEtiquetas } from "../../ComponentesGenerales/Genericos/titulos";
+import { BtnGenerico } from "../../ComponentesGenerales/Genericos/inputs";
 import * as yup from "yup";
 import { useAuth } from "../../Contextos/ContextoAuth";
 import { useContext, useEffect } from "react";

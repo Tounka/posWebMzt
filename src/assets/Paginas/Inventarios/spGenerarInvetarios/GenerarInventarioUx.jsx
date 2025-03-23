@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Contenedor100 } from "../../../ComponentesGenerales/layouts";
-import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/titulos";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
+import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { ItemInventario } from "../Componentes/ItemGenerarInventario";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 import { Form } from "formik";

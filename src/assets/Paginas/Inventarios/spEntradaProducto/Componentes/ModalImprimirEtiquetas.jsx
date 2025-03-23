@@ -4,7 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import JSZip from "jszip";  // Importamos la librería JSZip
 import { ModalGenerico } from "../../../../ComponentesGenerales/Modal";
-import { BtnGenericoRectangular } from "../../../../ComponentesGenerales/BtnsGenericos";
+import { BtnGenericoRectangular } from "../../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { useContextoInventarios } from "../../../../Contextos/ContextoInventarios";
 import { EtiquetaAImprimir } from "../../../../ComponentesGenerales/Ticket/EtiquetaProducto";
 import { formatearNumeroCeros } from "../../../../Fn/utilidades/Agregar0";
