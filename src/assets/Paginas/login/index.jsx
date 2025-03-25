@@ -1,19 +1,44 @@
-import { useEffect } from "react";
-import { Contenedor100vdh } from "../../ComponentesGenerales/Genericos/layouts"
-import { LoginUx } from "./loginUx"
+import { useEffect, useState } from "react";
+import { Contenedor100vdh } from "../../ComponentesGenerales/Genericos/layouts";
+import { LoginUx } from "./loginUx";
 import { useNavigate } from "react-router";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
-export const Login = () =>{
-    const {user} = useContextoGeneral();
+import { BtnCofiguracion, ModalConfiguracion } from "./BtnConfiguracion";
+
+export const Login = () => {
+    const { user, setLocalData } = useContextoGeneral();
+    const [boolModalConfig, setBoolModalConfig] = useState(false);
     const Navigate = useNavigate();
-    useEffect(() =>{
-        if(user){
-            Navigate("/")
+
+    const handleClose = () => {
+        setBoolModalConfig(false);
+    };
+
+    // Verifica la configuración inicial en localStorage
+    useEffect(() => {
+        const savedCaja = Number(localStorage.getItem("cajaSeleccionada"));
+        if (!isNaN(savedCaja) && savedCaja > 0) {
+            setLocalData({
+                ubicacion: "Ubicacion del local",
+                sucursal: "Sucursal X",
+                id: 1,
+                cajaId: savedCaja,
+            });
         }
-    },[])
-    return(
+    }, [setLocalData]);
+
+    // Redirige si el usuario está autenticado
+    useEffect(() => {
+        if (user) {
+            Navigate("/venta");
+        }
+    }, [user, Navigate]);
+
+    return (
         <Contenedor100vdh>
             <LoginUx />
-        </ Contenedor100vdh>
-    )
-}
+            <BtnCofiguracion setBoolModalConfig={setBoolModalConfig} />
+            <ModalConfiguracion onClose={handleClose} isOpen={boolModalConfig} />
+        </Contenedor100vdh>
+    );
+};

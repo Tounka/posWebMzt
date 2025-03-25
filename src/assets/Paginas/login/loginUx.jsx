@@ -1,5 +1,5 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { validateContraseña, validateCorreo } from "../../validaciones"; // Asegúrate de tener validateCorreo en tus validaciones
+import { Formik, Form, ErrorMessage } from "formik";
+import { validateContraseña, validateCorreo } from "../../validaciones"; 
 import styled from "styled-components";
 import { FieldStyledLabelInside } from "../../ComponentesGenerales/Genericos/inputs";
 import { TxtSinEtiquetas } from "../../ComponentesGenerales/Genericos/titulos";
@@ -9,6 +9,7 @@ import { useAuth } from "../../Contextos/ContextoAuth";
 import { useContext, useEffect } from "react";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { useNavigate } from "react-router";
+
 const ContenedoForm = styled(Form)`
     width: 500px;
     height: 350px;
@@ -30,27 +31,32 @@ const ContenedorField = styled.div`
 `;
 
 export const LoginUx = () => {
-  const {login} = useAuth();
-   
-  const {user} = useContextoGeneral();
+  const { login } = useAuth();
+  const { user, localData } = useContextoGeneral();
   const navigate = useNavigate();
-  useEffect(() =>{
-    if(user){
-      navigate("/venta")
+
+  useEffect(() => {
+    if (user) {
+      navigate("/venta");
     }
-  },[user])
+  }, [user]);
 
   const validationSchema = yup.object({
-    correo: validateCorreo, 
+    correo: validateCorreo,
     contraseña: validateContraseña,
   });
-  const handleSubmit = (values)=>{
+
+  const handleSubmit = (values) => {
+    if (!localData?.cajaId) {
+      alert("Es necesario agregar una caja antes de continuar.");
+      return;
+    }
     login(values);
-  }
-  
+  };
+
   return (
     <Formik
-      initialValues={{ correo: "", contraseña: "" }} // Cambiado a correo
+      initialValues={{ correo: "", contraseña: "" }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
         console.log("Datos enviados:", values);
@@ -61,7 +67,7 @@ export const LoginUx = () => {
         <ContenedoForm onSubmit={handleSubmit} className="form-container">
           <TxtSinEtiquetas txt="POS" />
           <ContenedorField>
-            <FieldStyledLabelInside placeholder="Ingresa tu correo electrónico" type="email" name="correo" /> {/* Cambiado a correo */}
+            <FieldStyledLabelInside placeholder="Ingresa tu correo electrónico" type="email" name="correo" />
             <ErrorMessage name="correo" component="div" className="error" />
           </ContenedorField>
 
@@ -69,6 +75,7 @@ export const LoginUx = () => {
             <FieldStyledLabelInside placeholder="Ingresa tu contraseña" type="password" name="contraseña" />
             <ErrorMessage name="contraseña" component="div" className="error" />
           </ContenedorField>
+
           <BtnGenerico type="submit">Ingresar</BtnGenerico>
         </ContenedoForm>
       )}

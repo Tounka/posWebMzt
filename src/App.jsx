@@ -7,8 +7,9 @@ import { MenuLateral } from './assets/ComponentesGenerales/MenuLateral/MenuLater
 
 import { routesConfig } from './routes.jsx';
 import { UpdatePWA } from './assets/ComponentesGenerales/DetectarActualizacion.jsx';
+import { useContextoGeneral } from './assets/Contextos/ContextoGeneral.jsx';
 function App() {
-  const [user, setUser] = useState(true);
+  const {user} = useContextoGeneral();
 
   return (
     <LayoutApp user={user}>

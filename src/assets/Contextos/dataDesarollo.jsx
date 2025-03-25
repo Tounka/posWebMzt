@@ -413,6 +413,7 @@ export const localDataIn = {
     ubicacion: "Ubicacion del local",
     sucursal: "Sucursal X",
     id: 1,
+    cajaId : 1,
 
 }
 
