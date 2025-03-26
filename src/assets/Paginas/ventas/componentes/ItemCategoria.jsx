@@ -9,8 +9,8 @@ import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { useContextoPaginaVenta } from "../ContextoVenta";
 
  const ContenedorItemCategoria = styled.button`
-    height: 100px;
-    width: 120px;
+    height: 90px;
+    width: 100px;
     display: grid;
     padding: 0px 0;
     border-radius: 20px;
@@ -35,11 +35,11 @@ export const ItemCategoria = ({icono=<PiHandSoapBold />,txt, catalogo, setCatalo
 
     return(
         <ContenedorItemCategoria onClick={() => handleClick()}>
-            <ContenedorGenerico width= "120px" align= "end" >
+            <ContenedorGenerico width= "100px" align= "end" >
                 <TxtGenerico color="var(--colorPrincipal)" line= ".8"  size="58px" > {icono} </TxtGenerico>
             </ContenedorGenerico>
 
-            <ContenedorGenerico width= "120px" >
+            <ContenedorGenerico width= "100px" >
                 <TxtGenerico size="14px" color="var(--colorPrincipal)" line= ".8"> {txt} </TxtGenerico>
             </ContenedorGenerico>
 

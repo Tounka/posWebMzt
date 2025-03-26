@@ -16,7 +16,7 @@ export const SeccionCategoria = styled(Contenedor100)`
         flex-direction: column;
         align-items: start;
         gap: 10px;
-        padding: 20px;
+        padding: 10px;
 
         
         max-width: auto;
@@ -35,7 +35,7 @@ export const ContenedorCategoria = styled(Contenedor100)`
         gap: 10px;
         justify-content: start;
         box-sizing: border-box;
-        width: calc(100dvw - var(--anchoMenuLateral) - 390px ); 
+        
        
 `
 export const SeccionItems = styled(Contenedor100)`

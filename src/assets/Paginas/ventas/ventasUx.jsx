@@ -4,7 +4,7 @@ import { ItemCategoria, ItemProducto } from "./componentes/ItemCategoria";
 import { Carrito } from "./componentes/Carrito";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { useState } from "react";
-import { ChecadorDeBarras } from "./componentes/ChecadorDeBarras";
+import { ChecadorDeBarras, ChecadorDeBarrasIntegrado } from "./componentes/ChecadorDeBarras";
 import { useContextoPaginaVenta } from "./ContextoVenta";
 
 export const VentasUx = ({ catalogo }) => {
@@ -49,8 +49,8 @@ export const VentasUx = ({ catalogo }) => {
     <ContenedorVentasStyled>
 
       <SeccionCategoria>
-        <TxtGenerico size="20px" color="var(--colorPrincipal)">Categorias</TxtGenerico>
-
+        <ChecadorDeBarrasIntegrado onProductoSeleccionado ={handleCodigoDetectado} />
+     
         <ContenedorCategoria>
           {catalogo?.map((categoria, index) => (
 
@@ -73,9 +73,6 @@ export const VentasUx = ({ catalogo }) => {
 
         </ContenedorItems>
       </SeccionItems>
-
-
-      <ChecadorDeBarras onCodigoDetectado={handleCodigoDetectado} />
 
       <SeccionCarrito>
         <H2Pos >Carrito</H2Pos>
