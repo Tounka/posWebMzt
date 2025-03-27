@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { categoriasProductos, inventariosDb, localDataIn, productos, ticketsDb, userData } from "./dataDesarollo.jsx";
+import { CategoriasDb, categoriasProductos, inventariosDb, localDataIn, productos, ticketsDb, userData } from "./dataDesarollo.jsx";
 import { useLocation, useNavigate } from "react-router";
 
 const ContextoGeneral = createContext();
@@ -15,6 +15,7 @@ export const ContextoGeneralProvider = ({ children }) => {
     });
     const [localData, setLocalData] = useState()
     const [catalogo, setCatalogo] = useState(categoriasProductos); 
+    const [categorias, setCategorias] = useState(CategoriasDb);
     const [catalogoV2, setCatalogov2] = useState(productos)
     const [tickets, setTickets ]= useState(ticketsDb);
     const [inventarios, setInventarios ]= useState(inventariosDb);
@@ -24,7 +25,7 @@ export const ContextoGeneralProvider = ({ children }) => {
 
     
     return (
-        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios,setRangoFechas,rangoFechas, catalogoV2, setLocalData }}>
+        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios,setRangoFechas,rangoFechas, catalogoV2, setLocalData, categorias }}>
             {children}
         </ContextoGeneral.Provider>
     );

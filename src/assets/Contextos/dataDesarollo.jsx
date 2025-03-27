@@ -615,3 +615,10 @@ export const usuariosData  = [
     { id: 19, nombre: "Manuel", apellido: "Jiménez", correo: "manuel@example.com", contraseña: "pass000", fechaIngreso: "2024-07-04", rol: "Admin", Fn: "Editar" },
     { id: 20, nombre: "Raquel", apellido: "Navarro", correo: "raquel@example.com", contraseña: "000pass", fechaIngreso: "2024-08-19", rol: "Usuario", Fn: "Eliminar" }
 ];
+
+export const CategoriasDb = [
+    { id: 1, nombre: "Pestañas", parent_id: 2, icono: "icono1" },
+    { id: 2, nombre: "Maquillaje", parent_id: null, icono: "icono2" },
+    { id: 3, nombre: "Labiales", parent_id: 2, icono: "icono3" }
+  ]
+  

@@ -8,6 +8,8 @@ import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { ModalModificarProductos } from "../Componentes/ModalModificarProducto";
 import { useState } from "react";
+import { BiCategoryAlt } from "react-icons/bi";
+import { ModalAgregarCategoria } from "../Componentes/ModalAgregarCategoria";
 
 
 
@@ -38,7 +40,8 @@ const PaperStyled = styled(Paper)`
 `
 const ContenedorBtn = styled.div`
     position: absolute;
-    right: 0;
+    right: ${({ position }) =>  position || 0};
+
     top: 0;
 
     height: 100%;
@@ -56,11 +59,15 @@ const ContenedorTabla = styled.div`
 export const ProductosUx = () => {
     const [productoSeleccionado, setProductoSeleccionado] = useState();
     const [boolModalProductoSeleccionado, setBoolModalProductoSeleccionado] = useState(false);
+    const [boolModalAgregarCategoria, setBoolModalAgregarCategoria] = useState(false);
 
     const handleClick = (producto) =>{
         console.log(producto)
         setProductoSeleccionado(producto);
         setBoolModalProductoSeleccionado(true);
+    }
+    const handleClickBtnAgregarCategoria =() => {
+        setBoolModalAgregarCategoria(true)
     }
     
     const Navigate = useNavigate();
@@ -113,6 +120,9 @@ export const ProductosUx = () => {
                     <ContenedorBtn>
                         <BtnRedondo diametro="40px" bgColor="var(--colorPrincipal)" handleClick={() => handleClickBtnAgregar()} />
                     </ContenedorBtn>
+                    <ContenedorBtn position={"50px"}>
+                        <BtnRedondo diametro="40px" bgColor="var(--colorPrincipal)" icon={<BiCategoryAlt />} handleClick={() => handleClickBtnAgregarCategoria()} />
+                    </ContenedorBtn>
                 </ContenedorTop>
 
                 <PaperStyled sx={{ height: "90%", width: '100%' }}>
@@ -132,6 +142,7 @@ export const ProductosUx = () => {
             </ContenedorTabla>
 
             <ModalModificarProductos productoSeleccionado={productoSeleccionado} isOpen={boolModalProductoSeleccionado} onClose={() => setBoolModalProductoSeleccionado(false)} />
+            <ModalAgregarCategoria isOpen={boolModalAgregarCategoria} onClose={() => setBoolModalAgregarCategoria(false)} />
         </ContenedorPaginaUsuarios>
     )
 }

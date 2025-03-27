@@ -33,7 +33,7 @@ export const ReporteVentasUx = () => {
 
             {rangoFechas != null ? (
                 <>
-                    <SeccionTicketPromedio tickets={tickets} />
+                    {/* `<SeccionTicketPromedio tickets={tickets} />` */}
                     <SeccionReporteProducto inventario={inventarios[0]} />
                     <ResumenVentas inventario={inventarios[0]} />
                     <ResumenVentasPorDia inventario={inventarios[0]} />

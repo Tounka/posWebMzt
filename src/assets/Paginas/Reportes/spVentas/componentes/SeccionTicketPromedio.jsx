@@ -93,7 +93,7 @@ const TxtSeccion = styled(TxtGenerico)`
 export const SeccionTicketPromedio = ({tickets}) => {
     console.log(tickets)
     const ObtenerTicketsTotales = tickets.reduce((acc, dia) => {
-        return acc + dia.tickets.length;
+        return acc + dia.tickets?.length;
     }, 0);
     const ObtenerTicketTotalPrecio = tickets.reduce((acumuladorTotal, dia) => {
         const totalPorDia = dia.tickets.reduce((acumuladorDia, ticket) => {
