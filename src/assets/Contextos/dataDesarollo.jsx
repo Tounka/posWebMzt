@@ -621,4 +621,6 @@ export const CategoriasDb = [
     { id: 2, nombre: "Maquillaje", parent_id: null, icono: "icono2" },
     { id: 3, nombre: "Labiales", parent_id: 2, icono: "icono3" }
   ]
+
+export const CajasDb =[]
   

@@ -13,7 +13,10 @@ export const ContextoGeneralProvider = ({ children }) => {
         correo: "luis@gmail.com",
         contraseña: "luis1234",
     });
-    const [localData, setLocalData] = useState()
+    const [localData, setLocalData] = useState({    ubicacion: "Ubicacion del local",
+        sucursal: "Sucursal X",
+        id: 1,
+        cajaId : 1,})
     const [catalogo, setCatalogo] = useState(categoriasProductos); 
     const [categorias, setCategorias] = useState(CategoriasDb);
     const [catalogoV2, setCatalogov2] = useState(productos)

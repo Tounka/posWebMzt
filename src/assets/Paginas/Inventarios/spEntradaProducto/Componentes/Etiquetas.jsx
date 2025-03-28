@@ -180,7 +180,6 @@ const TotalEtiqueta = ({ total = 0, handleClick }) => {
 }
 
 export const Etiquetas = () => {
-    const { carrito } = useContextoPaginaVenta();
     const {etiquetasAGenerar, setEtiquetasAGenerar} = useContextoInventarios();
     const Navigate = useNavigate();
  
