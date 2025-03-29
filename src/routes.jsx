@@ -19,11 +19,12 @@ import { BsCashStack } from "react-icons/bs";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { FiFileText } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
-import { RiLogoutCircleLine } from "react-icons/ri";
+import { RiAdminFill, RiLogoutCircleLine } from "react-icons/ri";
 import { Logout } from './assets/Paginas/login/logout.JSX';
 import { GenerarEtiqueta } from './assets/Paginas/Inventarios/spEntradaProducto/spGenerarEtiqueta/index.jsx';
 
 import { GrConfigure } from "react-icons/gr";
+import { MenuGerente } from './assets/Paginas/MenuGerente/MenuGerenteUx.jsx';
 
 
 export const routesConfig = [
@@ -130,6 +131,13 @@ export const routesConfig = [
     requiredPermission: [],
   },
 
+  {
+    path: '/menu-gerente',
+    element: <MenuGerente />,
+    isMenuPath: { icon: <RiAdminFill />, txt: "Menu Gerente", to: "/menu-gerente" },
+    name: 'Auth',
+    requiredPermission: ['administrador','gerente' ],
+  },
 
   {
     path: '/logout',
@@ -138,6 +146,7 @@ export const routesConfig = [
     name: 'Auth',
     requiredPermission: ['administrador', 'empleado'],
   },
+
 
 
 ];

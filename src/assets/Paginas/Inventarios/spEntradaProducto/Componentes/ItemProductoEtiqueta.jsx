@@ -72,7 +72,7 @@ export const ItemProductoEtiqueta = ({ producto }) => {
     const { etiquetasAGenerar, setEtiquetasAGenerar } = useContextoInventarios();
     const [unidades, setUnidades] = useState(0);
 
-    // Use Effect to sync the unidades with the etiquetasAGenerar state
+   
     useEffect(() => {
         const productoEnEtiquetas = etiquetasAGenerar.find(item => item.id === producto.id);
         setUnidades(productoEnEtiquetas ? etiquetasAGenerar.filter(item => item.id === producto.id).length : 0);

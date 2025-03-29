@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { ModalGenerico } from "../../ComponentesGenerales/Modal"
-import { TxtGenerico } from "../../ComponentesGenerales/Genericos/titulos"
-import { InputSelect } from "../../ComponentesGenerales/Formulario/InputGenerico"
+import { ModalGenerico } from "../../../ComponentesGenerales/Modal"
+import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos"
+import { InputSelect } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
+import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 
 
 const BtnConfiguracionStyled = styled.div`

@@ -1,5 +1,5 @@
 import { Formik, Form, ErrorMessage } from "formik";
-import { validateContraseña, validateCorreo } from "../../validaciones"; 
+import { validateContraseña, validateCorreo } from "../../validaciones";
 import styled from "styled-components";
 import { FieldStyledLabelInside } from "../../ComponentesGenerales/Genericos/inputs";
 import { TxtSinEtiquetas } from "../../ComponentesGenerales/Genericos/titulos";
@@ -9,6 +9,7 @@ import { useAuth } from "../../Contextos/ContextoAuth";
 import { useContext, useEffect } from "react";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { useNavigate } from "react-router";
+import { InformacionOperacion } from "./componentes/InformacionOperacion";
 
 const ContenedoForm = styled(Form)`
     width: 500px;
@@ -30,9 +31,11 @@ const ContenedorField = styled.div`
   width: 100%;
 `;
 
+
 export const LoginUx = () => {
   const { login } = useAuth();
   const { user, localData } = useContextoGeneral();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,20 +67,25 @@ export const LoginUx = () => {
       }}
     >
       {({ handleSubmit }) => (
-        <ContenedoForm onSubmit={handleSubmit} className="form-container">
-          <TxtSinEtiquetas txt="POS" />
-          <ContenedorField>
-            <FieldStyledLabelInside placeholder="Ingresa tu correo electrónico" type="email" name="correo" />
-            <ErrorMessage name="correo" component="div" className="error" />
-          </ContenedorField>
+       
+          <ContenedoForm onSubmit={handleSubmit} className="form-container">
+            <InformacionOperacion />
 
-          <ContenedorField>
-            <FieldStyledLabelInside placeholder="Ingresa tu contraseña" type="password" name="contraseña" />
-            <ErrorMessage name="contraseña" component="div" className="error" />
-          </ContenedorField>
 
-          <BtnGenerico type="submit">Ingresar</BtnGenerico>
-        </ContenedoForm>
+            <ContenedorField>
+              <FieldStyledLabelInside placeholder="Ingresa tu correo electrónico" type="email" name="correo" />
+              <ErrorMessage name="correo" component="div" className="error" />
+            </ContenedorField>
+
+            <ContenedorField>
+              <FieldStyledLabelInside placeholder="Ingresa tu contraseña" type="password" name="contraseña" />
+              <ErrorMessage name="contraseña" component="div" className="error" />
+            </ContenedorField>
+
+            <BtnGenerico type="submit">Ingresar</BtnGenerico>
+          </ContenedoForm>
+
+    
       )}
     </Formik>
   );

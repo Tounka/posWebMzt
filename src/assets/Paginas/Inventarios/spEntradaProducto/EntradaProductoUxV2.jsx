@@ -32,7 +32,7 @@ export const EntradaProductoUxV2 = ({ catalogo }) => {
           return [...prevCarrito, { ...objetoEncontrado, cantidad: 1 }];
         }
       });
-      console.log(etiquetasAGenerar)
+      
     }
   };
   return (

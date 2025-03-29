@@ -1,18 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { CategoriasDb, categoriasProductos, inventariosDb, localDataIn, productos, ticketsDb, userData } from "./dataDesarollo.jsx";
+import { CajasDb, CategoriasDb, categoriasProductos, DiasOperacionDb, inventariosDb, localDataIn, productos, ticketsDb, userData } from "./dataDesarollo.jsx";
 import { useLocation, useNavigate } from "react-router";
 
 const ContextoGeneral = createContext();
 
 export const ContextoGeneralProvider = ({ children }) => {
     const [ubicacionPagina, setUbicacionPagina] = useState("/");
-    const [user, setUser] = useState( {
+    const [user, setUser] = useState({
         nombre: "ramon",
         apellido: "marquez",
         rol: "administrador",
         correo: "luis@gmail.com",
         contraseña: "luis1234",
-    });
+    } );
     const [localData, setLocalData] = useState({    ubicacion: "Ubicacion del local",
         sucursal: "Sucursal X",
         id: 1,
@@ -23,12 +23,18 @@ export const ContextoGeneralProvider = ({ children }) => {
     const [tickets, setTickets ]= useState(ticketsDb);
     const [inventarios, setInventarios ]= useState(inventariosDb);
     const [rangoFechas, setRangoFechas]  = useState(null);
-
-
+   
+    const [cajaSelecionada,setCajaSelecionada] = useState(    {
+        id: 1,
+        fecha: new Date("2025-02-29T08:00:00"),
+        tickets: [],
+        aperturada: true,
+    })
+    const [diaEnOperacion, setDiasEnOperacion] = useState(DiasOperacionDb)
 
     
     return (
-        <ContextoGeneral.Provider value={{ user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios,setRangoFechas,rangoFechas, catalogoV2, setLocalData, categorias }}>
+        <ContextoGeneral.Provider value={{ diaEnOperacion,user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios,setRangoFechas,rangoFechas, catalogoV2, setLocalData, categorias,cajaSelecionada }}>
             {children}
         </ContextoGeneral.Provider>
     );

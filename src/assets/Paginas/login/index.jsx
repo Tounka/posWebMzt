@@ -3,7 +3,7 @@ import { Contenedor100vdh } from "../../ComponentesGenerales/Genericos/layouts";
 import { LoginUx } from "./loginUx";
 import { useNavigate } from "react-router";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
-import { BtnCofiguracion, ModalConfiguracion } from "./BtnConfiguracion";
+import { BtnCofiguracion, ModalConfiguracion } from "./componentes/BtnConfiguracion";
 
 export const Login = () => {
     const { user, setLocalData } = useContextoGeneral();
@@ -37,6 +37,7 @@ export const Login = () => {
     return (
         <Contenedor100vdh>
             <LoginUx />
+            
             <BtnCofiguracion setBoolModalConfig={setBoolModalConfig} />
             <ModalConfiguracion onClose={handleClose} isOpen={boolModalConfig} />
         </Contenedor100vdh>

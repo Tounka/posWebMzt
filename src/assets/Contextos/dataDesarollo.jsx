@@ -6,7 +6,7 @@ import { iconos, iconosUtils } from "../img/uitls/iconos";
 
 export const inventariosDb = [
     {
-        fecha: new Date("2023-10-01T08:00:00"), // Fecha con hora (8:00 AM)
+        fecha: new Date("2025-02-15T08:00:00"), // Fecha con hora (8:00 AM)
         categorias: [
             {
                 categoria: "Bebidas",
@@ -49,7 +49,7 @@ export const inventariosDb = [
         ]
     },
     {
-        fecha: new Date("2023-10-05T14:30:00"), // Fecha con hora (2:30 PM)
+        fecha: new Date("2025-02-14T14:30:00"), // Fecha con hora (2:30 PM)
         categorias: [
             {
                 categoria: "Bebidas",
@@ -92,7 +92,7 @@ export const inventariosDb = [
         ]
     },
     {
-        fecha: new Date("2023-10-10T18:45:00"), // Fecha con hora (6:45 PM)
+        fecha: new Date("2025-02-13T18:45:00"), // Fecha con hora (6:45 PM)
         categorias: [
             {
                 categoria: "Bebidas",
@@ -357,41 +357,26 @@ export const productosBrutosDb = [
         icono: "GiEyelashes",
     },
 ];
+export const CajasDb = [
+    {
+        id: 1,
+        fecha: new Date("2025-02-29T08:00:00"),
+        tickets: [],
+        aperturada: true,
+    },
+    {
+        id: 2,
+        fecha: "",
+        tickets: [],
+        aperturada: false,
+    },
+];
+export const DiasOperacionDb = 
+    {
+        fecha: new Date("2025-02-29T08:00:00"),
+        diaAbierto: true,
+    }
 
-export const tratarProductos = (productosBrutos) =>{
-
-    const ProductosTratados = productosBrutos.map((producto) => {
-        return {
-            ...producto, 
-            icono: iconos[producto.icono], // Cambia la propiedad `icono` al valor deseado
-        };
-    });
-
-    return(ProductosTratados);
-}
-export const productos = tratarProductos(productosBrutosDb);
-
- const convertirProductos = (productos) => {
-    const categoriasMap = new Map();
-    
-    productos.forEach((producto, index) => {
-        if (!categoriasMap.has(producto.categoria)) {
-            categoriasMap.set(producto.categoria, []);
-        }
-        
-        categoriasMap.get(producto.categoria).push({
-            id: producto.id, // Genera un ID basado en la posición en la lista
-            nombre: producto.nombre,
-            icono: producto.icono, 
-            costo: producto.costo,
-            precio: producto.precio
-        });
-    });
-    
-    return Array.from(categoriasMap, ([categoria, items]) => ({ categoria, items }));
-};
-
-export const categoriasProductos = convertirProductos(productos) //  Se construye a apartir de productos 
 
 export const userData = [
     {
@@ -413,7 +398,7 @@ export const localDataIn = {
     ubicacion: "Ubicacion del local",
     sucursal: "Sucursal X",
     id: 1,
-    cajaId : 1,
+    cajaId: 1,
 
 }
 
@@ -590,10 +575,7 @@ export const ticketsDb = [
     }
 ];
 
-
-
-
-export const usuariosData  = [
+export const usuariosData = [
     { id: 1, nombre: "Juan", apellido: "Pérez", correo: "juan@example.com", contraseña: "123456", fechaIngreso: "2023-01-15", rol: "Admin", Fn: "Editar" },
     { id: 2, nombre: "María", apellido: "Gómez", correo: "maria@example.com", contraseña: "abcdef", fechaIngreso: "2023-02-10", rol: "Usuario", Fn: "Eliminar" },
     { id: 3, nombre: "Carlos", apellido: "López", correo: "carlos@example.com", contraseña: "qwerty", fechaIngreso: "2023-03-05", rol: "Usuario", Fn: "Editar" },
@@ -620,7 +602,44 @@ export const CategoriasDb = [
     { id: 1, nombre: "Pestañas", parent_id: 2, icono: "icono1" },
     { id: 2, nombre: "Maquillaje", parent_id: null, icono: "icono2" },
     { id: 3, nombre: "Labiales", parent_id: 2, icono: "icono3" }
-  ]
+]
 
-export const CajasDb =[]
-  
+
+
+
+
+
+export const tratarProductos = (productosBrutos) => {
+
+    const ProductosTratados = productosBrutos.map((producto) => {
+        return {
+            ...producto,
+            icono: iconos[producto.icono], // Cambia la propiedad `icono` al valor deseado
+        };
+    });
+
+    return (ProductosTratados);
+}
+export const productos = tratarProductos(productosBrutosDb);
+
+const convertirProductos = (productos) => {
+    const categoriasMap = new Map();
+
+    productos.forEach((producto, index) => {
+        if (!categoriasMap.has(producto.categoria)) {
+            categoriasMap.set(producto.categoria, []);
+        }
+
+        categoriasMap.get(producto.categoria).push({
+            id: producto.id, // Genera un ID basado en la posición en la lista
+            nombre: producto.nombre,
+            icono: producto.icono,
+            costo: producto.costo,
+            precio: producto.precio
+        });
+    });
+
+    return Array.from(categoriasMap, ([categoria, items]) => ({ categoria, items }));
+};
+
+export const categoriasProductos = convertirProductos(productos) //  Se construye a apartir de productos 
