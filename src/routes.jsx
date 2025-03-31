@@ -24,7 +24,8 @@ import { Logout } from './assets/Paginas/login/logout.JSX';
 import { GenerarEtiqueta } from './assets/Paginas/Inventarios/spEntradaProducto/spGenerarEtiqueta/index.jsx';
 
 import { GrConfigure } from "react-icons/gr";
-import { MenuGerente } from './assets/Paginas/MenuGerente/MenuGerenteUx.jsx';
+import { MenuGerente } from './assets/Paginas/MenuGerente/index.jsx';
+
 
 
 export const routesConfig = [
