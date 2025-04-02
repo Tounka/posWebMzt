@@ -361,7 +361,40 @@ export const CajasDb = [
     {
         id: 1,
         fecha: new Date("2025-02-29T08:00:00"),
-        tickets: [],
+        tickets: [{
+            id: "1742762547580-925",
+            fechaTransaccion: new Date("2025-02-12T13:45:00"),
+            usuario: {
+                nombre: "María",
+                apellido: "Gómez"
+            },
+            caja: "1",
+            productos: [
+                { nombre: "Café", cantidad: 3, precio: 20, costo: 8, total: 60, costoTotal: 24 },
+                { nombre: "Pastel", cantidad: 1, precio: 90, costo: 35, total: 90, costoTotal: 35 }
+            ],
+            total: 150,
+            totalEnTxt: NumerosALetras(150),
+            costoTotal: 59,
+            descuento: 15
+        },
+        {
+            id: "1742762547582-926",
+            fechaTransaccion: new Date("2025-02-13T10:15:00"),
+            usuario: {
+                nombre: "Carlos",
+                apellido: "López"
+            },
+            caja: "1",
+            productos: [
+                { nombre: "Refresco", cantidad: 2, precio: 25, costo: 10, total: 50, costoTotal: 20 },
+                { nombre: "Pizza", cantidad: 1, precio: 75, costo: 30, total: 75, costoTotal: 30 }
+            ],
+            total: 125,
+            totalEnTxt: NumerosALetras(125),
+            costoTotal: 50,
+            descuento: 5
+        }],
         aperturada: true,
     },
     {
@@ -373,7 +406,7 @@ export const CajasDb = [
 ];
 export const DiasOperacionDb = 
     {
-        fecha: new Date("2025-02-29T08:00:00"),
+        fecha: new Date(),
         diaAbierto: true,
     }
 

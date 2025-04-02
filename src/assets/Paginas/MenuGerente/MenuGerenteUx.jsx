@@ -29,13 +29,13 @@ export const MenuGerenteUx = () =>{
            <ContenedorTopMenuGerente>Menu Administrador</ContenedorTopMenuGerente>
 
            <ContenedorGrid>
-                <BtnMenuGerente txt="Arqueo" position={["1/2", "auto"]} />
-                <BtnMenuGerente txt="Retiro" position={["2/3", "auto"]} />
+                <BtnMenuGerente txt="Arqueo" position={["1/2", "auto"]} modalSeleccionado="arqueo" />
                 
-                <BtnMenuGerente txt="Aperturar Caja" position={["4/5", "3/4"]} />
-                <BtnMenuGerente txt="Cerrar Caja" position={["5/6", "3/4"]} />
-                <BtnMenuGerente txt="Aperturar Dia" position={["4/5", "4/5"]} />
-                <BtnMenuGerente txt="Cerrar Dia" position={["5/6", "4/5"]} />
+                
+                <BtnMenuGerente txt="Aperturar Caja" position={["4/5", "3/4"]} modalSeleccionado="aperturarCaja" />
+                <BtnMenuGerente txt="Cerrar Caja" position={["5/6", "3/4"]} modalSeleccionado="cerrarCaja" />
+                <BtnMenuGerente txt="Aperturar Dia" position={["4/5", "4/5"]} modalSeleccionado="aperturarDia" />
+                <BtnMenuGerente txt="Cerrar Dia" position={["5/6", "4/5"]} modalSeleccionado="cerrarDia"/>
            </ContenedorGrid>
         </ ContenedorMenuGerente>
     )

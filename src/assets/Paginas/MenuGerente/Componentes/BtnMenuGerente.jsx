@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { FaBox } from "react-icons/fa";
 import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
+import { useContextoMenuGerente } from "../../../Contextos/ContextoMenuGerente";
 
 const BtnMenuGerenteStyled = styled.div`
     height: 90%;
@@ -44,9 +45,14 @@ const ContenedorBtnMenuGerente = styled(Contenedor100)`
 
 `;
 
-export const BtnMenuGerente = ({ txt = "Herramienta", icono = <FaBox />, position = ["auto", "auto"]  }) => {
+export const BtnMenuGerente = ({ txt = "Herramienta", icono = <FaBox />, position = ["auto", "auto"], modalSeleccionado = "arqueo"  }) => {
+    const { setBoolModalAdministrador, setModalSeleccionado} = useContextoMenuGerente();
+    const handleClick = () =>{
+        setBoolModalAdministrador(true);
+        setModalSeleccionado(modalSeleccionado);
+    }
     return (
-        <ContenedorBtnMenuGerente colums={position[0]} rows={position[1]} >
+        <ContenedorBtnMenuGerente colums={position[0]} rows={position[1]} onClick={() => handleClick()} >
             <BtnMenuGerenteStyled>
                 <SpanIcono>{icono}</SpanIcono>
                 <TxtGenerico align="center" size="22px" >{txt}</TxtGenerico>
