@@ -1,4 +1,10 @@
-export const imprimirTicket = (datosTicket) =>{
-    console.log("imprimir ticket");
-    console.log(datosTicket);
-}
+import { useReactToPrint } from "react-to-print";
+
+// Fn/Imprimir.js
+export const imprimirTicket = (contentRef, onAfterPrint = () => {}) => {
+  return {
+    content: contentRef,
+    documentTitle: `Ticket${contentRef.current?.datosTicket?.fechaTransaccion || ""}`,
+    onAfterPrint: onAfterPrint
+  };
+};

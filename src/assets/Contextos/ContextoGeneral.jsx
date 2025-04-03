@@ -6,7 +6,7 @@ const ContextoGeneral = createContext();
 
 export const ContextoGeneralProvider = ({ children }) => {
     const [ubicacionPagina, setUbicacionPagina] = useState("/");
-    const [user, setUser] = useState({
+    const [user, setUser] = useState( {
         nombre: "ramon",
         apellido: "marquez",
         rol: "administrador",

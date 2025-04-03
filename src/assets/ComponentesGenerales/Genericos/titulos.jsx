@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from "react";
 const TxtSinEtiquetasStyled = styled.div`
     font-size: 32px;
     font-weight: bold;

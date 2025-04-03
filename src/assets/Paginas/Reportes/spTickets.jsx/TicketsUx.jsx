@@ -3,12 +3,13 @@ import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
 import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Modal } from "@mui/material";
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal";
 import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/BtnsGenericos";
 import { imprimirTicket } from "../../../Fn/Imprimir";
 import { ModalFiltrar } from "./ContenidoModalFiltrar";
+import { useReactToPrint } from "react-to-print";
 
 const ContenedorPagina = styled(Contenedor100)`
     display: flex;
@@ -51,11 +52,16 @@ export const TicketsUx = () => {
     const [ticketSeleccionado, setTicketSeleccionado] = useState();
     const [boolModalFiltrarTickets, setBoolModalFiltrarTickets] = useState(false);
 
+    const currentRef = useRef();
     useEffect(() => {
         // Actualizamos los tickets formateados al cargar los datos
         setTicketsFormateados(transformarTickets(tickets));
     }, [tickets]); // Dependiendo de 'tickets', se actualiza la lista de tickets
+    const handlePrint = useReactToPrint({
+        contentRef: currentRef,
+        documentTitle: `Ticket`,
 
+    });
     const handleClickTicket = (ticket) => {
         setTicketSeleccionado(ticket);
         setBoolModalTicket(true);
@@ -71,7 +77,7 @@ export const TicketsUx = () => {
             const fecha = new Date(ticket.fechaTransaccion); // Asegurar que es un objeto Date
             const fechaKey = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`; // Solo la fecha sin hora
             const horaMinuto = `${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, "0")}`; // Formato HH:MM
-    
+
             if (!acc[fechaKey]) {
                 acc[fechaKey] = [];
             }
@@ -79,17 +85,17 @@ export const TicketsUx = () => {
                 ...ticket,
                 fechaTransaccion: `${fechaKey} - ${horaMinuto}`, // Guardamos la hora aparte
             });
-    
+
             return acc;
         }, {});
-    
+
         return Object.keys(groupedTickets).map(fecha => ({
             fecha,
             tickets: groupedTickets[fecha],
         }));
     }
-    
-    
+
+
 
     return (
         <ContenedorPagina>
@@ -106,8 +112,8 @@ export const TicketsUx = () => {
 
                         <ContenedorTickets>
                             {dia.tickets.map((ticket) => (
-                                <ContenedorTicketStyled 
-                                    key={ ticket.id}  // Usamos ID o una combinación única
+                                <ContenedorTicketStyled
+                                    key={ticket.id}  // Usamos ID o una combinación única
                                     onClick={() => handleClickTicket(ticket)}
                                 >
                                     <Ticket datosTicket={ticket} />
@@ -120,9 +126,12 @@ export const TicketsUx = () => {
             <ModalGenerico isOpen={boolModalTicket} onClose={() => setBoolModalTicket(false)}>
                 {ticketSeleccionado ? (
                     <Contenedor100 gap="10px" direction="column">
-                        <Ticket datosTicket={ticketSeleccionado} />
+                        <div ref={currentRef}>
+                            <Ticket datosTicket={ticketSeleccionado} />
+
+                        </div>
                         <Contenedor100 gap="10px">
-                            <BtnGenericoRectangular txt="Re-imprimir" handleClick={() => imprimirTicket(ticketSeleccionado)} />
+                            <BtnGenericoRectangular txt="Re-imprimir" handleClick={handlePrint} />
                         </Contenedor100>
                     </Contenedor100>
                 ) : null}
