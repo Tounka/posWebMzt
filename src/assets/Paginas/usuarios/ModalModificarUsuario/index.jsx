@@ -8,7 +8,9 @@ import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal"
 import { validateApellido, validateContraseña, validateCorreo, validateNombre, validateRol } from "../../../validaciones"
 import * as yup from "yup"
-import { ModificarUsuario } from "../../../Fn/AgregarModificarUsuarios"
+import { modificarUsario } from "../../../dbConection/m-usuariosDb"
+import { capitalizarNombres } from "../../../Fn/utilidades/herramientas"
+
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
     display: flex;
@@ -65,46 +67,68 @@ export const ModalModificarUsuario = ({ usuarioSeleccionado, isOpen, onClose }) 
     const initialValues = {
         nombre: usuarioSeleccionado?.nombre || "",
         apellido: usuarioSeleccionado?.apellido || "",
-        correo: usuarioSeleccionado?.correo || "",
-        contraseña: usuarioSeleccionado?.contraseña || "",
         rol: usuarioSeleccionado?.rol || "",
     }
     const validationSchema = yup.object({
         nombre: validateNombre,
         apellido: validateApellido,
-        correo: validateCorreo,
-        contraseña: validateContraseña,
         rol: validateRol,
     });
 
-    const handleSubmit = (values) => {
-        ModificarUsuario(values);
-        
-    }
+    const handleSubmit = async (values, { setSubmitting }) => {
+        // Verificar si los valores han cambiado
+        if (
+            values.nombre === initialValues.nombre &&
+            values.apellido === initialValues.apellido &&
+            values.rol === initialValues.rol
+        ) {
+            alert("Debes modificar la información para poder subirla");
+            setSubmitting(false); // Terminar el estado de submitting si no hay cambios
+            return;
+        }
+
+        const valoresCapitalizados = {
+            ...values,
+            nombre: capitalizarNombres(values.nombre),
+            apellido: capitalizarNombres(values.apellido),
+        };
+
+        try {
+            // Llamar a modificarUsario y pasar el setSubmitting para manejar el estado
+            await modificarUsario(usuarioSeleccionado.id, valoresCapitalizados, setSubmitting, onClose);
+        } catch (error) {
+            setSubmitting(false); // Si hay un error, asegúrate de deshabilitar el botón
+            console.error("Error al modificar usuario:", error);
+        }
+    };
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={handleSubmit}
             enableReinitialize
         >
-            <ModalGenerico isOpen={isOpen} onClose={onClose}>
-                <ContenedorContenidoModal>
-                    <ContenedorAgregarUsuarioStyled>
-                        <HeaderTxt> Modificar Usuario </HeaderTxt>
-                        <Separador>
-                            <ContenedorInputs>
-                                <InputGenerico id="nombre" name="nombre" txtLabel="Nombre" placeholder="Ingresa el nombre del usuario" />
-                                <InputGenerico id="apellido" name="apellido" txtLabel="Apellido" placeholder="Ingresa el apellido del usuario" />
-                                <InputGenerico id="correo" name="correo" txtLabel="Correo" placeholder="Ingresa el correo del usuario" />
-                                <InputGenerico id="contraseña" name="contraseña" txtLabel="Contraseña" placeholder="Ingresa el contraseña del usuario" />
-                                <InputSelect id="rol" name="rol" txtLabel="Rol" options={[{ value: "empleado", txt: "Empleado" }, { value: "Administrador", txt: "Administrador" }]} />
-                            </ContenedorInputs>
-                            <BtnSubmit type="submit" > Subir </BtnSubmit>
-                        </Separador>
-                    </ContenedorAgregarUsuarioStyled>
-                </ContenedorContenidoModal>
-            </ModalGenerico>
-        </ Formik>
+            {({ isSubmitting }) => (
+                <ModalGenerico isOpen={isOpen} onClose={onClose}>
+                    <ContenedorContenidoModal>
+                        <ContenedorAgregarUsuarioStyled>
+                            <HeaderTxt> Modificar Usuario </HeaderTxt>
+                            <Separador>
+                                <ContenedorInputs>
+                                    <InputGenerico id="nombre" name="nombre" txtLabel="Nombre" placeholder="Ingresa el nombre del usuario" />
+                                    <InputGenerico id="apellido" name="apellido" txtLabel="Apellido" placeholder="Ingresa el apellido del usuario" />
+                                    <InputSelect id="rol" name="rol" txtLabel="Rol" options={[{ value: "empleado", txt: "Empleado" }, { value: "Administrador", txt: "Administrador" }]} />
+                                </ContenedorInputs>
+                                <BtnSubmit type="submit" disabled={isSubmitting}>
+                                    {isSubmitting ? "Cargando..." : "Subir"}
+                                </BtnSubmit>
+                            </Separador>
+                        </ContenedorAgregarUsuarioStyled>
+                    </ContenedorContenidoModal>
+                </ModalGenerico>
+            )}
+        </Formik>
+
     )
 }

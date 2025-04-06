@@ -1,12 +1,15 @@
-import { Formik } from "formik"
-import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts"
-import { AgregarProductoUx } from "./AgregarProductoUx"
-import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico } from "../../../validaciones"
-import * as yup from "yup"
-
+import { Formik } from "formik";
+import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
+import { AgregarProductoUx } from "./AgregarProductoUx";
+import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico } from "../../../validaciones";
+import * as yup from "yup";
+import { subirProducto } from "../../../dbConection/m-productos";
+import { useNavigate } from "react-router";
 
 export const AgregarProducto = () => {
-    const initialValues ={
+    const navigate = useNavigate(); 
+
+    const initialValues = {
         nombre: "",
         descripcion: "",
         marca: "",
@@ -14,8 +17,9 @@ export const AgregarProducto = () => {
         precio: 0,
         categoria: "",
         subCategoria: "",
-    }
-    const  validationSchema  = yup.object({
+    };
+
+    const validationSchema = yup.object({
         nombre: validateNombre,
         descripcion: validateGenerica,
         marca: validateGenerica,
@@ -23,23 +27,31 @@ export const AgregarProducto = () => {
         subCategoria: validateGenerica,
         costo: validateNumeroGenerico,
         precio: validateNumeroGenerico,
-    
-    
     });
 
-    const handleSubmit = (values) =>{
-        console.log(values);
-    }
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+            await subirProducto(values); 
+            setSubmitting(false); 
+            navigate("/inventario/productos"); 
+        } catch (error) {
+            setSubmitting(false); 
+            alert("Error al agregar el producto");
+           
+        }
+    };
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={handleSubmit}
         >
-            <Contenedor100>
-                <AgregarProductoUx />
-               
-            </ Contenedor100>
+            {({ isSubmitting }) => (
+                <Contenedor100>
+                    <AgregarProductoUx isSubmitting={isSubmitting} /> 
+                </Contenedor100>
+            )}
         </Formik>
-    )
-}
+    );
+};

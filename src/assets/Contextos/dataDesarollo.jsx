@@ -411,22 +411,7 @@ export const DiasOperacionDb =
     }
 
 
-export const userData = [
-    {
-        nombre: "ramon",
-        apellido: "marquez",
-        rol: "administrador",
-        correo: "luis@gmail.com",
-        contraseña: "luis1234",
-    }, {
-        nombre: "pablo",
-        apellido: "gonzales",
-        rol: "empleado",
-        correo: "pablo@gmail.com",
-        contraseña: "pablo1234",
-    }
 
-]
 export const localDataIn = {
     ubicacion: "Ubicacion del local",
     sucursal: "Sucursal X",
@@ -655,7 +640,7 @@ export const tratarProductos = (productosBrutos) => {
 }
 export const productos = tratarProductos(productosBrutosDb);
 
-const convertirProductos = (productos) => {
+export const convertirProductos = (productos) => {
     const categoriasMap = new Map();
 
     productos.forEach((producto, index) => {

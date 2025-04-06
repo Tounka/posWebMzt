@@ -63,7 +63,7 @@ const IconoSeleccionado = styled.div`
     align-items: center;
 `;
 
-export const AgregarProductoUx = () => {
+export const AgregarProductoUx = ({isSubmitting}) => {
     const { values, setFieldValue } = useFormikContext();
 
     return (
@@ -99,7 +99,7 @@ export const AgregarProductoUx = () => {
                     </ContenedorInputSelect>
                 </GridGenerico>
 
-                <BtnSubmit type="submit">Subir</BtnSubmit>
+                <BtnSubmit type="submit" disabled={isSubmitting}>Subir</BtnSubmit>
             </Separador>
         </ContenedorAgregarUsuarioStyled>
     );

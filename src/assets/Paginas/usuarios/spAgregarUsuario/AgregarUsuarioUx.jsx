@@ -60,7 +60,7 @@ export const AgregarUsuarioUx = () => {
                     <InputGenerico id="nombre" name="nombre" txtLabel="Nombre" placeholder="Ingresa el nombre del usuario" />
                     <InputGenerico id="apellido" name="apellido" txtLabel="Apellido" placeholder="Ingresa el apellido del usuario" />
                     <InputGenerico id="correo" name="correo" txtLabel="Correo" placeholder="Ingresa el correo del usuario" />
-                    <InputGenerico id="contraseña" name="contraseña" txtLabel="Contraseña" placeholder="Ingresa el contraseña del usuario" />
+                    <InputGenerico id="contrasena" name="contrasena" txtLabel="Contraseña" placeholder="Ingresa el contraseña del usuario" />
                     <InputSelect id="rol" name="rol" txtLabel="Rol" options={[{value: "empleado", txt: "Empleado"},{value: "Administrador", txt: "Administrador"}]} />
                 </ContenedorInputs>
                 <BtnSubmit type="submit" > Subir </BtnSubmit>
