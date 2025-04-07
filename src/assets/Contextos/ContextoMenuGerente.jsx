@@ -7,9 +7,9 @@ export const ContextoMenuGerenteProvider = ({ children }) => {
 
     const [boolModalAdministrador, setBoolModalAdministrador] = useState(false);
     const [modalSeleccionado, setModalSeleccionado] = useState();
-    const [cajaSeleccionada, setCajaSeleccionada] = useState(CajasDb[0]);
+    
     return (
-        <ContextoMenuGerente.Provider value={{ boolModalAdministrador, setBoolModalAdministrador,modalSeleccionado,setModalSeleccionado, cajaSeleccionada}}>
+        <ContextoMenuGerente.Provider value={{ boolModalAdministrador, setBoolModalAdministrador,modalSeleccionado,setModalSeleccionado, }}>
             {children}
         </ContextoMenuGerente.Provider>
     );

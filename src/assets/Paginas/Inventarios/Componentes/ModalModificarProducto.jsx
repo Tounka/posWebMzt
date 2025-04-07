@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Form, Formik, useFormikContext } from "formik"
 
 
-import { InputGenerico, InputGenericoVertical, InputSelect, InputSelectIcono } from "../../../ComponentesGenerales/Formulario/InputGenerico"
+import { InputGenerico, InputGenericoVertical, InputSelect, InputSelectIcono, InputSelectVerical } from "../../../ComponentesGenerales/Formulario/InputGenerico"
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit"
 import { ModalGenerico } from "../../../ComponentesGenerales/Modal"
 import { validateApellido, validateContraseña, validateCorreo, validateGenerica, validateNombre, validateNumeroGenerico, validateRol } from "../../../validaciones"
@@ -11,6 +11,10 @@ import * as yup from "yup"
 import { ModificarUsuario } from "../../../Fn/AgregarModificarUsuarios"
 import { GridGenerico } from "../../../ComponentesGenerales/Genericos/GridGenerico"
 import { iconos, iconosUtils } from "../../../img/uitls/iconos"
+import { useContextoGeneral } from "../../../Contextos/ContextoGeneral"
+import { modificarUsario } from "../../../dbConection/m-usuariosDb"
+import { capitalizarNombres } from "../../../Fn/utilidades/herramientas"
+import { modificarProducto } from "../../../dbConection/m-productos"
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
     display: flex;
@@ -65,7 +69,8 @@ const ContenedorInputSelect = styled.div`
     gap: 10px;
 `
 export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose }) => {
- 
+    const { categorias } = useContextoGeneral();
+    console.log(productoSeleccionado)
     const initialValues = {
         nombre: productoSeleccionado?.nombre || "",
         descripcion: productoSeleccionado?.descripcion || "",
@@ -74,17 +79,35 @@ export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose 
         precio: productoSeleccionado?.precio || 0,
         categoria: productoSeleccionado?.categoria || "",
         subCategoria: productoSeleccionado?.subCategoria || "",
-        icono: productoSeleccionado?.icono?.type?.name || "", 
+        icono: productoSeleccionado?.icono?.type?.name || "",
     };
-    
- 
+    const options = {
+        categoria: [],
+        subcategoria: [{
+            txt: "Sin subcategoría",
+            value: ""
+        }]
+    };
+
+    categorias.forEach((categoria) => {
+        const option = {
+            txt: categoria.categoria,
+            value: categoria.categoria
+        };
+
+        if (!categoria.categoriaPadre) {
+            options.categoria.push(option);
+        } else {
+            options.subcategoria.push(option);
+        }
+    });
+
 
     const validationSchema = yup.object({
         nombre: validateNombre,
         descripcion: validateGenerica,
-        marca: validateGenerica,
         categoria: validateGenerica,
-        subCategoria: validateGenerica,
+
         costo: validateNumeroGenerico,
         precio: validateNumeroGenerico,
     });
@@ -96,18 +119,30 @@ export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose 
     align-items: center;
 `;
 
-    const handleSubmit = (values) => {
-        ModificarUsuario(values);
+    const handleSubmit = async (values, { setSubmitting }) => {
+        console.log(values.categoria)
+        let valuesAModificar = {
+            nombre: capitalizarNombres(values.nombre),
+            descripcion: values.descripcion,
+            marca: values.marca,
+            categoria: values.categoria,
+            subCategoria: values.subCategoria,
+            costo: values.costo,
+            precio: values.precio,
+        }
+        setSubmitting(true);
+        await modificarProducto(productoSeleccionado.idReferencia, valuesAModificar, onClose);
+        setSubmitting(false);
     };
 
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={handleSubmit}
             enableReinitialize
         >
-            {({ values, setFieldValue }) => ( // Accede a values y setFieldValue aquí
+            {({ values, setFieldValue, isSubmitting }) => ( // Accede a values y setFieldValue aquí
                 <ModalGenerico isOpen={isOpen} onClose={onClose}>
                     <ContenedorContenidoModal>
                         <ContenedorAgregarUsuarioStyled>
@@ -123,8 +158,26 @@ export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose 
                                         <InputGenericoVertical id="precio" name="precio" placeholder="Precio del producto" txtLabel="Precio" type="number" />
                                     </GridGenerico>
 
-                                    <InputGenericoVertical id="categoria" name="categoria" placeholder="Categoria del producto" txtLabel="Categoria" type="text" />
-                                    <InputGenericoVertical id="subCategoria" name="subCategoria" placeholder="SubCategoria del producto" txtLabel="SubCategoria" type="text" />
+
+                                    <InputSelectVerical id="categoria"
+                                        name="categoria"
+                                        placeholder="Categoria del producto"
+                                        txtLabel="Categoria"
+                                        options={options.categoria}
+                                        onChange={(e) => {
+                                            setFieldValue("categoria", e.target.value);
+                                        }}
+                                    />
+
+                                    <InputSelectVerical id="subCategoria"
+                                        name="subCategoria"
+                                        placeholder="subCategoria del producto"
+                                        txtLabel="subCategoria"
+                                        options={options.subcategoria}
+                                        onChange={(e) => {
+                                            setFieldValue("subCategoria", e.target.value);
+                                        }}
+                                    />
 
                                     <ContenedorInputSelect>
                                         <InputSelectIcono
@@ -139,7 +192,9 @@ export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose 
                                     </ContenedorInputSelect>
                                 </GridGenerico>
 
-                                <BtnSubmit type="submit">Subir</BtnSubmit>
+                                <BtnSubmit type="submit" disabled={isSubmitting}>
+                                    {isSubmitting ? "Cargando..." : "Modificar"}
+                                </BtnSubmit>
                             </Separador>
                         </ContenedorAgregarUsuarioStyled>
                     </ContenedorContenidoModal>

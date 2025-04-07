@@ -649,11 +649,9 @@ export const convertirProductos = (productos) => {
         }
 
         categoriasMap.get(producto.categoria).push({
-            id: producto.id, // Genera un ID basado en la posición en la lista
-            nombre: producto.nombre,
-            icono: producto.icono,
-            costo: producto.costo,
-            precio: producto.precio
+            
+            ...producto,
+            idReferencia: producto.idReferencia,
         });
     });
 

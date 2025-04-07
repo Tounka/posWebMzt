@@ -31,13 +31,16 @@ export const AgregarProducto = () => {
 
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
-            await subirProducto(values); 
+            setSubmitting(true);
+            await subirProducto(values);
             setSubmitting(false); 
+
             navigate("/inventario/productos"); 
         } catch (error) {
             setSubmitting(false); 
-            alert("Error al agregar el producto");
-           
+            console.error("Error al agregar el producto: ", error);
+
+            alert("Hubo un problema al agregar el producto. Por favor, inténtalo de nuevo."); 
         }
     };
 

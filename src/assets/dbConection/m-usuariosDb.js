@@ -13,7 +13,6 @@ export const ObtenerUsuarios = async () => {
             fechaCreacion: convertirTimestampAMazatlan( doc.data().fechaCreacion).fecha,
         }));
         
-        console.log(usuariosData);
         return usuariosData; 
     } catch (err) {
         console.error("Error al obtener usuarios:", err);

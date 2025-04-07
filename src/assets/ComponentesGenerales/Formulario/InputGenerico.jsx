@@ -42,7 +42,7 @@ const vibrar = keyframes`
 `;
 const ErrorMessageStyled = styled(ErrorMessage)`
     width: 100%;
-    color: red;
+    color: red !important;
     font-size: 14px; 
     margin-top: 5px;
     animation: ${vibrar} 0.5s ease-in-out; 
@@ -54,6 +54,7 @@ const ContenedorInputGenericoStyled = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
+    color: red;
 `
 const IconoSeleccionado = styled.div`
     font-size: 40px;
@@ -100,36 +101,6 @@ export const InputSelect = ({ id = "id", name = "name", placeholder = "Ingresa i
         </ContenedorInputGenericoStyled>
     );
 };
-
-export const InputSelectIcono = ({
-    id = "id",
-    name = "name",
-    placeholder = "Ingresa información",
-    txtLabel = "Label",
-    options = [],
-    onChange,
-    value, // Recibe el valor actual del campo
-}) => {
-    return (
-        <ContenedorInputGenericoStyled>
-            <ContenedorInputStyled>
-                <label htmlFor={id}>{txtLabel}</label>
-                <Field as="select" id={id} name={name} placeholder={placeholder} onChange={onChange} value={value}>
-                    <option value="" disabled>
-                        Selecciona una opción
-                    </option>
-                    {options.map((opcion, index) => (
-                        <option key={index} value={opcion.value}>
-                            {opcion.txt}
-                        </option>
-                    ))}
-                </Field>
-            </ContenedorInputStyled>
-            <ErrorMessageStyled name={name} component="div" />
-        </ContenedorInputGenericoStyled>
-    );
-};
-
 const ContenedorInputVerticalStyled = styled(ContenedorInputStyled)`
     height: 100%;
     display: grid;
@@ -161,6 +132,104 @@ const ContenedorInputVerticalStyled = styled(ContenedorInputStyled)`
         }
     }
 `;
+const ContenedorInputSelect = styled(Field)`
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: var(--colorPrincipal);
+    color: white;
+    padding: 10px 40px 10px 20px; /* espacio a la derecha para el ícono */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    &::placeholder {
+        color: white;
+    }
+
+    option {
+        color: white;
+    }
+`;
+
+export const InputSelectVerical = ({ id = "id", name = "name", placeholder = "Ingresa información", txtLabel = "Label", options = [], onChange  }) => {
+    return (
+        <ContenedorInputGenericoStyled>
+            <ContenedorInputVerticalStyled>
+                <label htmlFor={id}>{txtLabel}</label>
+                <ContenedorInputSelect as="select" id={id} name={name} placeholder={placeholder} onChange={onChange}>
+                    <option value="" hidden>
+                        Selecciona una opción
+                    </option>
+                    {options.map((opcion, index) => (
+                        <option key={index} value={opcion.value}>
+                            {opcion.txt}
+                        </option>
+                    ))}
+                </ContenedorInputSelect>
+            </ContenedorInputVerticalStyled>
+            <ErrorMessageStyled name={name} component="div" />
+        </ContenedorInputGenericoStyled>
+    );
+};
+const OptionStyledVertical = styled(Field)`
+    background-color: var(--colorPrincipal);
+    color: white;
+    border: none;
+    padding: 0 10px;
+    font-size: 1rem;
+    border-radius: 20px;
+
+    option {
+        background-color: var(--colorPrincipal);
+        color: white;
+    }
+
+    option:hover,
+    option:focus {
+        background-color: white;
+        color: var(--colorPrincipal);
+    }
+
+    &::placeholder {
+        color: white !important;
+    }
+`;
+export const InputSelectIcono = ({
+    id = "id",
+    name = "name",
+    placeholder = "Ingresa información",
+    txtLabel = "Label",
+    options = [],
+    onChange,
+    value, // Recibe el valor actual del campo
+}) => {
+    return (
+        <ContenedorInputGenericoStyled>
+            <ContenedorInputStyled>
+                <label htmlFor={id}>{txtLabel}</label>
+                <Field as="select" id={id} name={name} placeholder={placeholder} onChange={onChange} value={value}>
+                    <option value="" disabled>
+                        Selecciona una opción
+                    </option>
+                    {options.map((opcion, index) => (
+                        <option key={index} value={opcion.value}>
+                            {opcion.txt}
+                        </option>
+                    ))}
+                </Field>
+            </ContenedorInputStyled>
+            <ErrorMessageStyled name={name} component="div" />
+        </ContenedorInputGenericoStyled>
+    );
+};
+
+
 
 export const InputGenericoVertical = ({ id = "id", name = "name", placeholder = "Ingresa información", txtLabel = "Label", type = "text" }) => {
     return (

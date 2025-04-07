@@ -81,12 +81,17 @@ export const ProductosUx = () => {
             categoria.items.forEach(item => {
                 rows.push({
                     id: item.id,
-                    categoria: categoria.categoria, // Asignamos la categoría
-                    txt: item.nombre, // Nombre del producto
-                    costo: item.costo, // Costo del producto
-                    precio: item.precio, // Precio del producto
+                    categoria: categoria.categoria, 
+                    subCategoria: categoria.categoriaPadre, 
+                    txt: item.nombre, 
+                    costo: item.costo, 
+                    precio: item.precio, 
         
-                    productoCompelto: item,
+                    productoCompelto: {
+                        ...item,
+                        categoria: categoria.categoria,
+                        subCategoria: categoria.categoriaPadre
+                    }
                 });
             });
         });
@@ -95,6 +100,7 @@ export const ProductosUx = () => {
     };
 
     const { catalogo } = useContextoGeneral();
+
     const columns = [
         { field: "categoria", headerName: "Categoria", width: 150 },
         { field: "subCategoria", headerName: "subCategoria", width: 150 },

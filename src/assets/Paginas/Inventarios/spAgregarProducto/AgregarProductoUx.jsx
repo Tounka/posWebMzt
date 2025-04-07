@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import { BtnRegresar } from "../../../ComponentesGenerales/Genericos/btnRedondo";
 import { Form, useFormikContext } from "formik";
-import { InputGenericoVertical, InputSelect, InputSelectIcono } from "../../../ComponentesGenerales/Formulario/InputGenerico";
+import { InputGenericoVertical, InputSelect, InputSelectIcono, InputSelectVerical } from "../../../ComponentesGenerales/Formulario/InputGenerico";
 import { BtnSubmit } from "../../../ComponentesGenerales/Formulario/BtnSubmit";
 import { GridGenerico } from "../../../ComponentesGenerales/Genericos/GridGenerico";
 import { iconos, iconosUtils } from "../../../img/uitls/iconos";
+import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
 
 const ContenedorAgregarUsuarioStyled = styled(Form)`
     display: flex;
@@ -63,8 +64,30 @@ const IconoSeleccionado = styled.div`
     align-items: center;
 `;
 
-export const AgregarProductoUx = ({isSubmitting}) => {
+export const AgregarProductoUx = ({ isSubmitting }) => {
     const { values, setFieldValue } = useFormikContext();
+    const { categorias } = useContextoGeneral();
+    const options = {
+        categoria: [],
+        subcategoria: [   {
+            txt: "Sin subcategoría",
+            value: ""
+        }]
+    };
+
+    categorias.forEach((categoria) => {
+        const option = {
+            txt: categoria.categoria,
+            value: categoria.categoria
+        };
+
+        if (!categoria.categoriaPadre) {
+            options.categoria.push(option);
+        } else {
+            options.subcategoria.push(option);
+        }
+    });
+
 
     return (
         <ContenedorAgregarUsuarioStyled>
@@ -83,8 +106,19 @@ export const AgregarProductoUx = ({isSubmitting}) => {
                         <InputGenericoVertical id="precio" name="precio" placeholder="Precio del producto" txtLabel="Precio" type="number" />
                     </GridGenerico>
 
-                    <InputGenericoVertical id="categoria" name="categoria" placeholder="Categoria del producto" txtLabel="Categoria" type="text" />
-                    <InputGenericoVertical id="subCategoria" name="subCategoria" placeholder="SubCategoria del producto" txtLabel="SubCategoria" type="text" />
+
+                    <InputSelectVerical id="categoria"
+                        name="categoria"
+                        placeholder="Categoria del producto"
+                        txtLabel="Categoria"
+                        options={options.categoria} />
+
+                    <InputSelectVerical id="subCategoria"
+                        name="subCategoria"
+                        placeholder="subCategoria del producto"
+                        txtLabel="subCategoria"
+                        options={options.subcategoria} />
+                    
 
                     <ContenedorInputSelect>
                         <InputSelectIcono

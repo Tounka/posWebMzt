@@ -11,8 +11,7 @@ export const obtenerCategorias = async () => {
             id: doc.id,
             ...doc.data(),
         }));
-        console.log(categoriasData)
-        
+
         return categoriasData; 
     } catch (err) {
         console.error("Error al obtener categorías:", err);
@@ -26,7 +25,7 @@ export const subirCategoria = async (values) => {
     try {
         await setDoc(referencia, {
             categoria: capitalizarNombres(values.nombre),
-            categoriaPadre: values.subirCategoria ? capitalizarNombres(values.categoriaSeleccionada) : "", 
+            categoriaPadre: values.subCategoria ? capitalizarNombres(values.categoriaSeleccionada) : "", 
             icono: values.icono,
         });
 

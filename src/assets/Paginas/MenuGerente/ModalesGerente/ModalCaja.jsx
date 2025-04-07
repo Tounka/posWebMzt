@@ -3,6 +3,8 @@ import { ContenedorSeccionModal } from "../Componentes/SeccionModal"
 import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos"
 import { useContextoMenuGerente } from "../../../Contextos/ContextoMenuGerente"
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral"
+import { aperturarCaja } from "../../../dbConection/m-cajas"
+import { useState } from "react"
 
 const ContenedorModalCaja = styled.div`
     display: flex;
@@ -32,22 +34,37 @@ const BtnCerrarCaja = styled(BtnAperurarCaja)`
 `
 
 export const ModalAperturarCaja = () => {
-    const { cajaSeleccionada } = useContextoMenuGerente();
+    const { cajaSeleccionada } = useContextoGeneral();
     const { user } = useContextoGeneral();
+    const [isPulsable, setIsPulsable] = useState(true);
+    const handleClick = async () => {
+        if (!isPulsable) return; 
+        
+        
+        setIsPulsable(false); 
+        console.log(cajaSeleccionada)
 
+        try {
+            await aperturarCaja(cajaSeleccionada.id, user);
+            
+        } catch (error) {
+            console.log("Error al aperturar caja:", error);
+            setIsPulsable(true); 
+        }
+    };
 
 
     return (
         <ContenedorSeccionModal titulo="Aperturar Caja">
             <ContenedorModalCaja>
                 {
-                    cajaSeleccionada.aperturada ?
+                    cajaSeleccionada?.aperturada ?
 
                         <TxtGenerico size="18px" color="var(--colorRojo)" > No es posible aperturar la caja pues ya esta abierta. </TxtGenerico>
                         :
                         <>
                             <TxtGenerico size="18px" color="var(--colorRojo)" > Esta accion apertura la caja con el usuario: {user.nombre}. </TxtGenerico>
-                            <BtnAperurarCaja>Aperturar Caja</BtnAperurarCaja>
+                            <BtnAperurarCaja disabled={!isPulsable} onClick={() =>handleClick()}>Aperturar Caja</BtnAperurarCaja>
                         </>
                 }
 

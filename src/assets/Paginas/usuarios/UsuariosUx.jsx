@@ -45,10 +45,10 @@ const ContenedorBtn = styled.div`
 
 const columns = [
     { field: "id", headerName: "Id", width: 80 },
-    { field: "nombre", headerName: "Nombre", width: 125 },
-    { field: "apellido", headerName: "Apellido", width: 125 },
+    { field: "nombre", headerName: "Nombre", width: 150 },
+    { field: "apellido", headerName: "Apellido", width: 150 },
     { field: "fechaCreacion", headerName: "Fecha Ingreso", width: 150 },
-    { field: "rol", headerName: "Rol", width: 100 },
+    { field: "rol", headerName: "Rol", width: 150 },
  
 ];
 const paginationModel = { page: 0, pageSize: 15 };

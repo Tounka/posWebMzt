@@ -75,6 +75,7 @@ export const ModalAgregarCategoria = ({ isOpen, onClose }) => {
     setSubmitting(false); 
     onClose();
   };
+  
 
   return (
     <Formik

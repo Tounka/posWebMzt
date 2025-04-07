@@ -58,12 +58,11 @@ const ItemMenu = ({ icon, txt, to }) => {
         // Extraer el primer segmento de la ruta actual
         const primerSegmentoActual = location.pathname.split("/")[1];
         const primerSegmentoTo = to.split("/")[1];
-      
-        console.log(primerSegmentoActual)
+
 
         if (to === "/" || location.pathname==="/generar-ticket") {
             setIsCurrentLocation(location.pathname === "/" );
-            console.log("hola")
+        
         }  else {
             
             setIsCurrentLocation(primerSegmentoActual === primerSegmentoTo);
@@ -89,10 +88,6 @@ const ItemMenu = ({ icon, txt, to }) => {
 
 export const MenuLateral = () => {
     const { user } = useContextoGeneral();
-
-    useEffect(() => {
-        console.log(location);
-    }, [location])
 
     return (
         <MenuLateralStyled user={user}>
