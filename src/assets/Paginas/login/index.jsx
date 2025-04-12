@@ -4,9 +4,10 @@ import { LoginUx } from "./loginUx";
 import { useNavigate } from "react-router";
 import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { BtnCofiguracion, ModalConfiguracion } from "./componentes/BtnConfiguracion";
+import { Loading } from "../../ComponentesGenerales/Genericos/Loading";
 
 export const Login = () => {
-    const { user, setLocalData } = useContextoGeneral();
+    const { user, setLocalData,diaEnOperacion } = useContextoGeneral();
     const [boolModalConfig, setBoolModalConfig] = useState(false);
     const Navigate = useNavigate();
 
@@ -14,7 +15,6 @@ export const Login = () => {
         setBoolModalConfig(false);
     };
 
-    // Verifica la configuración inicial en localStorage
     useEffect(() => {
         const savedCaja = Number(localStorage.getItem("cajaSeleccionada"));
         if (!isNaN(savedCaja) && savedCaja > 0) {
@@ -33,7 +33,7 @@ export const Login = () => {
             Navigate("/venta");
         }
     }, [user, Navigate]);
-
+    //if(Object.keys(diaEnOperacion).length === 0){return(<Loading />);} 
     return (
         <Contenedor100vdh>
             <LoginUx />

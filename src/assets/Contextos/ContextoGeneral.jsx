@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import { obtenerCategorias } from "../dbConection/m-categoriasDb.js";
 import { obtenerProductos } from "../dbConection/m-productos.js";
 import { obtenerCaja } from "../dbConection/m-cajas.js";
+import { obtenerDiaEnOperacion } from "../dbConection/m-dias.js";
 
 const ContextoGeneral = createContext();
 
@@ -24,53 +25,37 @@ export const ContextoGeneralProvider = ({ children }) => {
     const [rangoFechas, setRangoFechas] = useState(null);
 
     const [cajaSelecionada, setCajaSelecionada] = useState({})
-    const [diaEnOperacion, setDiasEnOperacion] = useState(DiasOperacionDb)
+    const [cajaEnUso, setCajaEnUso] = useState({})
+    const [diaEnOperacion, setDiaEnOperacion] = useState({})
 
     useEffect(() => {
-        const fetchCategorias = async () => {
+        const obtenerTodo = async () => {
             try {
-                const data = await obtenerCategorias();
-                setCategorias(data);
+                const dia = await obtenerDiaEnOperacion();
+                setDiaEnOperacion(dia);
+    
+                const categoriasData = await obtenerCategorias();
+                setCategorias(categoriasData);
+    
+                const productosData = await obtenerProductos();
+                const productosTratados = tratarProductos(productosData);
+                setCatalogov2(productosTratados);
+                setCatalogo(convertirProductos(productosTratados));
+    
+                const caja = await obtenerCaja(localData.cajaId);
+                setCajaEnUso(caja);
             } catch (error) {
-                console.error("Error al obtener las categorías", error);
+                console.error("Error al obtener información inicial:", error);
             }
         };
-        const fetchProductos = async () => {
-            try {
-                const data = await obtenerProductos();
-
-                setCatalogov2(tratarProductos(data));
-                setCatalogo(convertirProductos(tratarProductos(data)))
-              
-            } catch (error) {
-                console.error("Error al obtener las categorías", error);
-            }
-        };
-        const fetchObtenerCaja = async () =>{
-            try{
-               const caja= await obtenerCaja(localData.cajaId);
-               console.log("aaa", caja)
-               setCajaSelecionada(caja);
-        
-            }catch(error){
-                console.log("error al conseguir el valor de la caja")
-                console.log(error)
-                console.log(localData)
-            }
+    
+        if (user) {
+            obtenerTodo();
         }
-
-        if(user ){
-            fetchCategorias();
-            fetchProductos();
-            fetchObtenerCaja();
-        }
-
-        
-
     }, [user]);
 
     return (
-        <ContextoGeneral.Provider value={{ diaEnOperacion, user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios, setRangoFechas, rangoFechas, catalogoV2, setLocalData, categorias, cajaSelecionada }}>
+        <ContextoGeneral.Provider value={{ diaEnOperacion, user, setUser, ubicacionPagina, setUbicacionPagina, catalogo, localData, tickets, inventarios, setRangoFechas, rangoFechas, catalogoV2, setLocalData, categorias, cajaSelecionada,cajaEnUso,setDiaEnOperacion, setCajaEnUso }}>
             {children}
         </ContextoGeneral.Provider>
     );

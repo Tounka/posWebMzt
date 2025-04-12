@@ -651,7 +651,7 @@ export const convertirProductos = (productos) => {
         categoriasMap.get(producto.categoria).push({
             
             ...producto,
-            idReferencia: producto.idReferencia,
+         
         });
     });
 

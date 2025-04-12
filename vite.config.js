@@ -10,6 +10,11 @@ export default defineConfig({
       devOptions: {
         enabled: true, // Activa PWA en desarrollo
       },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024, 
+        
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+      },
       manifest: {
         name: "POS-Beauty-With-Meli",
         short_name: "POS-BWM",

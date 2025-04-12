@@ -1,7 +1,7 @@
 {
   "name": "pos-web-front",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.7.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,8 +17,6 @@
     "firebase": "^11.6.0",
     "formik": "^2.4.6",
     "html2canvas": "^1.4.1",
-    "jsbarcode": "^3.11.6",
-    "jspdf": "^3.0.1",
     "jszip": "^3.10.1",
     "numero-a-letras": "^1.0.6",
     "react": "^19.0.0",

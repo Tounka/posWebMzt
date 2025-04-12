@@ -7,6 +7,7 @@ export const obtenerYActualizarContador = async (contadorSolicitado) => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+            
             const data = docSnap.data();
             const nuevoValor = (data.contador || 0) + 1;
 

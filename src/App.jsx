@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router';
 import './App.css';
 
@@ -10,9 +10,23 @@ import { UpdatePWA } from './assets/ComponentesGenerales/DetectarActualizacion.j
 import { useContextoGeneral } from './assets/Contextos/ContextoGeneral.jsx';
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
+import { obtenerDiaEnOperacion } from './assets/dbConection/m-dias.js';
+import { Loading } from './assets/ComponentesGenerales/Genericos/Loading.jsx';
 function App() {
-  const { user } = useContextoGeneral();
-
+  const { user,setDiaEnOperacion,diaEnOperacion } = useContextoGeneral();
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      try {
+        const diaEnOperacion = await obtenerDiaEnOperacion();
+        setDiaEnOperacion(diaEnOperacion);
+      } catch (error) {
+        alert("No se ha podido obtener la información del día en operación");
+      }
+    };
+  
+    obtenerDatos();
+  }, []);
+  if(Object.keys(diaEnOperacion).length === 0){return(<Loading />);} 
   return (
     <StyleSheetManager shouldForwardProp={isPropValid}>
 

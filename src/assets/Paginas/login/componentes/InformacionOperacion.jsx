@@ -13,12 +13,13 @@ const ContenedorTxtHead = styled.div`
 
 export const InformacionOperacion = () => {
     const { diaEnOperacion } = useContextoGeneral();
-
-    if (!diaEnOperacion) {
+  
+     const esObjetoVacio = !diaEnOperacion || Object.keys(diaEnOperacion).length === 0;
+    if (esObjetoVacio) {
         return null; 
     }
 
-    const fechaEnOperacion = obtenerFecha(diaEnOperacion.fecha);
+    const fechaEnOperacion = obtenerFecha(diaEnOperacion?.fecha);
     const fechaHoy = obtenerFecha(new Date()); 
     const TxtPrincipal = () => {
         if (!diaEnOperacion.diaAbierto) {

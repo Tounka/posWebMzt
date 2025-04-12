@@ -5,6 +5,9 @@ import { useContextoMenuGerente } from "../../../Contextos/ContextoMenuGerente"
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral"
 import { CajasDb } from "../../../Contextos/dataDesarollo"
 import { obtenerFecha } from "../../../Fn/ObtenerFechaHora"
+import { aperturarDia, cerrarDia, obtenerDiaEnOperacion } from "../../../dbConection/m-dias"
+import { obtenerTodasLasCajas } from "../../../dbConection/m-cajas"
+import { useEffect, useState } from "react"
 
 const ContenedorModalCaja = styled.div`
     display: flex;
@@ -34,9 +37,20 @@ const BtnCerrarCaja = styled(BtnAperurarCaja)`
 `
 
 export const ModalAperturarDia = () => {
-    const { diaEnOperacion } = useContextoGeneral();
+    const { diaEnOperacion, setDiaEnOperacion } = useContextoGeneral();
     const { user } = useContextoGeneral();
 
+    const handleClick = async () => {
+        try {
+            await aperturarDia()
+
+            const nuevoDia = await obtenerDiaEnOperacion();
+            setDiaEnOperacion(nuevoDia);
+            alert("Dia aperturado con éxito");
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
     return (
@@ -49,7 +63,7 @@ export const ModalAperturarDia = () => {
                         :
                         <>
                             <TxtGenerico size="18px" color="var(--colorRojo)" > Esta accion apertura el dia: ({obtenerFecha(new Date())}). </TxtGenerico>
-                            <BtnAperurarCaja>Aperturar Dia</BtnAperurarCaja>
+                            <BtnAperurarCaja onClick={() =>handleClick()}>Aperturar Dia</BtnAperurarCaja>
                         </>
                 }
 
@@ -58,34 +72,64 @@ export const ModalAperturarDia = () => {
     )
 }
 export const ModalCerrarDia = () => {
-    const { diaEnOperacion  } = useContextoGeneral();
+    const { diaEnOperacion, setDiaEnOperacion } = useContextoGeneral();
     const { user } = useContextoGeneral();
+    
+    const [todasLasCajas, setTodasLasCajas] = useState([]);
+    const [cajasAbiertas, setCajasAbiertas] = useState([]);
+    
+  
+    useEffect(() => {
+        const fetchCajas = async () => {
+            const cajas = await obtenerTodasLasCajas();
+            setTodasLasCajas(cajas);
 
-    const TodasLasCajas = CajasDb;
-    const CajasAbiertas = TodasLasCajas.filter(caja => caja.aperturada ===  true ).map(caja =>caja.id);
-    console.log(CajasAbiertas);
+            const abiertas = cajas
+                .filter(caja => caja?.aperturada === true)
+                .map(caja => caja.id);
+
+            setCajasAbiertas(abiertas);
+        };
+
+        fetchCajas();
+    }, []); 
+
+    const handleClick = async () => {
+        try {
+             const diaActualizado = await cerrarDia();
+             setDiaEnOperacion(diaActualizado)
+            alert("Día cerrado con éxito");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
-        <ContenedorSeccionModal titulo="Cerrar Dia">
+        <ContenedorSeccionModal titulo="Cerrar Día">
             <ContenedorModalCaja>
                 {
-                    diaEnOperacion.diaAbierto ?
+                    diaEnOperacion?.diaAbierto ?
                         <>
-                        {
-                            CajasAbiertas.length === 0 ?
-                            <>
-                            <TxtGenerico size="18px" color="var(--colorRojo)" > Esta accion cierra el dia: {obtenerFecha(diaEnOperacion.fecha)}. </TxtGenerico>
-                            <BtnCerrarCaja>Cerrar Dia</BtnCerrarCaja>
-                            </>
-                            :
-                            <TxtGenerico size="18px" color="var(--colorRojo)" > No es posible cerrar el dia pues las cajas (- {CajasAbiertas.join(", ")} -) continuan abiertas </TxtGenerico>
-
-                        }
+                            {
+                                cajasAbiertas?.length === 0 ?
+                                    <>
+                                        <TxtGenerico size="18px" color="var(--colorRojo)" >
+                                            Esta acción cierra el día: {obtenerFecha(diaEnOperacion.fecha)}.
+                                        </TxtGenerico>
+                                        <BtnCerrarCaja onClick={handleClick}>Cerrar Día</BtnCerrarCaja>
+                                    </>
+                                    :
+                                    <TxtGenerico size="18px" color="var(--colorRojo)" >
+                                        No es posible cerrar el día pues las cajas (- {cajasAbiertas.join(", ")} -) continúan abiertas
+                                    </TxtGenerico>
+                            }
                         </>
                         :
-                        <TxtGenerico size="18px" color="var(--colorRojo)" > El dia no esta abierto. </TxtGenerico>
+                        <TxtGenerico size="18px" color="var(--colorRojo)" >
+                            El día no está abierto.
+                        </TxtGenerico>
                 }
-
             </ContenedorModalCaja>
         </ContenedorSeccionModal>
-    )
-}
+    );
+};

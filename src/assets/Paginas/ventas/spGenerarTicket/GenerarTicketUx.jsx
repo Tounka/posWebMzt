@@ -10,6 +10,7 @@ import { NumerosALetras } from "numero-a-letras";
 import { obtenerFecha, obtenerHora } from "../../../Fn/ObtenerFechaHora";
 import { generarIdTicket } from "../../../Fn/utilidades/GenerarIdTicket";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
+import { agregarTicket } from "../../../dbConection/m-tickets";
 
 const ContedorTicket = styled.div`
   display: grid;
@@ -31,12 +32,14 @@ const ContenedorBtns = styled.div`
 export const GenerarTicketUx = ({ catalogo }) => {
   const componentRef = useRef();
   const { carrito, setCarrito, setHandleResetProductosActualizados, descuento, setDescuento } = useContextoPaginaVenta();
-  const { user } = useContextoGeneral();
+  const { user, localData } = useContextoGeneral();
   const fecha = new Date();
 
   const carritoConTotal = carrito.map(item => ({
     ...item,
-    total: item.cantidad * item.precio
+    total: item.cantidad * item.precio,
+    icono: "",
+    
   }));
   const sumatoriaTotal = carritoConTotal.reduce((acumulador, item) => acumulador + item.total, 0);
 
@@ -55,7 +58,7 @@ export const GenerarTicketUx = ({ catalogo }) => {
     Navigate(-1);
   };
 
- 
+
 
   const datosTicket = {
     fechaTransaccion: `${obtenerFecha(fecha)} - ${obtenerHora(fecha)}`,
@@ -70,17 +73,35 @@ export const GenerarTicketUx = ({ catalogo }) => {
     totalEnTxt: NumerosALetras(totalTicket),
     id: generarIdTicket()
   };
-  const handlePrint = useReactToPrint({
-    contentRef: componentRef,
-    documentTitle: `Ticket${datosTicket.fechaTransaccion}`,
- 
-    onAfterPrint: () => {
-      setCarrito([]);
-      setHandleResetProductosActualizados(prevS => prevS + 1);
-      setDescuento({ tipo: "$", valor: 0 });
-      Navigate(-1);
-    }
-  });
+  const printTicket = useReactToPrint(
+
+    {
+      contentRef: componentRef,
+      documentTitle: `Ticket${datosTicket.fechaTransaccion}`,
+
+      onAfterPrint: () => {
+        setCarrito([]);
+        setHandleResetProductosActualizados(prevS => prevS + 1);
+        setDescuento({ tipo: "$", valor: 0 });
+        Navigate(-1);
+      }
+    });
+  const handlePrint = async () => {
+    console.log(datosTicket)
+    console.log(localData.cajaId)
+    await agregarTicket({
+      fechaTransaccion:datosTicket.fechaTransaccion ,
+      usuario:datosTicket.usuario ,
+      caja:datosTicket.caja ,
+      productos:datosTicket.productos ,
+      total:datosTicket.total ,
+      descuento:datosTicket.descuento ,
+      totalEnTxt:datosTicket.totalEnTxt ,
+      id:datosTicket.id 
+    }, localData.cajaId);
+    //printTicket()
+  }
+
   return (
     <Contenedor100>
       <ContedorTicket>

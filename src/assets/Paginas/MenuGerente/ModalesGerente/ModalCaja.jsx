@@ -2,9 +2,10 @@ import styled from "styled-components"
 import { ContenedorSeccionModal } from "../Componentes/SeccionModal"
 import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos"
 import { useContextoMenuGerente } from "../../../Contextos/ContextoMenuGerente"
+
+import { aperturarCaja, cerrarCaja, obtenerCaja } from "../../../dbConection/m-cajas"
+import { useEffect, useState } from "react"
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral"
-import { aperturarCaja } from "../../../dbConection/m-cajas"
-import { useState } from "react"
 
 const ContenedorModalCaja = styled.div`
     display: flex;
@@ -34,23 +35,27 @@ const BtnCerrarCaja = styled(BtnAperurarCaja)`
 `
 
 export const ModalAperturarCaja = () => {
-    const { cajaSeleccionada } = useContextoGeneral();
-    const { user } = useContextoGeneral();
-    const [isPulsable, setIsPulsable] = useState(true);
+   
+    const { user,cajaEnUso, setCajaEnUso } = useContextoGeneral();
+    const [isSubmitting, setsubmitting] = useState(false);
     const handleClick = async () => {
-        if (!isPulsable) return; 
-        
-        
-        setIsPulsable(false); 
-        console.log(cajaSeleccionada)
-
-        try {
-            await aperturarCaja(cajaSeleccionada.id, user);
-            
-        } catch (error) {
-            console.log("Error al aperturar caja:", error);
-            setIsPulsable(true); 
+        setsubmitting(true);
+        try{
+            const usuarioAEnviar = {
+                id:user.uid,
+                nombre:user.nombre,
+                apellido:user.apellido,
+                rol:user.rol,
+            }
+            await aperturarCaja(cajaEnUso.id, usuarioAEnviar);
+            const nuevaCaja = await obtenerCaja(cajaEnUso.id);
+            setCajaEnUso(nuevaCaja);
+        }catch(error){
+            console.log(error)
         }
+        setsubmitting(false);
+
+       
     };
 
 
@@ -58,13 +63,13 @@ export const ModalAperturarCaja = () => {
         <ContenedorSeccionModal titulo="Aperturar Caja">
             <ContenedorModalCaja>
                 {
-                    cajaSeleccionada?.aperturada ?
+                    cajaEnUso?.aperturada ?
 
                         <TxtGenerico size="18px" color="var(--colorRojo)" > No es posible aperturar la caja pues ya esta abierta. </TxtGenerico>
                         :
                         <>
                             <TxtGenerico size="18px" color="var(--colorRojo)" > Esta accion apertura la caja con el usuario: {user.nombre}. </TxtGenerico>
-                            <BtnAperurarCaja disabled={!isPulsable} onClick={() =>handleClick()}>Aperturar Caja</BtnAperurarCaja>
+                            <BtnAperurarCaja disabled={isSubmitting}  onClick={() =>handleClick()}>Aperturar Caja</BtnAperurarCaja>
                         </>
                 }
 
@@ -73,19 +78,30 @@ export const ModalAperturarCaja = () => {
     )
 }
 export const ModalCerrarCaja = () => {
-    const { cajaSeleccionada } = useContextoMenuGerente();
-    const { user } = useContextoGeneral();
-
-
+    const { user,cajaEnUso,setCajaEnUso} = useContextoGeneral();
+    const [isSubmitting, setsubmitting] = useState(false);
+    const handleClick = async () => {
+        setsubmitting(true);
+        
+        try{
+            await cerrarCaja(cajaEnUso.id);
+            const nuevaCaja = await obtenerCaja(cajaEnUso.id);
+            setCajaEnUso(nuevaCaja);
+        }catch(error){
+            console.log(error)
+        }
+        setsubmitting(false)
+       
+    };
 
     return (
         <ContenedorSeccionModal titulo="Cerrar Caja">
             <ContenedorModalCaja>
                 {
-                    cajaSeleccionada.aperturada ?
+                    cajaEnUso?.aperturada ?
                         <>
                             <TxtGenerico size="18px" color="var(--colorRojo)" > Esta accion cierra la caja del usuario: {user.nombre}. </TxtGenerico>
-                            <BtnCerrarCaja>Cerrar Caja</BtnCerrarCaja>
+                            <BtnCerrarCaja disabled={isSubmitting} onClick={handleClick}>Cerrar Caja</BtnCerrarCaja>
                         </>
                         :
                         <TxtGenerico size="18px" color="var(--colorRojo)" > La caja no esta abierta. </TxtGenerico>
