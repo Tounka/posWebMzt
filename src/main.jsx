@@ -7,6 +7,7 @@ import { ContextoGeneralProvider } from './assets/Contextos/ContextoGeneral.jsx'
 import { AuthProvider } from './assets/Contextos/ContextoAuth.jsx'
 import { ContextoPaginaVentaProvider } from './assets/Paginas/ventas/ContextoVenta.jsx'
 import { ContextoInventariosProvider } from './assets/Contextos/ContextoInventarios.jsx'
+import { ContextoReportesProvider } from './assets/Contextos/Reportes.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')).render(
         <ContextoPaginaVentaProvider>
           <AuthProvider>
             <ContextoInventariosProvider>
-              <App />
+              <ContextoReportesProvider>
+                <App />
+              </ContextoReportesProvider>
             </ContextoInventariosProvider>
           </AuthProvider>
         </ContextoPaginaVentaProvider>

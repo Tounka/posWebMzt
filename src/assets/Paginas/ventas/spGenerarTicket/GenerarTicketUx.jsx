@@ -99,7 +99,7 @@ export const GenerarTicketUx = ({ catalogo }) => {
       totalEnTxt:datosTicket.totalEnTxt ,
       id:datosTicket.id 
     }, localData.cajaId);
-    //printTicket()
+    printTicket()
   }
 
   return (

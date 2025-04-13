@@ -1,13 +1,9 @@
 import styled from "styled-components";
 import { Contenedor100 } from "../../../ComponentesGenerales/Genericos/layouts";
 import { H2Pos, TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
-import { ModalGenerico } from "../../../ComponentesGenerales/Modal";
-import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
-import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/BtnsGenericos";
-import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TablaGenerica } from "../../../ComponentesGenerales/Genericos/TablaGenerica";
-
+import { obtenerInventarios } from "../../../dbConection/m-inventarios";
 
 
 
@@ -49,9 +45,11 @@ const ContenedorTabla = styled(ContenedorGenerico)`
     transition: max-height .3s ease-in-out;
     
 `
-const SeccionInventario = ({dia, index, height}) => {
+const SeccionInventario = ({ dia, index, height }) => {
     const [isOpenTabla, setIsOpenTabla] = useState(false);
-    const handleClick = () =>{
+
+
+    const handleClick = () => {
         setIsOpenTabla(prev => !prev);
     }
     const columns = [
@@ -64,22 +62,21 @@ const SeccionInventario = ({dia, index, height}) => {
         { field: "stock", headerName: "Stock", width: 120 },
         { field: "stockCalculado", headerName: "Stock Calculado", width: 150 },
     ];
+ 
 
-    console.log(dia)
-    const todosLosItems = dia.categorias.reduce((acumulador, categoria) => {
+    const todosLosItems = dia.catalogo.reduce((acumulador, categoria) => {
         return acumulador.concat(categoria.items);
     }, []);
-    
+
     const rows = todosLosItems;
-      console.log(todosLosItems);
 
     return (
         <ContenedorDias key={index}>
-            <ContenedorGenerico cursor="pointer" onClick={() =>handleClick()} >
+            <ContenedorGenerico cursor="pointer" onClick={() => handleClick()} >
                 <TxtGenerico color="white" size="20px">
                     {dia.fecha.toLocaleString()}
                 </TxtGenerico>
-                
+
             </ContenedorGenerico>
 
             <ContenedorTabla isOpen={isOpenTabla}>
@@ -91,8 +88,17 @@ const SeccionInventario = ({dia, index, height}) => {
 }
 
 export const ReporteInventariosUx = () => {
-    const { inventarios } = useContextoGeneral();
+    //const { inventarios } = useContextoGeneral();
+    const [inventarios, setIntentarios] = useState([]);
 
+    useEffect(() => {
+        const fetchInventarios = async () => {
+            const data = await obtenerInventarios();
+            setIntentarios(data);
+        };
+
+        fetchInventarios();
+    }, []);
 
 
 
@@ -103,7 +109,7 @@ export const ReporteInventariosUx = () => {
             <H2Pos color="var(--colorPrincipal)">inventarios</H2Pos>
             <>
                 {inventarios.map((dia, index) => (
-                    <SeccionInventario height="500px"  dia={dia} index={index} />
+                    <SeccionInventario height="500px" dia={dia} index={index} />
                 ))}
             </>
 

@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import { ContenedorTop } from "./ContenedorTop";
 import { useContextoGeneral } from "../../../Contextos/ContextoGeneral";
+import { Timestamp } from "firebase/firestore";
+import { subirInventario } from "../../../dbConection/m-inventarios";
 
 const ContenedorTopStyled = styled.div`
   width: 100%;
@@ -14,35 +16,61 @@ const ContenedorTopStyled = styled.div`
 `
 
 export const ModalHolaMundo = ({ isOpen, onClose, catalogo, values, fecha }) => {
-
   const { user } = useContextoGeneral();
+
   if (!isOpen) return null; // Si el modal no está abierto, no renderiza nada
 
   // Recolectamos todos los items y sus cantidades en un formato plano
-  const items = catalogo.flatMap(categoria =>
-    categoria.items.map(item => ({
+  const itemsPlanos = catalogo.flatMap((categoria) =>
+    categoria.items.map((item) => ({
       nombre: item.nombre,
-      cantidad: values[item.id] || 0,
+      idReferencia:
+        typeof item.idReferencia === "object" && item.idReferencia.id
+          ? item.idReferencia.id
+          : item.idReferencia,
+      stock: values[item.id] || 0,
     }))
   );
 
-  // Ref para la tabla
   const tableRef = useRef();
 
-  // Función para imprimir la tabla directamente desde el modal
-  const handlePrint = () => {
-    const printWindow = window.document; // Usamos el documento actual
-    const originalContent = printWindow.body.innerHTML; // Guardamos el contenido original de la página
-    const printContent = tableRef.current.outerHTML; // Obtenemos solo la tabla para imprimir
+  const handlePrint = async () => {
+    const catalogoLimpio = catalogo.map(({ categoria, items }) => ({
+      categoria,
+      items: items.map(({ idReferencia, ...rest }) => {
+        const idRef =
+          typeof idReferencia === "object" && idReferencia.id
+            ? idReferencia.id
+            : idReferencia;
 
-    // Insertamos la tabla en el documento de impresión
-    printWindow.body.innerHTML = `<div style="text-align: center;"><h2>Inventario Completo</h2></div>${printContent}`;
+        // Buscar la cantidad en el array plano
+        const itemEncontrado = itemsPlanos.find((i) => i.idReferencia === idRef);
+        const stock = itemEncontrado ? itemEncontrado.stock : 0;
 
-    // Llamamos a print() para imprimir sin abrir una nueva ventana
-    window.print();
+        return {
+          ...rest,
+          idReferencia: idRef,
+          icono: "",
+          stock,
+        };
+      }),
+    }));
 
-    // Restauramos el contenido original de la página después de la impresión
-    printWindow.body.innerHTML = originalContent;
+    const inventario = {
+      usuario: {
+        nombre: user.nombre,
+        apellido: user.apellido,
+        id: user.uid,
+      },
+      catalogo: catalogoLimpio,
+      fecha: Timestamp.fromDate(new Date()),
+    };
+
+    console.log(inventario);
+    console.log(itemsPlanos, "asdasdasda");
+
+    // Aquí podrías subir el inventario si lo deseas
+    await subirInventario(inventario);
   };
 
   return (
@@ -60,16 +88,17 @@ export const ModalHolaMundo = ({ isOpen, onClose, catalogo, values, fecha }) => 
             </tr>
           </thead>
           <tbody>
-            {items.map((item, index) => (
+            {itemsPlanos.map((item, index) => (
               <tr key={index}>
                 <td>{item.nombre}</td>
-                <td>{item.cantidad}</td>
+                <td>{item.stock}</td>
               </tr>
             ))}
           </tbody>
         </Table>
+
         <BtnModal onClick={onClose}>Cerrar</BtnModal>
-        <PrintBtn onClick={handlePrint}>Imprimir</PrintBtn> {/* Botón para imprimir */}
+        <PrintBtn onClick={handlePrint}>Imprimir</PrintBtn>
       </ModalContent>
     </ModalContainer>
   );

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TxtGenerico } from "../../../ComponentesGenerales/Genericos/titulos";
+import { obtenerTicketPorId } from "../../../dbConection/m-tickets";
+import { Ticket } from "../../../ComponentesGenerales/Ticket/TicketGenerico";
 
 const ContenedorModalStyle = styled.div`
     width: 90%;
@@ -41,15 +43,17 @@ const InputStyle = styled.input`
     }
 `;
 
-export const InputBuscarTicket = ({ onSearch }) => {
+export const InputBuscarTicket = ({ setTicketEncontrado }) => {
     const [tipoBusqueda, setTipoBusqueda] = useState("id");
     const [id, setId] = useState("");
     const [fecha, setFecha] = useState("");
     const [monto, setMonto] = useState("");
 
-    const handleSearch = () => {
+
+    const handleSearch = async () => {
         if (tipoBusqueda === "id") {
-            onSearch({ tipo: "id", valor: id });
+
+            setTicketEncontrado(await obtenerTicketPorId(id))
         } else {
             onSearch({ tipo: "fecha_monto", fecha, monto });
         }
@@ -58,10 +62,10 @@ export const InputBuscarTicket = ({ onSearch }) => {
     return (
         <ContenedorBusqueda>
             {/* Selector de tipo de búsqueda */}
-            <SelectStyle value={tipoBusqueda} onChange={(e) => setTipoBusqueda(e.target.value)}>
+            {/* <SelectStyle value={tipoBusqueda} onChange={(e) => setTipoBusqueda(e.target.value)}>
                 <option value="id">Buscar por ID</option>
                 <option value="fecha_monto">Buscar por Fecha y Monto</option>
-            </SelectStyle>
+            </SelectStyle> */}
 
             {/* Input para búsqueda por ID */}
             {tipoBusqueda === "id" && (
@@ -74,7 +78,7 @@ export const InputBuscarTicket = ({ onSearch }) => {
             )}
 
             {/* Inputs para búsqueda por Fecha y Monto */}
-            {tipoBusqueda === "fecha_monto" && (
+            {/* {tipoBusqueda === "fecha_monto" && (
                 <>
                     <InputStyle
                         type="date"
@@ -88,7 +92,7 @@ export const InputBuscarTicket = ({ onSearch }) => {
                         placeholder="Ingrese el monto"
                     />
                 </>
-            )}
+            )} */}
 
             {/* Botón de búsqueda */}
             <button onClick={handleSearch}>Buscar</button>
@@ -97,13 +101,10 @@ export const InputBuscarTicket = ({ onSearch }) => {
 };
 
 export const ModalFiltrar = () => {
-    const [resultadoBusqueda, setResultadoBusqueda] = useState(null);
+    const [ticketEncontrado, setTicketEncontrado] = useState(null);
+    const [componenteARenderizar, setComponenteARenderizar] = useState(null);
 
-    const handleSearch = (filtro) => {
-        console.log("Criterio de búsqueda:", filtro);
-        // Aquí podrías hacer una consulta a la base de datos o filtrar los tickets
-        setResultadoBusqueda(filtro);
-    };
+
 
     return (
         <ContenedorModalStyle>
@@ -111,12 +112,14 @@ export const ModalFiltrar = () => {
                 Buscar Ticket
             </TxtGenerico>
 
-            <InputBuscarTicket onSearch={handleSearch} />
+            <InputBuscarTicket setTicketEncontrado={setTicketEncontrado} />
 
-            {/* Muestra los resultados (puedes personalizarlo) */}
-            {resultadoBusqueda && (
-                <pre>{JSON.stringify(resultadoBusqueda, null, 2)}</pre>
-            )}
+          
+            {ticketEncontrado === "Ticket no encontrado" ? (
+                <TxtGenerico color="var(--colorPrincipal)">(No se ha encontrado ningún ticket con ese Id)</TxtGenerico>
+            ) : ticketEncontrado ? (
+                <Ticket datosTicket={ticketEncontrado} />
+            ) : null}
         </ContenedorModalStyle>
     );
 };

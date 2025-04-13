@@ -10,6 +10,7 @@ import { BtnGenericoRectangular } from "../../../ComponentesGenerales/Genericos/
 import { imprimirTicket } from "../../../Fn/Imprimir";
 import { ModalFiltrar } from "./ContenidoModalFiltrar";
 import { useReactToPrint } from "react-to-print";
+import { useContextoReportes } from "../../../Contextos/Reportes";
 
 const ContenedorPagina = styled(Contenedor100)`
     display: flex;
@@ -47,6 +48,10 @@ const ContenedorTop = styled.div`
 
 export const TicketsUx = () => {
     const { tickets } = useContextoGeneral();
+    const {ticketsPorDias} = useContextoReportes();
+    console.log(ticketsPorDias)
+    console.log(tickets)
+    console.log("tickets")
     const [boolModalTicket, setBoolModalTicket] = useState(false);
     const [ticketsFormateados, setTicketsFormateados] = useState([]);
     const [ticketSeleccionado, setTicketSeleccionado] = useState();
@@ -55,8 +60,8 @@ export const TicketsUx = () => {
     const currentRef = useRef();
     useEffect(() => {
         // Actualizamos los tickets formateados al cargar los datos
-        setTicketsFormateados(transformarTickets(tickets));
-    }, [tickets]); // Dependiendo de 'tickets', se actualiza la lista de tickets
+        setTicketsFormateados(transformarTickets(ticketsPorDias));
+    }, [ticketsPorDias]); // Dependiendo de 'tickets', se actualiza la lista de tickets
     const handlePrint = useReactToPrint({
         contentRef: currentRef,
         documentTitle: `Ticket`,
@@ -74,7 +79,7 @@ export const TicketsUx = () => {
     // Función para transformar los tickets
     function transformarTickets(tickets) {
         const groupedTickets = tickets.reduce((acc, ticket) => {
-            const fecha = new Date(ticket.fechaTransaccion); // Asegurar que es un objeto Date
+            const fecha = new Date(ticket.fecha.toDate()); // Asegurar que es un objeto Date
             const fechaKey = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`; // Solo la fecha sin hora
             const horaMinuto = `${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, "0")}`; // Formato HH:MM
 
@@ -84,6 +89,7 @@ export const TicketsUx = () => {
             acc[fechaKey].push({
                 ...ticket,
                 fechaTransaccion: `${fechaKey} - ${horaMinuto}`, // Guardamos la hora aparte
+               
             });
 
             return acc;

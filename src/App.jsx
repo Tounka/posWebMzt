@@ -6,7 +6,6 @@ import { LayoutApp } from './assets/ComponentesGenerales/Genericos/layouts.jsx';
 import { MenuLateral } from './assets/ComponentesGenerales/MenuLateral/MenuLateral';
 
 import { routesConfig } from './routes.jsx';
-import { UpdatePWA } from './assets/ComponentesGenerales/DetectarActualizacion.jsx';
 import { useContextoGeneral } from './assets/Contextos/ContextoGeneral.jsx';
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";

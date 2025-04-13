@@ -94,6 +94,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
             setIsConfirmationModal(true); // Muestra el modal de confirmación
         } else {
             setIsModalOpen(true); // Si no hay elementos con cantidad 0, muestra el modal de resumen
+            setIsHelloWorldModalOpen(true)
         }
     };
 
@@ -146,7 +147,7 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
              />
             )}
 
-            {/* Formulario de inventario */}
+          
             <ContenedorInventario>
                 <ContenedorTop user={user} fechaHora={fechaHora} />
                 {catalogo.map((categoria, index) => (
@@ -158,8 +159,8 @@ export const GenerarInventarioUx = ({ catalogo, user, values, handleChange }) =>
                                 id={item.id}
                                 name={item.id}
                                 label={item.nombre}
-                                value={values[item.id]} // Asigna el valor actual a cada input
-                                onChange={handleChange} // Asigna la función handleChange
+                                value={values[item.id]}
+                                onChange={handleChange} 
                             />
                         ))}
                     </ContenedorCategoria>
