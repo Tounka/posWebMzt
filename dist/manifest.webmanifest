@@ -1,1 +1,0 @@
-{"name":"POS-Beauty-With-Meli","short_name":"POS-BWM","description":"Sistema POS web pwa","start_url":"/","display":"minimal-ui","background_color":"#ffffff","theme_color":"#ffffff","lang":"en","scope":"/","icons":[{"src":"./public/imgLogo192.png","sizes":"192x192","type":"image/png"},{"src":"./public/imgLogo512.png","sizes":"512x512","type":"image/png"}]}
