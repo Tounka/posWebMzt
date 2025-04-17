@@ -47,11 +47,8 @@ const ContenedorTop = styled.div`
 `;
 
 export const TicketsUx = () => {
-    const { tickets } = useContextoGeneral();
+
     const {ticketsPorDias} = useContextoReportes();
-    console.log(ticketsPorDias)
-    console.log(tickets)
-    console.log("tickets")
     const [boolModalTicket, setBoolModalTicket] = useState(false);
     const [ticketsFormateados, setTicketsFormateados] = useState([]);
     const [ticketSeleccionado, setTicketSeleccionado] = useState();
@@ -106,7 +103,7 @@ export const TicketsUx = () => {
     return (
         <ContenedorPagina>
             <ContenedorTop>
-                <H2Pos color="var(--colorPrincipal)">Tickets</H2Pos>
+                <H2Pos color="var(--colorPrincipal)">Tickets de los últimos 3 días</H2Pos>
                 <BtnGenericoRectangular txt="Buscar" handleClick={() => handleClickBtnModal()} />
             </ContenedorTop>
             <>

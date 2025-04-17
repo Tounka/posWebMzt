@@ -66,11 +66,8 @@ export const ModalHolaMundo = ({ isOpen, onClose, catalogo, values, fecha }) => 
       fecha: Timestamp.fromDate(new Date()),
     };
 
-    console.log(inventario);
-    console.log(itemsPlanos, "asdasdasda");
-
-    // Aquí podrías subir el inventario si lo deseas
     await subirInventario(inventario);
+    onClose();
   };
 
   return (

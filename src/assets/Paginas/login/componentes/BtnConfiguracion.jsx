@@ -100,7 +100,7 @@ export const ModalConfiguracion = ({ onClose, isOpen }) => {
         if (savedCaja) {
             setInitialCaja(savedCaja);
             setLocalData({
-                ubicacion: "Ubicacion del local",
+                ubicacion: "Mazatlan Sinaloa",
                 sucursal: "Sucursal X",
                 id: 1,
                 cajaId: savedCaja,
@@ -164,7 +164,7 @@ export const ModalConfiguracion = ({ onClose, isOpen }) => {
                                     id="inputSeleccionarCaja"
                                     name="caja"
                                     txtLabel="Caja"
-                                    options={Array.from({ length: 9 }, (_, i) => ({ value: i + 1, txt: (i + 1).toString() }))}
+                                    options={Array.from({ length: 2 }, (_, i) => ({ value: i + 1, txt: (i + 1).toString() }))}
                                 />
                                 <BotonStyled type="submit">Guardar</BotonStyled>
                             </ContenedorForm>

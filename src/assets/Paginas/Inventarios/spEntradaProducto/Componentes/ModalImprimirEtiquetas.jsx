@@ -49,7 +49,9 @@ export const ModalImprimirEtiquetas = ({ isOpen, onClose }) => {
 
         // Convertir las etiquetas a imágenes y agregar al ZIP
         for (const etiqueta of etiquetas) {
-            const canvas = await html2canvas(etiqueta);
+            const canvas = await html2canvas(etiqueta, {
+                scale: 2 
+            });
             const imgData = canvas.toDataURL("image/png");
 
             // Convertir la imagen a Blob
@@ -67,10 +69,9 @@ export const ModalImprimirEtiquetas = ({ isOpen, onClose }) => {
 
             const imgBlob = new Blob(byteArrays, { type: "image/png" });
 
-            const nombreArchivo = etiqueta.getAttribute('dataNombre'); 
-
-            // Agregar la imagen al archivo ZIP, dentro de una carpeta con el nombre de la fecha
-            zip.folder(nombreCarpeta).file(`${nombreArchivo}.png`, imgBlob);
+            const nombreArchivo = etiqueta.textContent.split("]"); 
+    
+            zip.folder(nombreCarpeta).file(`${nombreArchivo[1]}.png`, imgBlob);
         }
 
         // Generar y descargar el archivo ZIP

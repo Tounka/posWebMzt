@@ -59,7 +59,6 @@ export const LoginAdminUx = ({setAdmin}) => {
       initialValues={{ correo: "", contraseña: "" }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        console.log("Datos enviados:", values);
         handleSubmit(values);
       }}
     >

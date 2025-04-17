@@ -5,13 +5,17 @@ import { convertirTimestampAMazatlan } from "../Fn/ObtenerFechaHora";
 export const subirInventario = async (inventario) => {
     const ref = collection(db, "inventarios");
     try {
-        await addDoc(ref, {
+        const docRef = await addDoc(ref, {
             ...inventario
         });
+        console.log("Inventario subido con éxito:", docRef.id); 
+        return docRef.id; 
     } catch (error) {
-        console.log("Error al subir el inventario:", error);
+        console.error("Error al subir el inventario:", error);
+        throw error; 
     }
 };
+
 
 export const obtenerInventarios = async () => {
     const ref = collection(db, "inventarios");

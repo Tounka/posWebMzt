@@ -129,7 +129,7 @@ export const ChecadorDeBarrasIntegrado = ({ onProductoSeleccionado }) => {
             
             if (event.key === "Enter") {
                 const codigo = bufferRef.current;
-                console.log("Código escaneado:", codigo);
+               
                 setSearchTerm(codigo); // Mostrar el código en el input
                 buscarProductoPorCodigo(codigo);
                 bufferRef.current = "";

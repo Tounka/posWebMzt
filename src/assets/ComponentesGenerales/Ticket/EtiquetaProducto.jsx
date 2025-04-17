@@ -5,16 +5,16 @@ import { useContextoGeneral } from "../../Contextos/ContextoGeneral";
 import { TxtGenerico } from "../Genericos/titulos";
 
 const EtiquetaAImprimirStyled = styled.div`
-    height: 13mm;
+    height: 14mm;
     width: fit-content;
     background-color: white;
-    padding: 1mm;
+    padding: .5mm;
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
     color: black;
-    border: 2px solid var(--colorPrincipal);
+    border: 2px solid black;
     gap: 2mm;
 `;
 
@@ -50,8 +50,8 @@ export const EtiquetaAImprimir = ({ nombre,idProducto, idLote = "0000" , classNa
                     value={IdProducto} 
                     format="CODE128" 
                     width={1.5}
-                    height={28} 
-                    margin={0}  
+                    height={32} 
+                    margin={2}  
                     displayValue={true}  
                     fontSize={8} 
                 />

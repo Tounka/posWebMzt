@@ -12,7 +12,7 @@ export const ContextoGeneralProvider = ({ children }) => {
     const [ubicacionPagina, setUbicacionPagina] = useState("/");
     const [user, setUser] = useState();
     const [localData, setLocalData] = useState({
-        ubicacion: "Ubicacion del local",
+        ubicacion: "Mazatlan Sinaloa",
         sucursal: "Sucursal X",
         id: 1,
         cajaId: 1,

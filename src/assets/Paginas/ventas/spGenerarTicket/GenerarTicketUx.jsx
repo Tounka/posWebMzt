@@ -87,8 +87,6 @@ export const GenerarTicketUx = ({ catalogo }) => {
       }
     });
   const handlePrint = async () => {
-    console.log(datosTicket)
-    console.log(localData.cajaId)
     await agregarTicket({
       fechaTransaccion:datosTicket.fechaTransaccion ,
       usuario:datosTicket.usuario ,
