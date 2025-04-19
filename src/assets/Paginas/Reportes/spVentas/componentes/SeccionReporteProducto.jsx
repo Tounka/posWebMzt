@@ -34,8 +34,8 @@ const ContenedorGeneral = styled.div`
     height: 100%;
 `
 export const SeccionReporteProducto = ({ inventario }) => {
-    const ItemsFlotantes = inventario.categorias.flatMap(categoria => categoria.items);
-    const SumaCategorias = inventario.categorias.map(categoria => ({
+    const ItemsFlotantes = inventario.catalogo.flatMap(categoria => categoria.items);
+    const SumaCategorias = inventario.catalogo.map(categoria => ({    
         categoria: categoria.categoria,
         stockTotal: categoria.items.reduce((acc, item) => acc + item.stock, 0),
         costoTotal: categoria.items.reduce((acc, item) => acc + (item.stock * item.costo), 0),

@@ -54,7 +54,7 @@ export const VentasUx = ({ catalogo }) => {
         <ContenedorCategoria>
           {catalogo?.map((categoria, index) => (
 
-            <ItemCategoria setCatalogoSeleccionado={setCatalogoSeleccionado} txt={categoria.categoria} catalogo={catalogo} index={index} />
+            <ItemCategoria key={index} setCatalogoSeleccionado={setCatalogoSeleccionado} txt={categoria.categoria} catalogo={catalogo} index={index} />
 
           ))}
 
@@ -67,7 +67,7 @@ export const VentasUx = ({ catalogo }) => {
         <ContenedorItems>
           {catalogoSeleccionado?.items.map((item, index) => (
 
-            <ItemProducto producto={item} />
+            <ItemProducto  key={index} producto={item} />
           ))}
 
 

@@ -3,6 +3,7 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 
 import { useContextoGeneral } from '../../../../Contextos/ContextoGeneral';
 import { ContenedorSeccionReporte } from './ContenedorSeccionReporteGenerico';
+import { useContextoReportes } from '../../../../Contextos/Reportes';
 
 const data = [
     {
@@ -49,42 +50,34 @@ const data = [
     },
 ];
 
-export const ResumenVentas = () => {
+export const ResumenVentas = ({tickets}) => {
 
-
-
-    const { tickets } = useContextoGeneral();
-
-    const obtenerProductosVendidos = (ticketsDiasDb) => {
+    
+    const obtenerProductosVendidos = (tickets) => {
         const productosVendidos = {};
     
-        // Recorrer todos los tickets
-        ticketsDiasDb.forEach((dia) => {
-            dia.tickets.forEach((ticket) => {
-                ticket.productos.forEach((producto) => {
-                    const nombreProducto = producto.nombre;
+        tickets.forEach((ticket) => {
+            ticket.productos.forEach((producto) => {
+                const nombreProducto = producto.nombre;
     
-                    // Si el producto ya existe en el objeto, sumar la cantidad
-                    if (productosVendidos[nombreProducto]) {
-                        productosVendidos[nombreProducto] += producto.cantidad;
-                    } else {
-                        // Si no existe, inicializarlo con la cantidad actual
-                        productosVendidos[nombreProducto] = producto.cantidad;
-                    }
-                });
+                if (productosVendidos[nombreProducto]) {
+                    productosVendidos[nombreProducto] += producto.cantidad;
+                } else {
+                    productosVendidos[nombreProducto] = producto.cantidad;
+                }
             });
         });
     
-        // Convertir el objeto a un arreglo en el formato deseado
         const data = Object.keys(productosVendidos).map((nombre) => ({
             name: nombre,
             ItemsVendidos: productosVendidos[nombre]
         }));
-
+    
         data.sort((a, b) => b.ItemsVendidos - a.ItemsVendidos);
     
         return data;
     };
+    
 
     return (
         <ContenedorSeccionReporte txt='Ranking De Ventas'>

@@ -13,7 +13,6 @@ export const agregarTicket = async (ticket, cajaId) => {
     await updateDoc(cajaRef, {
       tickets: arrayUnion(ticket),
     })
-    console.log("Ticket agregado con ID: ", docRef.id);
   } catch (error) {
     alert("Error al subir ticket");
     console.error(error);
@@ -40,7 +39,6 @@ export const obtenerTickets = async ( {diasAObtener} ) => {
       ...doc.data(),
       
     }));
-    console.log("estooo", tickets)
     return tickets;
   } catch (error) {
     console.error("Error obteniendo tickets:", error);
@@ -57,7 +55,7 @@ export const obtenerTicketPorId = async (id) => {
 
     if (!querySnapshot.empty) {
       const ticket = querySnapshot.docs[0].data();
-      console.log(ticket)
+
       return ticket;
     } else {
       return "Ticket no encontrado";

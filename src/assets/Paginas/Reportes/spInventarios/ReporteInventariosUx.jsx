@@ -109,7 +109,7 @@ export const ReporteInventariosUx = () => {
             <H2Pos color="var(--colorPrincipal)">inventarios</H2Pos>
             <>
                 {inventarios.map((dia, index) => (
-                    <SeccionInventario height="500px" dia={dia} index={index} />
+                    <SeccionInventario key={index} height="500px" dia={dia} index={index} />
                 ))}
             </>
 

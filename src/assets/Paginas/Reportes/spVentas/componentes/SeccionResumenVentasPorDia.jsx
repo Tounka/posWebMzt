@@ -1,63 +1,25 @@
-import React, { PureComponent, useContext } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
-import { useContextoGeneral } from '../../../../Contextos/ContextoGeneral';
 import { ContenedorSeccionReporte } from './ContenedorSeccionReporteGenerico';
 
-const data = [
-    {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
-
-export const ResumenVentasPorDia = () => {
-    const { tickets } = useContextoGeneral();
-    const ResumenTicketsPorDia = tickets.map((dia, index) => ({
-        name: dia.fecha,
-        venta: dia.tickets.reduce((acc, item) => acc + item.total, 0),
-        costo: dia.tickets.reduce((acc, item) => acc + item.costoTotal, 0),
-
-    }));
-    console.log(tickets);
+export const ResumenVentasPorDia = ({tickets}) => {
+    const agruparPorFecha = (tickets) => {
+        const agrupados = {};
+    
+        tickets.forEach(ticket => {
+            const fecha = ticket.fechaTransaccion?.split(" - ")[0]; // ej: "17/04/2025"
+            if (!agrupados[fecha]) agrupados[fecha] = [];
+            agrupados[fecha].push(ticket);
+        });
+    
+        return Object.entries(agrupados).map(([fecha, tickets]) => ({
+            name: fecha,
+            venta: tickets.reduce((acc, t) => acc + (t.total || 0), 0),
+            costo: tickets.reduce((acc, t) => acc + (t.costoTotal || 0), 0),
+        }));
+    };
+    
+ 
     return (
         <ContenedorSeccionReporte txt='Reporte Ventas Por Dia'>
 
@@ -66,7 +28,7 @@ export const ResumenVentasPorDia = () => {
                 <LineChart
                     width={500}
                     height={200}
-                    data={ResumenTicketsPorDia}
+                    data={agruparPorFecha(tickets)}
                     margin={{
                         top: 5,
                         right: 30,

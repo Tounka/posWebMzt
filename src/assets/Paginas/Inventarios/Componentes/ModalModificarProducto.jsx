@@ -70,7 +70,6 @@ const ContenedorInputSelect = styled.div`
 `
 export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose }) => {
     const { categorias } = useContextoGeneral();
-    console.log(productoSeleccionado)
     const initialValues = {
         nombre: productoSeleccionado?.nombre || "",
         descripcion: productoSeleccionado?.descripcion || "",
@@ -120,7 +119,6 @@ export const ModalModificarProductos = ({ productoSeleccionado, isOpen, onClose 
 `;
 
     const handleSubmit = async (values, { setSubmitting }) => {
-        console.log(values.categoria)
         let valuesAModificar = {
             nombre: capitalizarNombres(values.nombre),
             descripcion: values.descripcion,

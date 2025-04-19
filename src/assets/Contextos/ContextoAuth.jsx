@@ -38,14 +38,11 @@ export const AuthProvider = ({ children }) => {
       const empleadoSnap = await getDoc(empleadoRef);
   
       if (empleadoSnap.exists()) {
-        // 3. Combinar datos de autenticación con datos de empleado
         const empleadoData = empleadoSnap.data();
         setUser({
           ...usuario,
-          ...empleadoData // Datos adicionales del empleado
+          ...empleadoData 
         });
-        
-        // 4. Redirigir según el rol o cualquier otra lógica
         Navigate("/");
       } else {
         // Si no existe en empleados, puedes cerrar sesión o manejar el caso

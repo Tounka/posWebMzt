@@ -13,13 +13,10 @@ export const obtenerDiaEnOperacion = async () => {
         }
 
         const data = diaSnapshot.data();
-        console.log(data.fecha);
-
         const diaTratado = {
             ...data,
             fecha: data.fecha.toDate(),
         };
-        console.log(diaTratado)
         return diaTratado;
     } catch (error) {
         console.error(error);

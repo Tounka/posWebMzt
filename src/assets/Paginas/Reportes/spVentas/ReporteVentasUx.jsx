@@ -9,6 +9,7 @@ import { SeccionTicketPromedio } from "./componentes/SeccionTicketPromedio";
 import { SeccionSetFecha } from "./componentes/SeccionSetFecha";
 import { useEffect, useState } from "react";
 import { obtenerTickets } from "../../../dbConection/m-tickets";
+import { useContextoReportes } from "../../../Contextos/Reportes";
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;
     justify-content: start;  
@@ -23,14 +24,15 @@ const ContenedorReportes = styled(Contenedor100)`
 
 
 export const ReporteVentasUx = () => {
-    const { inventarios, setRangoFechas, rangoFechas } = useContextoGeneral();
+    const { setRangoFechas, rangoFechas } = useContextoGeneral();
+    const {inventarios} = useContextoReportes()
     const [tickets, setTickets] = useState([])
     useEffect(() => {
         const fetchTickets = async () => {
             try {
                 const tickets = await obtenerTickets({diasAObtener:30});
                 setTickets(tickets);
-                console.log(tickets);
+                
             } catch (error) {
                 console.error("Error al obtener tickets:", error);
             }
@@ -45,9 +47,9 @@ export const ReporteVentasUx = () => {
         <ContenedorReportes>
 
            <SeccionTicketPromedio tickets={tickets} /> 
-            {/*<SeccionReporteProducto inventario={inventarios[0]} />*/}
-            {/*<ResumenVentas inventario={inventarios[0]} />*/}
-            {/*<ResumenVentasPorDia inventario={inventarios[0]} />*/}
+            <SeccionReporteProducto inventario={inventarios[0]} />
+            <ResumenVentas tickets={tickets} />
+            <ResumenVentasPorDia tickets={tickets} />
 
 
         </ContenedorReportes>

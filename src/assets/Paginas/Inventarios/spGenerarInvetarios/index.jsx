@@ -15,7 +15,7 @@ export const GenerarInventario = () => {
     }, {});
 
     const handleSubmit = (values) => {
-        console.log("Inventario guardado:", values);
+        
     };
 
     return (

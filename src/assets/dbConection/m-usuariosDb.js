@@ -6,7 +6,6 @@ export const ObtenerUsuarios = async () => {
     try {
         const q = query(collection(db, "usuarios"), orderBy("rol", "desc"));
         const querySnapshot = await getDocs(q); 
-        console.log(querySnapshot)
         const usuariosData = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data(),

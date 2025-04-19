@@ -15,14 +15,19 @@ export const Ventas = () => {
     }
 
     const componenteARenderizar = () => {
-        if (diaEnOperacion.diaAbierto) {
-            if (cajaEnUso.aperturada) {
-                return <VentasUx catalogo={productosEnVenta} />;
+        if(Object.keys(diaEnOperacion).length === 0 || Object.keys(cajaEnUso).length === 0){
+            return <Bloqueador txt="Obteniendo datos" />;
+        }else{
+
+            if (diaEnOperacion?.diaAbierto) {
+                if (cajaEnUso?.aperturada) {
+                    return <VentasUx catalogo={productosEnVenta} />;
+                } else {
+                    return <Bloqueador txt="Es necesario aperturar la caja antes de comenzar la venta." />;
+                }
             } else {
-                return <Bloqueador txt="Es necesario aperturar la caja antes de comenzar la venta." />;
+                return <Bloqueador txt="Es necesario aperturar el día antes de comenzar la venta." />;
             }
-        } else {
-            return <Bloqueador txt="Es necesario aperturar el día antes de comenzar la venta." />;
         }
     };
 

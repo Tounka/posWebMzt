@@ -32,7 +32,6 @@ export const obtenerInventarios = async () => {
                     fecha: convertirTimestampAMazatlan(data.fecha).objetoDate,
                 };
             });
-            console.log(inventarios)
             return inventarios;
         } else {
             console.log("No hay inventarios.");

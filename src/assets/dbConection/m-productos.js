@@ -15,7 +15,6 @@ export const obtenerProductos = async () => {
             ...doc.data(),
         }));
 
-        console.log("productosData",productosData)
         return productosData; 
     } catch (err) {
         console.error("Error los productos:", err);
