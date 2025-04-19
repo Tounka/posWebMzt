@@ -146,7 +146,7 @@ export const ModalConfiguracion = ({ onClose, isOpen }) => {
                     onSubmit={(values) => {
                         localStorage.setItem("cajaSeleccionada", values.caja);
                         setLocalData({
-                            ubicacion: "Ubicacion del local",
+                            ubicacion: "Mazatlan, Sinaloa",
                             sucursal: "Sucursal X",
                             id: 1,
                             cajaId: values.caja,

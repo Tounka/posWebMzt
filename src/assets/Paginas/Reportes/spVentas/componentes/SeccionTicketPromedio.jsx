@@ -1,6 +1,6 @@
 import { ContenedorSeccionReporte } from "./ContenedorSeccionReporteGenerico"
 import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Pie, PieChart, Cell, Legend  } from 'recharts';
 
 import styled from "styled-components";
 import { Contenedor100 } from "../../../../ComponentesGenerales/Genericos/layouts";
@@ -90,26 +90,18 @@ const TxtSeccion = styled(TxtGenerico)`
         
     
 `
-export const SeccionTicketPromedio = ({tickets}) => {
-    console.log(tickets)
-    const ObtenerTicketsTotales = tickets.reduce((acc, dia) => {
-        return acc + dia.tickets?.length;
+export const SeccionTicketPromedio = ({ tickets }) => {
+    const ticketsTotales = tickets.length;
+    const ticketTotalPrecio = tickets.reduce((acum, t) => {
+        return acum + (t.total - (t.descuento || 0));
     }, 0);
-    const ObtenerTicketTotalPrecio = tickets.reduce((acumuladorTotal, dia) => {
-        const totalPorDia = dia.tickets.reduce((acumuladorDia, ticket) => {
-            const totalTicket = ticket.total || 0; 
-            const descuentoTicket = ticket.descuento || 0; 
-            return acumuladorDia + (totalTicket - descuentoTicket);
-        }, 0);
-        return acumuladorTotal + totalPorDia;
-    }, 0);
+
     const totales = {
-        ticketsTotales:  ObtenerTicketsTotales,
-        ticketTotalPrecio : ObtenerTicketTotalPrecio,
-    }
+        ticketsTotales,
+        ticketTotalPrecio,
+    };
 
     const ObtenerPromediosPorDiaSemana = (tickets) => {
-        // Objeto para almacenar los totales por día de la semana
         const totalesPorDia = {
             lunes: { totalTickets: 0, totalPrecio: 0, cantidadDias: 0 },
             martes: { totalTickets: 0, totalPrecio: 0, cantidadDias: 0 },
@@ -119,62 +111,68 @@ export const SeccionTicketPromedio = ({tickets}) => {
             sábado: { totalTickets: 0, totalPrecio: 0, cantidadDias: 0 },
             domingo: { totalTickets: 0, totalPrecio: 0, cantidadDias: 0 },
         };
-    
-        // Función para obtener el día de la semana a partir de una fecha en formato "DD/MM/YYYY"
-        const obtenerDiaSemana = (fecha) => {
-            const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-    
-            // Convertir "DD/MM/YYYY" a "MM/DD/YYYY"
-            const [dia, mes, año] = fecha.split("/");
+
+        const fechasRegistradas = new Set();
+
+        tickets.forEach((ticket) => {
+            const fechaSolo = ticket.fechaTransaccion.split(" - ")[0]; // "17/04/2025"
+            const [dia, mes, año] = fechaSolo.split("/");
             const fechaFormateada = `${mes}/${dia}/${año}`;
-    
-            // Crear el objeto Date
             const fechaObj = new Date(fechaFormateada);
-    
-            // Validar si la fecha es válida
-            if (isNaN(fechaObj.getTime())) {
-                console.error(`Fecha inválida: ${fecha}`);
-                return null;
-            }
-    
-            return diasSemana[fechaObj.getDay()];
-        };
-    
-        // Recorremos cada día en tickets
-        tickets.forEach((dia) => {
-            const diaSemana = obtenerDiaSemana(dia.fecha);
-    
-            // Validar si diaSemana es una clave válida en totalesPorDia
-            if (diaSemana && totalesPorDia.hasOwnProperty(diaSemana)) {
-                // Incrementamos la cantidad de días para este día de la semana
+
+            if (isNaN(fechaObj.getTime())) return;
+
+            const diaSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"][fechaObj.getDay()];
+
+            // Solo contar cada día una vez para `cantidadDias`
+            const claveFecha = `${diaSemana}-${fechaSolo}`;
+            if (!fechasRegistradas.has(claveFecha)) {
+                fechasRegistradas.add(claveFecha);
                 totalesPorDia[diaSemana].cantidadDias += 1;
-    
-                // Sumamos los tickets y precios para el día de la semana correspondiente
-                dia.tickets.forEach((ticket) => {
-                    totalesPorDia[diaSemana].totalTickets += 1; // Contamos 1 ticket
-                    totalesPorDia[diaSemana].totalPrecio += (ticket.total - (ticket.descuento || 0)); // Sumamos el precio neto
-                });
-            } else {
-                console.error(`Día de la semana no válido: ${diaSemana}`);
             }
+
+            totalesPorDia[diaSemana].totalTickets += 1;
+            totalesPorDia[diaSemana].totalPrecio += (ticket.total - (ticket.descuento || 0));
         });
-    
-        // Generar el arreglo en el formato deseado
-        const data = Object.keys(totalesPorDia).map((dia) => {
+
+        return Object.keys(totalesPorDia).map((dia) => {
             const { totalTickets, totalPrecio, cantidadDias } = totalesPorDia[dia];
             return {
-                name: dia, // Nombre del día de la semana
-                promedioDias: cantidadDias > 0 ? totalTickets / cantidadDias : 0, // Promedio de tickets por día
-                promedioPrecioDias: cantidadDias > 0 ? totalPrecio / cantidadDias : 0, // Promedio de precios por día
-                amt: cantidadDias, // Cantidad de días (opcional, puedes eliminarlo si no lo necesitas)
+                name: dia,
+                promedioDias: cantidadDias > 0 ? totalTickets / cantidadDias : 0,
+                promedioPrecioDias: cantidadDias > 0 ? totalPrecio / cantidadDias : 0,
             };
         });
-    
-        return data;
     };
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560', '#2ECC71'];
+
     const promedios = ObtenerPromediosPorDiaSemana(tickets);
-    console.log("promedios")
-    console.log(promedios)
+
+    const ObtenerIngresosPorDia = (tickets) => {
+        const ingresosPorDia = {
+            lunes: 0, martes: 0, miércoles: 0, jueves: 0, viernes: 0, sábado: 0, domingo: 0,
+        };
+
+        tickets.forEach((ticket) => {
+            const fechaSolo = ticket.fechaTransaccion.split(" - ")[0];
+            const [dia, mes, año] = fechaSolo.split("/");
+            const fechaFormateada = `${mes}/${dia}/${año}`;
+            const fechaObj = new Date(fechaFormateada);
+
+            if (isNaN(fechaObj.getTime())) return;
+
+            const diaSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"][fechaObj.getDay()];
+            ingresosPorDia[diaSemana] += (ticket.total - (ticket.descuento || 0));
+        });
+
+        return Object.entries(ingresosPorDia).map(([dia, total]) => ({
+            name: dia,
+            total
+        }));
+    };
+
+    const ingresos = ObtenerIngresosPorDia(tickets);
+
     return (
         <ContenedorSeccionReporte txt="Ticket Promedio" height="600px">
             <ContenedorSeccionTicketPromedio>
@@ -183,17 +181,36 @@ export const SeccionTicketPromedio = ({tickets}) => {
                     <ContenedorTxtPadre>
                         <ContenedorTxt>
                             <TxtSeccion color="black" size="20px">Tickets en revision</TxtSeccion>
-                            <TxtSeccion color="black" size="20px">{totales.ticketsTotales }</TxtSeccion>
+                            <TxtSeccion color="black" size="20px">{totales.ticketsTotales}</TxtSeccion>
                         </ContenedorTxt>
                         <ContenedorTxt>
                             <TxtSeccion color="black" size="20px">Ticket Promedio</TxtSeccion>
-                            <TxtSeccion color="black" size="20px">${(totales.ticketTotalPrecio /totales.ticketsTotales).toFixed(2) }</TxtSeccion>
+                            <TxtSeccion color="black" size="20px">${(totales.ticketTotalPrecio / totales.ticketsTotales).toFixed(2)}</TxtSeccion>
                         </ContenedorTxt>
                     </ContenedorTxtPadre>
 
 
                     <Contenedor100>
-
+                        <ResponsiveContainer width="100%" height="90%">
+                            <PieChart>
+                                <Pie
+                                    data={ingresos}
+                                    dataKey="total"
+                                    nameKey="name"
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={80}
+                                    fill="#8884d8"
+                                    label
+                                >
+                                    {ingresos.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                               
+                                <Tooltip />
+                            </PieChart>
+                        </ResponsiveContainer>
                     </Contenedor100>
                 </ContenedorTop>
 
@@ -216,7 +233,7 @@ export const SeccionTicketPromedio = ({tickets}) => {
                         <Tooltip />
                         <Area type="monotone" dataKey="promedioDias" stackId="1" stroke="#8884d8" fill="#8884d8" />
                         <Area type="monotone" dataKey="promedioPrecioDias" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                        
+
                     </AreaChart>
                 </ResponsiveContainer>
             </ContenedorSeccionTicketPromedio>

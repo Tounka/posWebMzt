@@ -42,6 +42,7 @@ export const GenerarTicketUx = ({ catalogo }) => {
     
   }));
   const sumatoriaTotal = carritoConTotal.reduce((acumulador, item) => acumulador + item.total, 0);
+  const sumatoriaCostoTotal = carritoConTotal.reduce((acumulador, item) => acumulador + item?.costo, 0);
 
   const ObtenerDescuento = () => {
     if (descuento.tipo === "$") {
@@ -71,6 +72,7 @@ export const GenerarTicketUx = ({ catalogo }) => {
     total: sumatoriaTotal,
     descuento: ObtenerDescuento(),
     totalEnTxt: NumerosALetras(totalTicket),
+    costoTotal: sumatoriaCostoTotal,
     id: generarIdTicket()
   };
   const printTicket = useReactToPrint(
@@ -95,7 +97,8 @@ export const GenerarTicketUx = ({ catalogo }) => {
       total:datosTicket.total ,
       descuento:datosTicket.descuento ,
       totalEnTxt:datosTicket.totalEnTxt ,
-      id:datosTicket.id 
+      id:datosTicket.id,
+      costoTotal: datosTicket.costoTotal,
     }, localData.cajaId);
     printTicket()
   }

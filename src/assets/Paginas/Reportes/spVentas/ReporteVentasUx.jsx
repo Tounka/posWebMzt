@@ -7,7 +7,8 @@ import { ResumenVentasPorDia } from "./componentes/SeccionResumenVentasPorDia";
 import { ResumenVentas } from "./componentes/SeccionResumenVentas";
 import { SeccionTicketPromedio } from "./componentes/SeccionTicketPromedio";
 import { SeccionSetFecha } from "./componentes/SeccionSetFecha";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { obtenerTickets } from "../../../dbConection/m-tickets";
 const ContenedorReportes = styled(Contenedor100)`
     display: flex;
     justify-content: start;  
@@ -22,25 +23,31 @@ const ContenedorReportes = styled(Contenedor100)`
 
 
 export const ReporteVentasUx = () => {
-    const { inventarios, tickets,setRangoFechas,rangoFechas } = useContextoGeneral();
-
+    const { inventarios, setRangoFechas, rangoFechas } = useContextoGeneral();
+    const [tickets, setTickets] = useState([])
+    useEffect(() => {
+        const fetchTickets = async () => {
+            try {
+                const tickets = await obtenerTickets({diasAObtener:30});
+                setTickets(tickets);
+                console.log(tickets);
+            } catch (error) {
+                console.error("Error al obtener tickets:", error);
+            }
+        };
     
+        fetchTickets();
+    }, []);
 
 
     return (
 
         <ContenedorReportes>
 
-            {rangoFechas != null ? (
-                <>
-                    {/* `<SeccionTicketPromedio tickets={tickets} />` */}
-                    <SeccionReporteProducto inventario={inventarios[0]} />
-                    <ResumenVentas inventario={inventarios[0]} />
-                    <ResumenVentasPorDia inventario={inventarios[0]} />
-                </>
-            ) : (
-                <SeccionSetFecha setRangoFechas={setRangoFechas} />
-            )}
+           <SeccionTicketPromedio tickets={tickets} /> 
+            {/*<SeccionReporteProducto inventario={inventarios[0]} />*/}
+            {/*<ResumenVentas inventario={inventarios[0]} />*/}
+            {/*<ResumenVentasPorDia inventario={inventarios[0]} />*/}
 
 
         </ContenedorReportes>
